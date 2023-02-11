@@ -1,0 +1,1 @@
+from .obj_owner_edit_permission_or_admin import obj_owner_edit_permission_or_admin_get
