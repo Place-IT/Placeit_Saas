@@ -1,0 +1,121 @@
+/* Google Fonts - Poppins */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+*{
+
+    font-family: 'DM Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.5s ease;;
+}
+/* body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+:root{
+    --body-color: #FAFAFA;
+    --nav-color: #Fefefe;
+    --side-nav: #050505;
+    --text-color: #6B35E8;
+    --search-bar: #050505;
+    --search-text: #050505;
+}
+.container {
+    position: absolute;
+    /* border: 3px solid var(--text-color); */
+    max-width: 370px;
+    width: 100%;
+    padding: 50px;
+    border-radius: 30px;
+    background-color: #fff;
+    border:none;
+    box-shadow:rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
+
+
+}
+.container header {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+.container form {
+    margin-top: 30px;
+}
+form .field {
+    margin-bottom: 20px;
+}
+form .input-field {
+    position: relative;
+    height: 55px;
+    width: 100%;
+}
+.input-field input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    padding: 0 15px;
+    border: 1px solid #d1d1d1;
+}
+.invalid input {
+    border-color: #d93025;
+}
+.input-field .show-hide {
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #919191;
+    cursor: pointer;
+    padding: 3px;
+}
+.field .error {
+    display: flex;
+    align-items: center;
+    margin-top: 6px;
+    color: #d93025;
+    font-size: 13px;
+    display: none;
+}
+.invalid .error {
+    display: flex;
+}
+.error .error-icon {
+    margin-right: 6px;
+    font-size: 15px;
+}
+.create-password .error {
+    align-items: flex-start;
+}
+.create-password .error-icon {
+    margin-top: 4px;
+}
+.button {
+    margin: 25px 0 6px;
+    border-radius: 100px;
+    align-items: center;
+    display:flex;
+    justify-content: center;
+}
+.button input {
+    border-radius: 100px;
+    width: 50%;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.button input:hover {
+    background-color: var(--body-color);
+    color: var(--text-color);
+    border: 5px solid var(--text-color);
+}

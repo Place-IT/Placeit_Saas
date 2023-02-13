@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}PlaceIT{% endblock %}</title>
+<!--    <script defer  src="https://cdn.tailwindcss.com"></script>-->
+<!--    <link rel="stylesheet" href='{% static "/css/input.css"%}' />-->
+<!--    <link rel="stylesheet" href='{% static "/css/flowbite.min.css"%}'/>-->
+    <script src='{% static "/js/flowbite.js"%}'></script>
+    <script src='{% static "/js/tailwindcss.js"%}'></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    {% block css_files %}{% endblock %}
+</head>
+<body>
+{% block nav %}{% endblock %}
+{% block Body %}{% endblock %}
+{% block fotter %}{% endblock %}
+{% block js %}
+<script src='{% static "/js/index.js" %}' >
+</script>
+{% endblock %}
+</body>
+</html>

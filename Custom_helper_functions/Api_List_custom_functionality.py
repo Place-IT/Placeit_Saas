@@ -15,7 +15,7 @@ class CustomViewset:
             if not b:
                 return a
         except Exception as e:
-            pass
+            print(e)
             # logger.error(f"some exception occured  while performing Condition_check as {e}")
 
         page = self.paginate_queryset(a)

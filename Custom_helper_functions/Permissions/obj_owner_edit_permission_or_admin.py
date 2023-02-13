@@ -7,7 +7,7 @@ def obj_owner_edit_permission_or_admin_get(request,obj=None):
         elif len(get_perms(request.user, obj)) > 0:
             return True
         else:
-            if request.user.groups.filter(name='Member').exists() and request.method in ['GET']:
+            if request.user.groups.filter(name='Faculty').exists() and request.method in ['GET']:
                 return True
             return False
 

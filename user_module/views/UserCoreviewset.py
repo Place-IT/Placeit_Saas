@@ -25,11 +25,9 @@ class UserCoreOperationsViewset(CustomViewset,Gurdian_model_viewset, viewsets.Mo
     serializer_class = UserserializerCoreOperations
 
     permission_classes = [ModelNamePermission("user", "user_module",
+                                              custom_check_view=lambda x:True,
                                               custom_check_object=obj_owner_edit_permission_or_admin_get
-                                              )]
-
-    # permission_classes = [obj_owner_edit_permission_or_admin_get]
-    # [Owneronly]
+                                              ),]
 
     list_of_permission = ["change_", 'delete_']
     modelname = "user"

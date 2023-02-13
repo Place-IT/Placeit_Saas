@@ -41,7 +41,7 @@ def email_verfy_core(email, host):
 
             msg = EmailMultiAlternatives(
                 # title:
-                "Email verification Autoflow ",
+                "Email verification PLaceit ",
                 # message:
                 email_plaintext_message,
                 # from:

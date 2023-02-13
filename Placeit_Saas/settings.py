@@ -20,8 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rt+*_6sx+ld!(oxw_q!e647ps@94w1y&jiz218@91i64f24f8='
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,22 +30,6 @@ ALLOWED_HOSTS = ["*"]
 
 ROOT_URLCONF = 'Placeit_Saas.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
 
 WSGI_APPLICATION = 'Placeit_Saas.wsgi.application'
 
@@ -81,7 +64,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -91,6 +74,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ##### Custom Setup
 load_dotenv()
 
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.getenv('Secret_key')
 
 if os.getenv("DEBUG") == "True":
     DATABASES = {
@@ -128,17 +114,12 @@ INSTALLED_APPS = [
     'drf_api_logger',
     "phonenumber_field",
 
-
     ##########
     "user_module",
     "api_module",
-
-
+    "frontend_module",
 ]
 
-# meid roots
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 
 
@@ -205,12 +186,16 @@ AUTH_PASSWORD_VALIDATORS = [
 # static file handler
 
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'templates/React/static/',
-#     BASE_DIR / 'templates/Static/'
-# ]
-# STATIC_URL = 'static/'
-# STATIC_ROOT = BASE_DIR / "static"
+STATICFILES_DIRS = [
+    BASE_DIR / 'templates/React/static/',
+    BASE_DIR / 'templates/Static/'
+]
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "static"
+
+# meid roots
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # email
@@ -261,3 +246,26 @@ MIDDLEWARE = [
 
 
 DRF_API_LOGGER_DATABASE = True
+
+
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates',
+                 BASE_DIR / 'templates/Static/errors',
+                 BASE_DIR / 'templates/Static',
+                 BASE_DIR / 'templates/React/templates/React_frontend/',
+                 ]
+        ,
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]

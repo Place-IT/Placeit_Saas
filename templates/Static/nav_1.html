@@ -1,0 +1,176 @@
+{% load static %}
+{% load auth_extras %}
+<nav class="bg-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between space-x-12">
+            <div class="flex">
+                <div>
+                    <!-- Website Logo -->
+                    <a href="{% url 'Landing' %}" class="flex items-center py-4 px-2">
+                        <img src='{% static "/img/logo.png"%}' alt="Logo" class="h-8" />
+                    </a>
+                </div>
+            </div>
+            <!-- Primary Navbar items -->
+            {% if user.is_authenticated %}
+
+            <div class="hidden md:flex items-center space-x-4">
+                {% if request.user|has_group:"Faculty" %}
+                <a
+
+                    href="{% url 'dashbaord_landing'%}"
+                    class="py-4 px-2 text-gray-500 font-semibold hover:text-indigo-500 transition duration-300"
+                >dashboard</a
+                >
+                {% else %}
+                <a
+                        href="{% url 'Timeline'%}"
+                        class="py-4 px-2 text-gray-500 font-semibold hover:text-indigo-500 transition duration-300"
+
+                >Feed</a
+                >
+                {% endif%}
+
+
+                <a
+                        href="{% url 'profile' as profilessss%}"
+                        {% if request.path == profilessss  %}
+                        class="py-4 px-2 text-indigo-500 border-b-4 border-indigo-500 font-semibold"
+                        {% else%}
+                        class="py-4 px-2 text-gray-500 font-semibold hover:text-indigo-500 transition duration-300"
+                        {% endif%}
+
+                >profile</a>
+                <a
+                        href="{% url 'settings_landing'%}"
+                        class="py-4 px-2 text-gray-500 font-semibold hover:text-indigo-500 transition duration-300"
+                >Settings</a>
+
+            </div>
+
+            <a href="{% url 'profile' %}">
+            <div class="hidden md:flex items-center space-x-8" style="margin-top:10px;" >
+                <div class="flex items-center space-x-4">
+                    <div class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
+                        <svg class="absolute -left-1 w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                    </div>
+
+                    <div class="font-medium dark:text-white">
+                        <div class="break-normal md:break-all">{{ user.email }}</div>
+                    </div>
+                </div>
+            </div>
+            </a>
+            {% else %}
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a
+                        href="{% url 'Login' %}"
+                        class="py-2 px-8 font-medium text-gray-500 rounded-3xl border-2 border-slate-400 hover:bg-indigo-500 hover:text-white transition duration-300"
+                >Log In</a
+                >
+                <a
+                        href="{% url 'signup' %}"
+                        class="py-2 px-8 font-medium text-gray-500 rounded-3xl border-2 border-slate-400 hover:bg-indigo-500 hover:text-white transition duration-300"
+                >Sign up</a
+                >
+            </div>
+            {% endif %}
+
+            <!-- Mobile menu button -->
+            <div class="md:hidden flex items-center">
+                <button class="outline-none mobile-menu-button">
+                    <svg
+                            class="w-6 h-6 text-gray-500 hover:text-indigo-500"
+                            x-show="!showMenu"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                    >
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- mobile menu -->
+
+    <div class="hidden mobile-menu">
+        <ul class="flex flex-col">
+
+            {% if user.is_authenticated %}
+            <li>
+                <div class="w-full h-20 flex items-center space-x-4 pl-10 ">
+                    <div class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
+                        <svg class="absolute -left-1 w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                    </div>
+
+                    <div class="h-10 w-9/12 break-normal md:break-all font-medium dark:text-white">
+                        <div>{{ user.email }}</div>
+
+                    </div>
+                </div>
+            </li>
+
+                {% if  request.user|has_group:"Faculty" %}
+
+                <li >
+                    <a
+                            href="{% url 'dashbaord_landing' %}"
+                            class="block font-semibold hover:bg-indigo-500 hover:text-white text-sm px-14 py-4 transition duration-300"
+                    >dashboard</a
+                    >
+                </li>
+                {% else %}
+                <li >
+                    <a
+                            href="{% url 'Timeline' %}"
+                            class="block font-semibold hover:bg-indigo-500 hover:text-white text-sm px-14 py-4 transition duration-300"
+                    >feed</a
+                    >
+                </li>
+                {% endif %}
+
+
+            <li class="active">
+                <a
+                        href="{% url 'profile' %}"
+                        class="block text-white hover:bg-indigo-500 text-sm px-14 py-4 hover:text-white bg-indigo-500 font-semibold"
+                >Profile</a
+                >
+            </li>
+            <li>
+                <a
+                        href="{% url 'settings_landing' %}"
+                        class="block font-semibold hover:bg-indigo-500 hover:text-white text-sm px-14 py-4 transition duration-300"
+                >Settings</a
+                >
+            </li>
+
+            {% else %}
+            <li>
+                <a
+                        href="{% url 'Login' %}"
+                        class="block font-semibold hover:bg-indigo-500 hover:text-white text-sm px-14 py-4 transition duration-300"
+                >Login</a
+                >
+            </li>
+            <li>
+                <a
+                        href="{% url 'signup' %}"
+                        class="block font-semibold hover:bg-indigo-500 hover:text-white text-sm px-14 py-4 transition duration-300"
+                >Signup</a>
+            </li>
+            {% endif %}
+
+
+        </ul>
+    </div>
+</nav>
+
+
+
+

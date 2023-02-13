@@ -1,0 +1,31 @@
+{% extends "Base.html" %}
+
+{% block nav %}
+<nav>
+    <div class="nav-bar">
+        <i class="bx bx-menu sidebarOpen"></i>
+        <span class="logo navLogo"><a href="#">
+                <img src='{% static "/img/logo.png"%}' /> </a>
+        </span>
+        <div class="adjust">..</div>
+
+        <div class="menu">
+            <div class="logo-toggle">
+                <span class="logo"><a href="#">
+                      <img src='{% static "/img/logo.png"%}' /> </a></span>
+                <i class="bx bx-x siderbarClose"></i>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </div>
+        <div class="sign-up">
+            <div class="login"><a href="#">Log-in</a></div>
+            <div class="sign"><a href="#">sign up</a></div>
+        </div>
+    </div>
+</nav>
+{% endblock %}

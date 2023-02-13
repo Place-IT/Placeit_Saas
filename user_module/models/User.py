@@ -200,13 +200,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         permissions = [("can_view_all_student", "access to view all student")]
 
-
-    # def suspend_user(self):
-    #     self.is_suspended = True
-    #
-    # def Unsuspend_user(self):
-    #     self.is_suspended = False
-
     def create_email_Token(self):
         print(timezone.now() > self.email_token_dateTime_expire, timezone.now(), self.email_token_dateTime_expire)
         if timezone.now() > self.email_token_dateTime_expire:
@@ -246,7 +239,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
 
     msg = EmailMultiAlternatives(
         # title:
-        "Password Reset for {title}".format(title="Some website title"),
+        "Password Reset for {title}".format(title="Placeit"),
         # message:
         email_plaintext_message,
         # from:
