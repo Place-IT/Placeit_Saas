@@ -4,11 +4,15 @@ from frontend_module.Views import BaseReactView, DefaultVerifyReactView, Notauth
 from django.contrib.auth.decorators import login_required ,user_passes_test
 from .UserSettings import urlpatterns as Setting_urlpattern
 
+def update_context(context,request,args,kwargs):
+    context["display_user_content"]=request.user
+
+
 urlpatterns = [
     path('login/',BaseReactView.as_view(condition_check_Function=[Notauth]),name="Login"),
     path('signup/',DefaultVerifyReactView.as_view(condition_check_Function=[Notauth]),name="signup"),
 
-    path('profile/',login_required(DefaultVerifyReactView.as_view(template_name="Profile\profile.html")),name="profile"),
+    path('profile/',login_required(DefaultVerifyReactView.as_view(template_name="Profile\profile.html",context_update=update_context)),name="profile"),
 
     # path('verify/',login_required(BaseReactView.as_view()),name="verify"),
 

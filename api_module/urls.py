@@ -1,14 +1,14 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-# from Company.urls import router as CompanyRouter
-# from Department.urls import router as DepartmentRouter
-# from Form.urls import router as FormRouter
 from user_module.urls import router as UserRouter
+from department_module.urls import router as DepartmentRouter
+from company_module.urls import router as CompanyRouter
+from form_module.urls import router as FormRouter
 
 router = DefaultRouter()
-# router.registry.extend(DepartmentRouter.registry)
-# router.registry.extend(CompanyRouter.registry)
-# router.registry.extend(FormRouter.registry)
+router.registry.extend(DepartmentRouter.registry)
+router.registry.extend(CompanyRouter.registry)
+router.registry.extend(FormRouter.registry)
 router.registry.extend(UserRouter.registry)
 
 

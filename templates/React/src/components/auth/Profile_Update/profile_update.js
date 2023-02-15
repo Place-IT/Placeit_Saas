@@ -185,14 +185,14 @@ export default function  Profile_update (props)  {
                                     }/>
                                 </div>
                             </div>
-                            {UserDetail.groups.includes("Faculty") === false&&<>
-
+                            {UserDetail.groups.includes("Faculty") &&<>
                                 {/*Student_phone_number*/}
                                 <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
                                     <div className="md:w-1/3">
                                         <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                                htmlFor="inline-full-name">
-                                            Student-Phonenumber :
+                                            {UserDetail.groups.includes("Faculty") ?<>Phonenumber :</>:<>Student-Phonenumber :</>}
+
                                         </label>
                                     </div>
                                     <div className="md:w-1/3">
@@ -208,6 +208,10 @@ export default function  Profile_update (props)  {
                                     </div>
                                 </div>
 
+
+                            </>}
+
+                            {UserDetail.groups.includes("Faculty") === false&&<>
 
                                 {/*Parent_phone_number*/}
                             <div className="md:flex md:items-center mb-4 space-x-6 mx-2">

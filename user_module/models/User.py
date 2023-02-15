@@ -13,7 +13,7 @@ from django.utils.crypto import get_random_string
 from django_rest_passwordreset.signals import reset_password_token_created
 
 from phonenumber_field.modelfields import PhoneNumberField
-# from Department.models import Department
+from department_module.models import Department
 
 
 class UserManager(BaseUserManager):
@@ -162,7 +162,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     Internship = models.TextField(null=True, blank=True)
 
-    # Affliated_Department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True,blank=True)
+    Affliated_Department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True,blank=True)
 
     collage_passingYear = models.IntegerField(validators=[MinValueValidator(2015), MaxValueValidator(2050)], null=True, blank=True)
 

@@ -14,10 +14,10 @@ def Verifie(request):
     return True
 
 
+
 class DefaultVerifyReactView(BaseReactView):
 
     def condition_Check(self, request, context):
         self.condition_check_Function.append(Verifie)
-        #TODO:uncomment below
-        # self.condition_check_Function.append(Affliated_to_department_or_not)
+        self.condition_check_Function.append(Affliated_to_department_or_not)
         return super().condition_Check(request, context)

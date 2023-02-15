@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+
+from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -89,9 +91,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'blogdb',
-            'USER': 'blog_admin',
-            'PASSWORD': 'testing123',
+            'NAME': os.getenv('db_name'),
+            'USER': os.getenv('db_username'),
+            'PASSWORD': os.getenv('db_password'),
             'HOST': 'localhost',
             'PORT': '',
         }
@@ -118,6 +120,10 @@ INSTALLED_APPS = [
     "user_module",
     "api_module",
     "frontend_module",
+    "department_module",
+    "company_module",
+    "form_module"
+
 ]
 
 
@@ -139,7 +145,7 @@ DJANGO_REST_PASSWORDRESET_TOKEN_CONFIG = {
 
 
 # login url
-# LOGIN_URL = reverse_lazy('Login')
+LOGIN_URL = reverse_lazy('Login')
 
 
 # django rest framework

@@ -6,7 +6,7 @@ class BaseReactView(TemplateView):
 
     # functions which will check req and return true or false
     condition_check_Function = []
-
+    context_update=False
     def condition_Check(self, request, context):
         for x in self.condition_check_Function:
             a = x(request)
@@ -27,10 +27,15 @@ class BaseReactView(TemplateView):
         if context is None:
             context = self.get_context_data(**kwargs)
 
+            if self.context_update != False:
+                self.context_update(context,request,args,kwargs)
+
             a = self.condition_Check(request, context)
+
 
             if a == False:
                 return self.render_to_response(context)
             elif a != True:
                 return a
+
         return self.render_to_response(context)

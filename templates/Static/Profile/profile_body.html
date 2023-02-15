@@ -1,4 +1,7 @@
 {% load static %}
+{% load auth_extras %}
+<div abc="{% url 'profile' as profilessss %}"></div>
+
 <div class="flex flex-wrap items-center justify-center">
     <div class="container bg-white shadow-lg transform duration-200 easy-in-out mx-24">
         <div class="sm:h-96 max-w-full overflow-hidden">
@@ -19,7 +22,7 @@
         </div>
         <div class=" ">
             <div class="name font-semibold text-xl md:text-3xl mx-10 mt-4 mx-auto">
-                {{user.First_name}} {{user.middle_name}} {{user.Last_name}}
+                {{display_user_content.First_name}} {{display_user_content.middle_name}} {{display_user_content.Last_name}}
             </div>
             <ul class="max-w-3xl">
                 <li class="flex justify-items-start space-x-4 mx-10 my-4">
@@ -30,12 +33,12 @@
                 </li>
                 <li class="flex justify-items-start space-x-4 mx-10 my-4">
                     <i class="bx bxs-envelope text-2xl"></i>
-                    <a class="text-sm text-indigo-700 md:text-xl" href="#link">{{user.email}}</a>
+                    <a class="text-sm text-indigo-700 md:text-xl" href="#link">{{display_user_content.email}}</a>
                 </li>
                 <li class="flex justify-items-start space-x-4 mx-10 my-4">
                     <i class="bx bxs-message-square-dots text-2xl"></i>
                     <p class="text-sm md:text-xl">
-                        {{user.Bio}}
+                        {{display_user_content.Bio}}
                     </p>
                 </li>
             </ul>
@@ -51,6 +54,7 @@
                         Personal
                     </button>
                 </li>
+                {% if display_user_content|has_group:"Student" %}
                 <li class="mr-2" role="presentation">
                     <button
                             class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
@@ -59,7 +63,7 @@
                         Education
                     </button>
                 </li>
-                <li class="mr-2" role="presentation">
+                    <li class="mr-2" role="presentation">
                     <button
                             class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                             id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings"
@@ -75,6 +79,7 @@
                         Resume
                     </button>
                 </li>
+                {% endif %}
             </ul>
         </div>
         <div id="myTabContent">
@@ -86,74 +91,78 @@
                     <ul class="flex flex-col max-w-6xl">
                         <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
                             <p class="text-sm md:text-xl">FirstName :</p>
-                            <p class="font-bold text-sm md:text-xl">{{user.First_name}}</p>
+                            <p class="font-bold text-sm md:text-xl">{{display_user_content.First_name}}</p>
                         </li>
                         <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
                             <p class="text-sm md:text-xl">MiddleName :</p>
-                            <p class="font-bold text-sm md:text-xl">{{user.middle_name}}</p>
+                            <p class="font-bold text-sm md:text-xl">{{display_user_content.middle_name}}</p>
                         </li>
                         <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
                             <p class="text-sm md:text-xl">Surname :</p>
-                            <p class="font-bold text-sm md:text-xl">{{user.Last_name}}</p>
+                            <p class="font-bold text-sm md:text-xl">{{display_user_content.Last_name}}</p>
                         </li>
+                        {% if display_user_content|has_group:"Student" %}
                         <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
                             <p class="text-sm md:text-xl">MIS_no :</p>
-                            <p class="font-bold text-sm md:text-xl">{{user.MIS_no}}</p>
+                            <p class="font-bold text-sm md:text-xl">{{display_user_content.MIS_no}}</p>
                         </li>
+                        {% endif %}
                     </ul>
                     <ul class="flex flex-col md:flex-col flex-row max-w-6xl">
                         <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
                             <i class="bx bxs-envelope text-sm md:text-xl" style="color: #ebe417"></i>
                             <a href="#" class="font-bold text-sm md:text-xl">
-                                {{user.email}}
+                                {{display_user_content.email}}
                             </a>
                         </li>
                         <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
                             <i class="bx bxl-linkedin-square text-xl" style="color: #0077b5"></i>
                             <a href="#" class="font-bold text-sm md:text-xl">
-                                {{user.linkedin_profile}}
+                                {{display_user_content.linkedin_profile}}
                             </a>
                         </li>
                         <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
                             <i class="bx bxl-github text-xl" style="color: black"></i>
                             <a href="#" class="font-bold text-sm md:text-xl">
-                                {{user.Github_profile}}
+                                {{display_user_content.Github_profile}}
                             </a>
                         </li>
                     </ul>
-                    <ul class="flex flex-col max-w-6xl">
-                        <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
-                            <p class="text-sm md:text-xl">Student phonenumber :</p>
-                            <p class="font-bold text-sm md:text-xl">{{user.Student_phone_number}}</p>
-                        </li>
-                        <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
-                            <p class="text-sm md:text-xl">Parent phonenumber :</p>
-                            <p class="font-bold text-sm md:text-xl">{{user.Parent_phone_number}}</p>
-                        </li>
-                    </ul>
+                    {% if display_user_content|has_group:"Student" %}
+                        <ul class="flex flex-col max-w-6xl">
+                            <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
+                                <p class="text-sm md:text-xl">Student phonenumber :</p>
+                                <p class="font-bold text-sm md:text-xl">{{display_user_content.Student_phone_number}}</p>
+                            </li>
+                            <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
+                                <p class="text-sm md:text-xl">Parent phonenumber :</p>
+                                <p class="font-bold text-sm md:text-xl">{{display_user_content.Parent_phone_number}}</p>
+                            </li>
+                        </ul>
+                    {% endif%}
                     <div class="name font-semibold text-xl md:text-2xl mx-10 mb-4 mx-auto">
                         Address :
                     </div>
                     <ul class="flex flex-col max-w-6xl">
                         <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
                             <p class="text-sm md:text-xl">Building name And RoomNumber :</p>
-                            <p class="font-bold text-sm md:text-xl">{{user.Building_name_And_RoomNumber}}</p>
+                            <p class="font-bold text-sm md:text-xl">{{display_user_content.Building_name_And_RoomNumber}}</p>
                         </li>
                         <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
                             <p class="text-sm md:text-xl">Locality_name :</p>
-                            <p class="font-bold text-sm md:text-xl">{{user.Locality_name}}</p>
+                            <p class="font-bold text-sm md:text-xl">{{display_user_content.Locality_name}}</p>
                         </li>
                         <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
                             <p class="text-sm md:text-xl">State Name :</p>
-                            <p class="font-bold text-sm md:text-xl">{{user.State_name}}</p>
+                            <p class="font-bold text-sm md:text-xl">{{display_user_content.State_name}}</p>
                         </li>
                         <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
                             <p class="text-sm md:text-xl">PostalCode :</p>
-                            <p class="font-bold text-sm md:text-xl">{{user.PostalCode}}</p>
+                            <p class="font-bold text-sm md:text-xl">{{display_user_content.PostalCode}}</p>
                         </li>
                         <li class="flex px-10 space-x-4 mx-10 my-2 py-2 border-4 max-w-xl rounded-3xl border-gray-500">
                             <p class="text-sm md:text-xl">Country Name :</p>
-                            <p class="font-bold text-sm md:text-xl">{{user.Country_name}}</p>
+                            <p class="font-bold text-sm md:text-xl">{{display_user_content.Country_name}}</p>
                         </li>
 
                     </ul>
@@ -168,35 +177,35 @@
                 <div class="container flex sm:flex-row flex-col flex-wrap">
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                        <p>sem 1: {{user.Sem1}}</p>
+                        <p>sem 1: {{display_user_content.Sem1}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                        <p>sem 2 : {{user.Sem2}}</p>
+                        <p>sem 2 : {{display_user_content.Sem2}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                        <p>sem 3 : {{user.Sem3}}</p>
+                        <p>sem 3 : {{display_user_content.Sem3}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                        <p>sem 4 : {{user.Sem4}}</p>
+                        <p>sem 4 : {{display_user_content.Sem4}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                        <p>sem 5: {{user.Sem5}}</p>
+                        <p>sem 5: {{display_user_content.Sem5}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                        <p>sem 6 : {{user.Sem6}}</p>
+                        <p>sem 6 : {{display_user_content.Sem6}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                        <p>sem 7 : {{user.Sem7}}</p>
+                        <p>sem 7 : {{display_user_content.Sem7}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                        <p>sem 8 : {{user.Sem8}}</p>
+                        <p>sem 8 : {{display_user_content.Sem8}}</p>
                     </div>
                 </div>
 
@@ -207,91 +216,95 @@
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
                         <p>Dead kt:
-                            {% if user.DeadKT == True %}
+                            {% if display_user_content.DeadKT == True %}
                             Yes
                             {% else %}
                             No
                             {% endif%}
                             </p>
                     </div>
-                    {% if user.DeadKT == True %}
+                    {% if display_user_content.DeadKT == True %}
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                        <p>No of dead kt : {{user.No_Of_DeadKT}}</p>
+                        <p>No of dead kt : {{display_user_content.No_Of_DeadKT}}</p>
                     </div>
                     {% endif%}
 
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
                         <p>Live KT:
-                            {% if user.LiveKT == True %}
+                            {% if display_user_content.LiveKT == True %}
                             Yes
                             {% else %}
                             No
                             {% endif%}
                         </p>
                     </div>
-                    {% if user.LiveKT == True %}
+                    {% if display_user_content.LiveKT == True %}
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                        <p>No Of LiveKT : {{user.No_Of_LiveKT}}</p>
+                        <p>No Of LiveKT : {{display_user_content.No_Of_LiveKT}}</p>
                     </div>
                     {% endif%}
 
                 </div>
 
-                <div class="name font-semibold text-xl md:text-2xl mx-10 my-4 mx-auto">
+                <div  class="name font-semibold text-xl md:text-2xl mx-10 my-4 mx-auto">
                     Academics Details :
                 </div>
                 <div class="container flex sm:flex-row flex-col flex-wrap">
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
-                        <p>10th Score :  {{user.SSC}}</p>
+                        <p>10th Score :  {{display_user_content.SSC}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
-                        <p>12th Score : {{user.HSC}}</p>
+                        <p>12th Score : {{display_user_content.HSC}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
-                        <p>12th Score : {{user.Diploma}}</p>
+                        <p>12th Score : {{display_user_content.Diploma}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
-                        <p>JEE Score : {{user.JEE}}</p>
+                        <p>JEE Score : {{display_user_content.JEE}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
-                        <p>MhCET Score : {{user.MhCET}}</p>
+                        <p>MhCET Score : {{display_user_content.MhCET}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
-                        <p>Diploma Score : {{user.Diploma}}</p>
+                        <p>Diploma Score : {{display_user_content.Diploma}}</p>
                     </div>
 
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
-                        <p>Collage Joinig Year : {{user.collage_joinig_year}}</p>
+                        <p>Collage Joinig Year : {{display_user_content.collage_joinig_year}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
-                        <p>Collage Passing Year : {{user.collage_passingYear}}</p>
+                        <p>Collage Passing Year : {{display_user_content.collage_passingYear}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
-                        <p>Future Options : {{user.future_options}}</p>
+                        <p>Future Options : {{display_user_content.future_options}}</p>
                     </div>
                     <div
                             class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
-                        <p>Gate Status : {{user.Gate_Status}}</p>
+                        <p>Gate Status : {{display_user_content.Gate_Status}}</p>
                     </div>
 
                 </div>
 
 
             </div>
+
+
+
+
             <div class="hidden p-4 rounded-lg" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                {% for offer in user.response_to_user_set.all %}
+                {% for offer in display_user_content.response_to_user_set.all %}
                     {% if offer.response_Type == "placed"%}
                         <div class="mx-2">
                     <div class="flex flex-wrap flex-row border-4 justify-center border-blue-900 rounded-2xl">
@@ -368,3 +381,5 @@
     </div>
 </div>
 
+{#{% if request.path ==  profilessss %}#}
+{#{% endif  %}#}

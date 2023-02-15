@@ -1,6 +1,6 @@
 {% load static %}
 {% load auth_extras %}
-<nav class="bg-white shadow-lg">
+<nav class="bg-white ">
     <div class="max-w-6xl mx-auto px-4">
         <div class="flex justify-between space-x-12">
             <div class="flex">
@@ -31,9 +31,9 @@
                 >
                 {% endif%}
 
-
                 <a
-                        href="{% url 'profile' as profilessss%}"
+                        aaaaa="{% url 'profile' as profilessss%}"
+                        href="{% url 'profile' %}"
                         {% if request.path == profilessss  %}
                         class="py-4 px-2 text-indigo-500 border-b-4 border-indigo-500 font-semibold"
                         {% else%}
