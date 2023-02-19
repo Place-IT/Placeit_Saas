@@ -1,8 +1,7 @@
-from django.db.models import Sum, OuterRef, Exists
+from django.db.models import Sum, OuterRef, Exists,Count
 from django.forms import DateInput
 from django_filters.rest_framework import DjangoFilterBackend
 from guardian.shortcuts import assign_perm
-from django.utils import timezone
 from rest_framework import status
 from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
@@ -47,12 +46,22 @@ class Form_viewset(CustomViewset, Gurdian_model_viewset):
     modelname = "form"
 
     def filter_returner(self, queryset, request):
-        return queryset.annotate(
-            no_of_user_enroled=Sum("responsefromuser"),
+       if request.user.groups.filter(name="Faculty").exists():
+           print("Faculty")
+           return queryset.annotate(
+               no_of_user_enroled=Count("responsefromuser"),
+           ) \
+               .filter(Originator=request.user.id) \
+               .order_by("-expire_date_time", "-Creation_Date","pk")
+       elif request.user.groups.filter(name="Student").exists():
+           print("Student")
+           return queryset.annotate(
+            no_of_user_enroled=Count("responsefromuser"),
             User_submitted=Exists(ResponseFromUser.objects.filter(user__id=request.user.id, Form_id=OuterRef('pk')))
         ) \
             .filter(Originator__Affliated_Department__id=request.user.Affliated_Department.id, ) \
-            .order_by("-expire_date_time", "-Creation_Date", "pk")
+            .order_by("-expire_date_time", "-Creation_Date","pk")
+       return queryset
 
     def create(self, request, form_data=None, *args, **kwargs):
         data = request.data

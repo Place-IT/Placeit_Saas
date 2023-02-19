@@ -37,5 +37,4 @@ class CustomViewset:
         return queryset,True
 
     def filter_returner(self, queryset, request):
-
         return queryset.filter(id=request.user.id)

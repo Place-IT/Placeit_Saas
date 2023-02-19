@@ -57,7 +57,7 @@ export default function Settings(props)
                         }}
                         className=" cursor-pointer w-80 px-5 my-8 py-5 place-items-center flex flex-row justify-center space-x-4 text-indigo-700 border-2 border-gray-200 shadow-lg hover:bg-indigo-700  hover:text-white rounded-2xl"
                     >
-                        <i className="bx bx-check-shield text-6xl"></i>
+                        <i className="bx bx-log-out text-6xl"></i>
                         <p  className=" font-bold  text-lg">Logout</p>
                     </div>
 

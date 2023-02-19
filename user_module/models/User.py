@@ -232,7 +232,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
             instance.request.build_absolute_uri(reverse('reset-password-confirm-frontend')),
             reset_password_token.key)
     }
-    # print(reverse('reset-password-confirm-frontend'))
+    print(context)
     # render email text
     email_html_message = render_to_string('email/user_reset_password.html', context)
     email_plaintext_message = render_to_string('email/user_reset_password.txt', context)

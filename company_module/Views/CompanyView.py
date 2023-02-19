@@ -11,7 +11,7 @@ class Company_viewset(Gurdian_model_viewset):
 
     queryset = Company.objects.all()
     serializer_class = Company_Serailizer
-    permission_classes = [ModelNamePermission("company", "Company")]
+    permission_classes = [ModelNamePermission("company", "company_module")]
     modelname="company"
 
     filter_backends = [DjangoFilterBackend,SearchFilter]

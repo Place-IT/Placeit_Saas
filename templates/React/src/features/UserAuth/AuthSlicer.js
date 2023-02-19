@@ -79,7 +79,8 @@ const initialState = {
     email:"",
     is_suspended:"",
     is_faculty: false,
-    groups:[]
+    groups:[],
+    Affliated_Department:{}
 };
 
 export const AuthSlice = createSlice({
@@ -240,6 +241,7 @@ export const AuthSlice = createSlice({
                 state.HSC=action.payload.response.data.HSC
                 state.Diploma=action.payload.response.data.Diploma
                 state.Github_profile=action.payload.response.data.Github_profile
+                state.Affliated_Department=action.payload.response.data.Affliated_Department
 
 
             }else
@@ -487,6 +489,8 @@ export const BasicDetailsU = (state) => {
         Diploma: state.Auth.Diploma,
         Github_profile: state.Auth.Github_profile,
         Cache_check:state.Auth.Cache_check,
+        Affliated_Department:state.Auth.Affliated_Department,
+
     }
 };
 

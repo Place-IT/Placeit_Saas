@@ -1,36 +1,35 @@
 {% load static %}
 {% load auth_extras %}
 <div abc="{% url 'profile' as profilessss %}"></div>
-
-
 <div class="max-w-6xl mx-auto">
-    <div class="border-2 border-black">
+    <div class="">
         <img  src='{% static "/img/cover2.jpeg"%}' class="w-full h-48 sm:h-72" alt="">
     </div>
     <div class="flex -mt-24 ">
         <div class="px-10 sm:px-20 block relative">
-            <img alt=""    {% if x.reminder == None %}
+            <img alt="user_image"{% if display_user_content.i_card_image == "" %}
                  src='{% static "/img/default-avatar.png"%}'
             {% else %}
-                 src='{% static user.i_card_image %}'
+                 src='/media/{{ display_user_content.i_card_image }}'
             {% endif %}
-                 class="mx-auto object-cover rounded-full h-36 w-36 sm:w-48 sm:h-48 border-4 border-black mt-2" />
+                 class="mx-auto object-cover rounded-full h-36 w-36 sm:w-48 sm:h-48  mt-2 border-2 border-black" />
         </div>
-
     </div>
     <div class="flex flex-row-reverse max-w-6xl mx-4 md:-mt-4 md:mt-0 ">
-        <button
-                class="text-white py-2 px-4 border-2 text-2xl text-blue-700 border-blue-900 rounded-full hover:text-white hover:bg-blue-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
 
-            <i class='bx bx-user-plus'></i>
-        </button>
+            <button id="shareBtn"
+                    class="text-white py-2 px-4 border-2 text-2xl text-blue-700 border-blue-900 rounded-full hover:text-white hover:bg-blue-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+
+                <i class='bx bx-user-plus'></i>
+            </button>
+
     </div>
 </div>
 
 <div class=" max-w-6xl mx-auto ">
     <div class="font-semibold text-xl md:text-3xl mx-10 mt-4 mx-auto">
         {{display_user_content.First_name}} {{display_user_content.middle_name}} {{display_user_content.Last_name}}
-        {% if display_user_content|has_group:"Faculty" %}
+        {% if display_user_content|has_group:"Faculty" or display_user_content|has_group:"Head" %}
           <i class='bx bxs-badge-check text-xl md:text-3xl' style='color:#497de4'></i>
         {% endif %}
     </div>
@@ -85,14 +84,16 @@
                 Company
             </button>
         </li>
-        <li role="presentation">
-            <button
-                    class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
-                    id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts"
-                    aria-selected="false">
-                Resume
-            </button>
-        </li>
+            {% if request.user.is_authenticated and  request.user.id == display_user_content.id%}
+                <li role="presentation">
+                    <button
+                            class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
+                            id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts"
+                            aria-selected="false">
+                        Resume
+                    </button>
+                </li>
+            {% endif %}
         {% endif %}
     </ul>
 </div>
@@ -102,7 +103,7 @@
         <div class="text-gray-900">
             <div class="flex flex-row mb-4 space-x-2 mx-2">
                 <div class=" text-sm md:text-xl">
-                    <label class="block text-gray-900 font-bold text-right" for="inline-full-name">
+                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
                         First-Name :
                     </label>
                 </div>
@@ -112,7 +113,7 @@
             </div>
             <div class="flex flex-row mb-4 space-x-2 mx-2">
                 <div class=" text-sm md:text-xl">
-                    <label class="block text-gray-900 font-bold text-right" for="inline-full-name">
+                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
                         Second-Name :
                     </label>
                 </div>
@@ -122,7 +123,7 @@
             </div>
             <div class="flex  mb-4 space-x-2 mx-2">
                 <div class=" text-sm md:text-xl">
-                    <label class="block text-gray-900 font-bold text-right" for="inline-full-name">
+                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
                         Last-Name :
                     </label>
                 </div>
@@ -132,34 +133,149 @@
             </div>
             <div class="flex  mb-4 space-x-2 mx-2">
                 <div class=" text-sm md:text-xl">
-                    <label class="block text-gray-900 font-bold text-right" for="inline-full-name">
-                        <i class='bx bxl-github' undefined></i>
+                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                        <i class='bx bxl-github' ></i>
                     </label>
                 </div>
                 <div class="text-sm md:text-xl">
-                    @janak27
+                    <a href="{{display_user_content.Github_profile}}">{{display_user_content.Github_profile}}</a>
                 </div>
             </div>
             <div class="flex mb-4 space-x-2 mx-2">
                 <div class=" text-sm md:text-xl">
-                    <label class="block text-gray-900 font-bold text-right" for="inline-full-name">
-                        <i class='bx bxl-linkedin-square' style='color:#0a66c2'></i>
+                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                        <i class='bx bxl-linkedin-square' style='color:#0a66c2'>
+
+                        </i>
                     </label>
                 </div>
                 <div class="text-sm md:text-xl">
-                    /@janak-avhad
+                    <a href="{{display_user_content.linkedin_profile}}">{{display_user_content.linkedin_profile}}</a>
+                </div>
+            </div>
+
+            <div class="flex  mb-4 space-x-2 mx-2">
+                <div class=" text-sm md:text-xl">
+                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                        MIS no :
+                    </label>
+                </div>
+                <div class="text-sm md:text-xl">
+                    {{display_user_content.MIS_no}}
+                </div>
+            </div>
+            {% if display_user_content|has_group:"Student" %}
+                <div class="flex  mb-4 space-x-2 mx-2">
+                    <div class=" text-sm md:text-xl">
+                        <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                            Student phonenumber :
+                        </label>
+                    </div>
+                    <div class="text-sm md:text-xl">
+                        {{display_user_content.Student_phone_number}}
+                    </div>
+                </div>
+                <div class="flex  mb-4 space-x-2 mx-2">
+                    <div class=" text-sm md:text-xl">
+                        <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                            Parent phonenumber :
+                        </label>
+                    </div>
+                    <div class="text-sm md:text-xl">
+                        {{display_user_content.Parent_phone_number}}
+                    </div>
+                </div>
+
+            {% else %}
+                <div class="flex  mb-4 space-x-2 mx-2">
+                    <div class=" text-sm md:text-xl">
+                        <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                            phonenumber :
+                        </label>
+                    </div>
+                    <div class="text-sm md:text-xl">
+                        {{display_user_content.Student_phone_number}}
+                    </div>
+                </div>
+
+            {% endif%}
+
+
+
+            <div class="name font-semibold text-xl  md:text-2xl mx-10 mb-4 mx-auto">
+                Address-
+            </div>
+            <div class="flex  mb-4 space-x-2 mx-2">
+                <div class=" text-sm md:text-xl">
+                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                        Building name And RoomNumber :
+                    </label>
+                </div>
+                <div class="text-sm md:text-xl">
+                    {{display_user_content.Building_name_And_RoomNumber}}
                 </div>
             </div>
             <div class="flex  mb-4 space-x-2 mx-2">
-                <div class="text-sm md:text-xl">
-                    <label class="block text-gray-900 font-bold text-right" for="inline-full-name">
-                        <i class='bx bxl-gmail' style='color:#bb001b'></i>
+                <div class=" text-sm md:text-xl">
+                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                        Building name And RoomNumber :
                     </label>
                 </div>
                 <div class="text-sm md:text-xl">
-                    avhadjanak@gmail.com
+                    {{display_user_content.Building_name_And_RoomNumber}}
                 </div>
             </div>
+            <div class="flex  mb-4 space-x-2 mx-2">
+                <div class=" text-sm md:text-xl">
+                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                        Locality_name :
+                    </label>
+                </div>
+                <div class="text-sm md:text-xl">
+                    {{display_user_content.Locality_name}}
+                </div>
+            </div>
+            <div class="flex  mb-4 space-x-2 mx-2">
+                <div class=" text-sm md:text-xl">
+                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                        State Name :
+                    </label>
+                </div>
+                <div class="text-sm md:text-xl">
+                    {{display_user_content.State_name}}
+                </div>
+            </div>
+            <div class="flex  mb-4 space-x-2 mx-2">
+                <div class=" text-sm md:text-xl">
+                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                        PostalCode :
+                    </label>
+                </div>
+                <div class="text-sm md:text-xl">
+                    {{display_user_content.PostalCode}}
+                </div>
+            </div>
+            <div class="flex  mb-4 space-x-2 mx-2">
+                <div class=" text-sm md:text-xl">
+                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                        Country Name :
+                    </label>
+                </div>
+                <div class="text-sm md:text-xl">
+                    {{display_user_content.Country_name}}
+                </div>
+            </div>
+
+            {#            <div class="flex  mb-4 space-x-2 mx-2">#}
+{#                <div class="text-sm md:text-xl">#}
+{#                    <label class="block text-gray-900 font-bold text-right" for="inline-full-name">#}
+{#                        <i class='bx bxl-gmail' style='color:#bb001b'></i>#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div class="text-sm md:text-xl">#}
+{#                    avhadjanak@gmail.com#}
+{#                </div>#}
+{#            </div>#}
         </div>
     </div>
     <div class="hidden p-4 max-w-6xl mx-auto rounded-lg" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab"   >
@@ -293,7 +409,7 @@
     </div>
     <div class="hidden p-4 max-w-6xl mx-auto rounded-lg" id="settings" role="tabpanel" aria-labelledby="settings-tab">
         <div class="mx-2">
-        {% if display_user_content.response_to_user_set.all.count|length  == 0 %}
+        {% if display_user_content.form_responses.all|length  == 0 %}
             <div class="flex flex-wrap flex-row  justify-center  rounded-2xl">
                 <div
                         class="container flex flex-col justify-center p-6 mx-auto sm:py-12  lg:flex-row lg:justify-between">
@@ -307,7 +423,7 @@
                 </div>
             </div>
         {% else %}
-            {% for offer in display_user_content.response_to_user_set.all %}
+            {% for offer in display_user_content.form_responses.all %}
                 {% if offer.response_Type == "placed"%}
                     <div class="mx-2">
                         <div class="flex flex-wrap flex-row border-4 justify-center border-blue-900 rounded-2xl">
@@ -341,13 +457,14 @@
                                 </ul>
                             </div>
                             <div class="mx-2 my-10 flex flex-col basis-1/2">
+                                {% if request.user.is_authenticated and  request.user.id == display_user_content.id%}
 
-                                <div
+                                    <div
                                         class="mx-2 p-5 my-2 cursor-pointer grid place-items-center text-indigo-700 font-extrabold border-4 border-indigo-700 p-2 rounded-2xl">
                                     <i class="bx bx-upload text-5xl"></i>
                                     <p class="">Upload offer letter</p>
                                 </div>
-
+                                {% endif %}
                                 <div
                                         class="mx-2 p-5 my-2  cursor-pointer grid place-items-center text-indigo-700 font-extrabold border-4 border-indigo-700 p-2 rounded-2xl">
                                     <i class="bx bx-file-blank text-5xl"></i>
@@ -379,3 +496,74 @@
         </div>
     </div>
 </div>
+
+
+<div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+    <div class="relative w-full h-full max-w-2xl md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Terms of Service
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6">
+                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                </p>
+                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                </p>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button data-modal-hide="defaultModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                <button data-modal-hide="defaultModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.querySelector('#shareBtn')
+        .addEventListener('click', event => {
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Placeit',
+                    url: "{% url 'Public_Profile' display_user_content.id %}"
+                }).then(() => {
+                    console.log('Thanks for sharing!');
+                }).catch(err => {
+                    console.log("Error while using Web share API:");
+                    console.log(err);
+                });
+            } else {
+                alert("Browser doesn't support this API !");
+            }
+        })
+    // set the modal menu element
+    const $targetEl = document.getElementById('modalEl');
+
+    // options with default values
+    const options = {
+        placement: 'bottom-right',
+        backdrop: 'dynamic',
+        backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
+        closable: true,
+        onHide: () => {
+            console.log('modal is hidden');
+        },
+        onShow: () => {
+            console.log('modal is shown');
+        },
+        onToggle: () => {
+            console.log('modal has been toggled');
+        }
+    };
+</script>

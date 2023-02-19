@@ -11,9 +11,9 @@ from company_module.serializer import Visiting_company_record_Serailizer
 class Visiting_company_record_viewset(viewsets.ModelViewSet):
     serializer_class=Visiting_company_record_Serailizer
     queryset = Visiting_company_record.objects.all()
-    permission_classes = [ModelNamePermission("visiting_company_record", "Company")]
+    permission_classes = [ModelNamePermission("visiting_company_record", "company_module")]
 
     filter_backends = [DjangoFilterBackend]
-    filterset_fields =["company"]
+    filterset_fields =["company","id"]
 
 

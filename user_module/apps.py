@@ -27,5 +27,8 @@ class UserModuleConfig(AppConfig):
             assign_perm(f"form_module.view_response_to_user", stu)
             assign_perm(f"form_module.view_questions", stu)
 
+            Head, created_Head=Group.objects.get_or_create(name='Head')
+            Head.permissions.set(Permission.objects.all())
+
         except Exception as e:
             print(e)

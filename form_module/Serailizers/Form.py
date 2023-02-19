@@ -7,6 +7,7 @@ class Form_Serailizer(serializers.ModelSerializer):
     no_of_user_enroled = serializers.IntegerField(read_only=True)
     Originator_id=serializers.SlugField(source="Originator.id",read_only=True)
     Originator_email=serializers.SlugField(source="Originator.email",read_only=True)
+    Originator_i_card_image=serializers.SlugField(source="Originator.i_card_image",read_only=True)
     User_submitted = serializers.BooleanField(read_only=True)
     Company_image=serializers.SerializerMethodField()
     Company_name=serializers.SlugField(source="Visitng_record.company.Company_name",read_only=True)
@@ -23,6 +24,7 @@ class Form_Serailizer(serializers.ModelSerializer):
                   "Originator_email",
                   "User_submitted",
                   "questions_set",
+                  "Originator_i_card_image",
                   "Company_image",
                   "Company_name"
                   ]

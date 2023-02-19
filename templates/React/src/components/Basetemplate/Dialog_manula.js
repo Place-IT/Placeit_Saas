@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     Button,
     Dialog,
@@ -12,9 +12,14 @@ import { useTheme } from '@mui/material/styles';
 import {useSelector} from "react-redux";
 import {DialogSlice, selectState} from "../../features/dialogSlicer";
 import {store} from "../../app/store";
+import {logdata} from "../../CommonFunctions/Logger/Logevents";
 
 export default function DialogManual(props)
 {
+    useEffect(ev=>{
+        logdata("DialogManual","init",`DialogManual initated with following props ${props}`)
+    },[])
+
     const Dialog_state = useSelector(selectState);
     const Error = useSelector(props.Error);
     const Success = useSelector(props.Success);
@@ -23,7 +28,10 @@ export default function DialogManual(props)
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     const handleClose = () => {
+        logdata("handleClose","init",`Dialog closing`)
         store.dispatch(DialogSlice.actions.dialogState())
+        logdata("handleClose","Completed",`Dialog closing`)
+
     };
 
     if(Success.Success)

@@ -21,8 +21,8 @@ def ModelNamePermission(ModelName: str, AppName: str, custom_check_view=None, cu
                 elif res == False:
                     # print("false")
                     return False
-            # print(f'{self.appname}.view_{self.modelname}',request.user.has_perm(f'{self.appname}.view_{self.modelname}'))
             if request.user.is_authenticated:
+                # print(f'{self.appname}.view_{self.modelname}',request.user.has_perm(f'{self.appname}.view_{self.modelname}'))
                 if request.method in ['GET']:
                     return request.user.has_perm(f'{self.appname}.view_{self.modelname}')
                 if request.method in ['POST']:

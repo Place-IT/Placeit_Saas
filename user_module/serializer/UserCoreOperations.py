@@ -10,10 +10,10 @@ class UserserializerCoreOperations(serializers.ModelSerializer):
                   'password','re_password',
                   'email_token_dateTime_expire',
                   'is_active','is_staff',
-                  # 'Affliated_Department',
-                  'is_faculty']
+                  'Affliated_Department',
+                  ]
         read_only_fields = ['First_name','email_token_dateTime_expire','email_token','is_active','is_staff',
-                            # 'Affliated_Department',
+                            'Affliated_Department',
                             'is_faculty']
         ordering = ['-id']
 

@@ -97,7 +97,7 @@ class UserCoreOperationsViewset(CustomViewset,Gurdian_model_viewset, viewsets.Mo
         except ValidationError:
             return Response({'error': "invalid-email"})
 
-        return email_verfy_core(email, host=request.get_host())
+        return email_verfy_core(email,request)
 
     @action(detail=False, methods=['post'])
     def email_verify_conform(self, request, pk=None):

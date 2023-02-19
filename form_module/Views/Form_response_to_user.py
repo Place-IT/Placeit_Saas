@@ -43,7 +43,9 @@ class Form_Response_To_User_viewset(CustomViewset,Gurdian_model_viewset):
     def Condition_check(self, request, queryset, *args, **kwargs):
         if request.user.is_anonymous:
             return Response({}), False
-        if request.user.groups.filter(name="Faculty"):
+        if request.user.groups.filter(name="Head"):
+            pass
+        elif request.user.groups.filter(name="Faculty"):
             queryset = queryset.filter(
                 Form_id__department_related_form__Department__id=request.user.Affliated_Department.id,
                 # Form_id__Originator=request.user.id

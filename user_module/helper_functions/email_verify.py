@@ -11,7 +11,7 @@ from user_module.models import User
 logger = logging.getLogger('UserAuth')
 
 
-def email_verfy_core(email, host):
+def email_verfy_core(email, request):
     try:
 
         user = User.objects.get(email=email)
@@ -23,18 +23,15 @@ def email_verfy_core(email, host):
         a = user.create_email_Token()
         q = user.email_token_dateTime_expire
         user.save()
-        print("hello doen")
 
         if a == True:
             context = {
                 'current_user': user,
                 'email': user.email,
-                'reset_password_url': "{}{}?token={}".format(host,
-                                                             reverse('emailverifyconform'),
+                'reset_password_url': "{}?token={}".format(request.build_absolute_uri
+                                                             (reverse('emailverifyconform')),
                                                              user.email_token)
             }
-
-            print(context)
 
             email_html_message = render_to_string('email/Email_verify.html', context)
             email_plaintext_message = render_to_string('email/user_reset_password.txt', context)
@@ -51,7 +48,7 @@ def email_verfy_core(email, host):
             )
             msg.attach_alternative(email_html_message, "text/html")
             # msg.send()
-            print(msg)
+            # print(msg)
             z = 0
             try:
                 z = msg.send(fail_silently=False)

@@ -49,7 +49,7 @@ export default function NavBar()  {
 
 
     //list of nav elemts to display according to user
-    if(UserDetail.groups.includes("Faculty"))
+    if(UserDetail.groups.includes("Faculty") || UserDetail.groups.includes("Head") )
     {
         list_of_nav_ele={"/dashboard/":"dashboard","/auth/profile/":"profile","/auth/settings/":"Settings"}
     }
@@ -65,7 +65,7 @@ export default function NavBar()  {
 
         return (
             <>
-                <nav className="bg-white shadow-lg fixed w-full  z-50 ">
+                <nav className="bg-white  fixed w-full  z-50 ">
                     <div className="max-w-6xl mx-auto px-4">
                         <div className="flex justify-between space-x-12">
                             <div className="flex">

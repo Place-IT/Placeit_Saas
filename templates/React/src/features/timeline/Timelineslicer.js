@@ -104,7 +104,5 @@ function clean_result(result)
 {
     return result.forEach(ev=>{
         let companys=[]
-
-
     })
 }

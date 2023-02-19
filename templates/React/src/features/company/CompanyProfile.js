@@ -7,6 +7,7 @@ export const Company_Profile = createAsyncThunk(
     'Company/Company_profile_fetch',
     async (body_sent) =>
     {
+
          const response= await  FetchCallSFK(
             `/api/Company/Company/?id=${body_sent}`,  "Get",
             false,false,false,

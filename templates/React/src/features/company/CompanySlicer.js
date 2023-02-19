@@ -15,6 +15,7 @@ const initialState = {
     Success_msg:"",
     Company_list:[],
     profile_fetch_success:false,
+    cvr_fetch:false,
     Compnay_visitng_record:[],
     to:"/dashboard/company_profile/",
     User_list:[]
@@ -88,11 +89,13 @@ export const Company = createSlice({
                 state.status = 'loading';
                 state.error=false
                 state.Success=false
+                state.cvr_fetch=false
             })
             .addCase(Compnay_visitng_record.fulfilled, (state, action) => {
                 if(action.payload.type === true) {
                     state.error = false
                     state.status = "idle"
+                    state.cvr_fetch=true
                     state.Compnay_visitng_record=action.payload.response.results
                 } else {
                     state.status = "idle"
@@ -144,9 +147,10 @@ export const selectError = (state) => {
 };
 export const SuccessSelector = (state) => {
 
-    return {Success: state.Company.Success, Success_msg: state.Company.SuccessMsg,profile_fetch_success: state.Company.profile_fetch_success,to:state.Company.to}
+    return {Success: state.Company.Success, Success_msg: state.Company.SuccessMsg,profile_fetch_success: state.Company.profile_fetch_success,to:state.Company.to,cvr_fetch:state.Company.cvr_fetch}
 };
 export const selectCompany_list = (state) => state.Company.Company_list;
+export const SelectCompnay_visitng_record =(state)=>state.Company.Compnay_visitng_record
 export const selectCompany_visitng_list = (state) => state.Company.Compnay_visitng_record;
 export const User_list = (state) => state.Company.User_list;
 export default Company.reducer;

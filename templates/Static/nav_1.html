@@ -15,7 +15,7 @@
             {% if user.is_authenticated %}
 
             <div class="hidden md:flex items-center space-x-4">
-                {% if request.user|has_group:"Faculty" %}
+                {% if request.user|has_group:"Faculty" or request.user|has_group:"Head"  %}
                 <a
 
                     href="{% url 'dashbaord_landing'%}"

@@ -6,13 +6,15 @@ from ..Views import BaseReactView, DefaultVerifyReactView
 from .Dashboard import urlpatterns as dashboardurlpatterns
 from .Timeline import urlpatterns as Timelineurlpatterns
 from .errors import urlpatterns as Errorurlpatterns,hoc
+from ..Views.profile_view import ProfileView
+
 
 def update_context(context,request,args,kwargs):
     context["display_user_content"]=request.user
 
 
 urlpatterns = [
-    path('profile/<int:pk>/',login_required(DefaultVerifyReactView.as_view(template_name="Profile\profile.html",context_update=update_context)),name="Public_Profile"),
+    path('profile/<int:pk>/',ProfileView.as_view(template_name="Profile\profile.html",context_update=update_context),name="Public_Profile"),
 
     path('timeline/', include(Timelineurlpatterns), name="Timelineurlpatterns"),
     path('dashboard/', include(dashboardurlpatterns), name="dashboardurlpatterns"),
