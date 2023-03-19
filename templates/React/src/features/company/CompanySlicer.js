@@ -6,6 +6,7 @@ import {Company_Profile} from "./CompanyProfile";
 import {Compnay_visitng_record} from "./Visitng_record";
 import {Create_Company_visitng} from "./create_visitng_record";
 import {GetUsers} from "./get_placed_user";
+import {Compnay_visitngStats_record} from "./stats_data";
 
 const initialState = {
     error_msg:"",
@@ -18,7 +19,8 @@ const initialState = {
     cvr_fetch:false,
     Compnay_visitng_record:[],
     to:"/dashboard/company_profile/",
-    User_list:[]
+    User_list:[],
+    sats_data:[]
 };
 
 
@@ -104,6 +106,25 @@ export const Company = createSlice({
 
                 }
             })
+            .addCase(Compnay_visitngStats_record.pending, (state) => {
+                state.status = 'loading';
+                state.error=false
+                state.Success=false
+                state.cvr_fetch=false
+            })
+            .addCase(Compnay_visitngStats_record.fulfilled, (state, action) => {
+                if(action.payload.type === true) {
+                    state.error = false
+                    state.status = "idle"
+                    state.cvr_fetch=true
+                    state.sats_data=action.payload.response.results
+                } else {
+                    state.status = "idle"
+                    state.error = true
+                    state.error_msg = action.payload.response["error"]
+
+                }
+            })
             .addCase(GetUsers.pending, (state) => {
                 state.status = 'loading';
                 state.error=false
@@ -152,5 +173,6 @@ export const SuccessSelector = (state) => {
 export const selectCompany_list = (state) => state.Company.Company_list;
 export const SelectCompnay_visitng_record =(state)=>state.Company.Compnay_visitng_record
 export const selectCompany_visitng_list = (state) => state.Company.Compnay_visitng_record;
+export const Selectsats_data = (state) => state.Company.sats_data;
 export const User_list = (state) => state.Company.User_list;
 export default Company.reducer;

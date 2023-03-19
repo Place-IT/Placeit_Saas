@@ -51,11 +51,11 @@ export default function NavBar()  {
     //list of nav elemts to display according to user
     if(UserDetail.groups.includes("Faculty") || UserDetail.groups.includes("Head") )
     {
-        list_of_nav_ele={"/dashboard/":"dashboard","/auth/profile/":"profile","/auth/settings/":"Settings"}
+        list_of_nav_ele={"/dashboard/":"Dashboard","/auth/profile/":"Profile","/auth/settings/":"Settings"}
     }
     else
     {
-        list_of_nav_ele={"/timeline/":"Feed","/auth/profile/":"profile","/auth/settings/":"Settings"}
+        list_of_nav_ele={"/timeline/":"Feed","/auth/profile/":"Profile","/auth/settings/":"Settings"}
     }
 
 
@@ -104,7 +104,7 @@ export default function NavBar()  {
 
 
                                     <div className="hidden md:flex items-center space-x-8">
-                                        <Avatar >S</Avatar>
+                                        <Avatar >{UserDetail.email.charAt(0)}</Avatar>
                                         {UserDetail.email}
                                     </div>
                                 </>:<>

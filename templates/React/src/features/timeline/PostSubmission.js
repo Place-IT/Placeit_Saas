@@ -10,7 +10,7 @@ export const PostSubmission = createAsyncThunk(
     {
         logdata("PostSubmission","init",`body_sent:"${body_sent}"`)
         const response= await  FetchCallSFK(
-            "/api/Form/Response_to_form/",  "Post",
+            "/api/Form/Response_to_form_view/",  "Post",
             body_sent,false,commonFailurerfunction,
             ["id"], ["Company_name","Company_logo","Employers_Website"],
         )

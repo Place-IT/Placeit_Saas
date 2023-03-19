@@ -10,9 +10,6 @@ class Response_To_User(models.Model):
                                      blank=True)
     offer_letter=models.FileField( blank=True,null=True,
         upload_to="students/offerletter/" ,validators=[FileExtensionValidator(allowed_extensions=["pdf"])])
-
-    # include department if necessary for query
-
     class Meta:
         unique_together = ('Form_id', 'User',)
 

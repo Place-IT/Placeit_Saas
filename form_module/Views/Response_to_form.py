@@ -25,7 +25,7 @@ def check_obj_permission(request, obj):
 
 
 class Response_to_form_viewset(CustomViewset, viewsets.ModelViewSet):
-    queryset = ResponseFromUser.objects.all()
+    queryset = ResponseFromUser.objects.all().order_by("id")
     serializer_class = Response_to_form_Serailizer
     permission_classes = [
         ModelNamePermission("responsefromuser", "form_module", Get_Allow_list_permission, check_obj_permission), ]
@@ -52,46 +52,3 @@ class Response_to_form_viewset(CustomViewset, viewsets.ModelViewSet):
 
         return queryset, True
 
-    def create(self, request, form_data=None, *args, **kwargs):
-
-        data = request.data
-        try:
-            email = data['answer']
-        except KeyError:
-            return Response({'answer': "answer not found in form data"})
-
-        request.data.update({"user": request.user.id})
-        # print(request.data)
-
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        comment = serializer.save()
-
-        comment.user = request.user
-        comment.save()
-
-
-        for x in self.list_of_permission:
-            assign_perm(f"{x}responsefromuser", request.user, comment)
-
-        z = request.data["answer"]
-
-        for x in z:
-            x["user"] = request.user.id
-            x["form_response"] = comment.id
-
-        # print(z)
-
-        try:
-            a = Additional_Response_Serailizer(data=z, many=True)
-            print(a.is_valid(), a.errors)
-            if a.is_valid():
-                # TODO add list of all created ansewer in info logger
-                logger.info(f"{z}, valid")
-                a.save()
-
-        except Exception as e:
-            return Response("e")
-
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

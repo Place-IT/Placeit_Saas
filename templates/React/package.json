@@ -53,6 +53,7 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-redux": "^8.0.4",
     "react-router-dom": "^5.2.0",
+    "react-web-share": "^2.0.2",
     "read-more-react": "^1.0.10"
   }
 }

@@ -3,10 +3,7 @@ import {logdata} from "../Logger/Logevents";
 export default function commonFailurerfunction (res){
 
     if (Reflect.has(res,"error"))
-    {
-        return {response:res,type:false}
-    }
-    console.log(res,"sssssssssssssssssssssssssssssssss",Object.entries(res))
+    {return {response:res,type:false}}
     let output=""
     Object.entries(res).forEach(ev=>{
         if(Array.isArray(ev[1]))
@@ -19,8 +16,6 @@ export default function commonFailurerfunction (res){
         }
 
     })
-
-    // logdata("commonFailurerfunction","init",`Data url:"${url}"  req_obj:"${req_obj}"`)
     return {response:{error:output},type:false}
 
 }

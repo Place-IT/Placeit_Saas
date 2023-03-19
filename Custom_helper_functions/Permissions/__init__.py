@@ -1,2 +1,2 @@
 from .obj_owner_edit_permission_or_admin import obj_owner_edit_permission_or_admin_get
-from .onGet_forList_allow_all import Get_Allow_list_permission
+from .onGet_forList_allow_all import Get_Allow_list_permission ,Get_Allow_list_permission_GET

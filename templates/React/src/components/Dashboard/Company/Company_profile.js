@@ -45,7 +45,6 @@ export default function  Company_profile (props)  {
         MinLpa_offered:"",
         MaxLpa_offered:"",
         Description:"",
-        Pdf:"",
         Company_image:"",
         company:pkId
     });
@@ -71,7 +70,7 @@ export default function  Company_profile (props)  {
         {
             setSearch({...search,seacond: true})
             setState({...state,company:pkId})
-            dispatch(Compnay_visitng_record(pkId))
+            dispatch(Compnay_visitng_record({id:pkId}))
         }
     }
     function dispatch_function(ev)
@@ -104,10 +103,10 @@ export default function  Company_profile (props)  {
                             </div>
                         </Link>
 
-                        <div className="hidden md:flex flex-row bg-indigo-600 rounded-full w-fit cursor-pointer" onClick={open}>
-                            <a href="#" className="py-4 px-4"><i className="bx bx-plus-circle text-white text-2xl"></i></a>
-                            <p className="py-4 pr-6 text-xl text-white font-bold">New visit</p>
-                        </div>
+                        {/*<div className="hidden md:flex flex-row bg-indigo-600 rounded-full w-fit cursor-pointer" onClick={open}>*/}
+                        {/*    <a href="#" className="py-4 px-4"><i className="bx bx-plus-circle text-white text-2xl"></i></a>*/}
+                        {/*    <p className="py-4 pr-6 text-xl text-white font-bold">New visit</p>*/}
+                        {/*</div>*/}
                     </div>
 
                     <div
@@ -170,19 +169,20 @@ export default function  Company_profile (props)  {
                         </div>
                     </div>
                 </div>
-                <div className="md:hidden" >
-                    <Fab color="primary" aria-label="add" style={{
-                        margin: 0,
-                        top: 'auto',
-                        right: 10,
-                        bottom: 70,
-                        left: 'auto',
-                        position: 'fixed',
-                    }} onClick={open}
-                    >
-                        <AddIcon />
-                    </Fab>
-                </div>
+
+                {/*<div className="md:hidden" >*/}
+                {/*    <Fab color="primary" aria-label="add" style={{*/}
+                {/*        margin: 0,*/}
+                {/*        top: 'auto',*/}
+                {/*        right: 10,*/}
+                {/*        bottom: 70,*/}
+                {/*        left: 'auto',*/}
+                {/*        position: 'fixed',*/}
+                {/*    }} onClick={open}*/}
+                {/*    >*/}
+                {/*        <AddIcon />*/}
+                {/*    </Fab>*/}
+                {/*</div>*/}
 
 
 

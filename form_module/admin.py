@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import ViewdBy, Form, ResponseFromUser,  Response_To_User, Questions, \
-    Additional_Response
+    Additional_Response , Conditions
 from django.contrib.admin import DateFieldListFilter, BooleanFieldListFilter, ChoicesFieldListFilter
 
 
@@ -68,20 +68,18 @@ class Questions_model_admin(admin.ModelAdmin):
 
 class Additional_Response_model_admin(admin.ModelAdmin):
     list_display = ['form', 'Answer', 'Question']
-
-    # search_fields = ['User']
-    # list_filter = (
-    #     ('response_Type', ChoicesFieldListFilter),
-    # )
-
     class Meta:
         model = Additional_Response
 
+class Conditions_admin(admin.ModelAdmin):
+    list_display = ["id"]
+    class Meta:
+        model = Conditions
 
 admin.site.register(Form, Form_model_admin)
 admin.site.register(ViewdBy, ViewdBy_model_admin)
 admin.site.register(ResponseFromUser, ResponseFromUser_model_admin)
-# admin.site.register(Form_shared_creator, Form_shared_creator_model_admin)
 admin.site.register(Response_To_User, Response_To_User_model_admin)
 admin.site.register(Questions, Questions_model_admin)
 admin.site.register(Additional_Response, Additional_Response_model_admin)
+admin.site.register(Conditions, Conditions_admin)

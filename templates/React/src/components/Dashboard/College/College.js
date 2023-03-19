@@ -47,7 +47,7 @@ function prepare_data(data,setRows,setOptions)
         exportEnabled: true,
         theme: "light2",
         title:{
-            text: ""
+            text: "Number of Student Placemend."
         },
         axisY: {
             includeZero: true
@@ -66,7 +66,7 @@ function prepare_data(data,setRows,setOptions)
             ]
         }]
     })
-    console.log(data["Department Of Information Technology"].no_of_students_placed)
+    // console.log(data["Department Of Information Technology"].no_of_students_placed,"set options updated")
     logdata("prepare_data ","completed",`called data data:${rows} `)
 }
 
@@ -74,7 +74,6 @@ function prepare_data(data,setRows,setOptions)
 export default function  College (props)  {
 
     const dispatch = useDispatch();
-    const years=[2020,2023,2024,2025,2026,2027,2028,2029,2030]
     const [year,setYear]=useState(years[0])
     const [dataPrepared,setDataprepared]=useState(false)
     const [call,setCall]=useState(false)
@@ -88,7 +87,7 @@ export default function  College (props)  {
         exportEnabled: true,
         theme: "light2",
         title:{
-            text: ""
+            text: "Number of Student Placemend."
         },
         axisY: {
             includeZero: true

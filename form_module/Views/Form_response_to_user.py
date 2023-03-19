@@ -10,8 +10,8 @@ from django_filters import rest_framework as filters
 import logging
 
 from Custom_helper_functions import CustomViewset, Gurdian_model_viewset, ModelNamePermission
-from form_module.Serailizers import Form_Response_To_User_Serailizer, Form
-from form_module.models import Response_To_User
+from form_module.Serailizers import Form_Response_To_User_Serailizer
+from form_module.models import Response_To_User,Form
 
 logger = logging.getLogger('Form_Response_toUser')
 array_validator = RegexValidator(regex="\\d+(?:,\\d+)+", message='not a valid array')
@@ -106,10 +106,10 @@ class Form_Response_To_User_viewset(CustomViewset,Gurdian_model_viewset):
             logger.error(f"{z} error invalid {serializer.errors} ")
             return Response({"Completed": False, "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST )
 
-        logger.info(f"{serializer.data.id} completed sucesfully")
+        # logger.info(f"{serializer.data.id} completed sucesfully")
 
         headers = self.get_success_headers(serializer.data)
-        return Response({"Completed": True, "output": serializer.data}, status=status.HTTP_201_CREATED, headers=headers)
+        return Response({"Completed": "Student Placed Successfully", "output": serializer.data}, status=status.HTTP_201_CREATED, headers=headers)
 
     @action(detail=False, methods=['delete'])
     def destroy_list(self, request, *args, **kwargs):
@@ -142,11 +142,11 @@ class Form_Response_To_User_viewset(CustomViewset,Gurdian_model_viewset):
             a.delete()
         except Response_To_User.DoesNotExist as e:
             # print(e)
-            logger.error(f" error invalid {self.serializer.errors} ")
+            # logger.error(f" error invalid {self.serializer.errors} ")
             return Response({"error": e}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        logger.info(f" deleted sucessfully {students_list} ")
-        return Response({"Completed": True}, status=status.HTTP_201_CREATED)
+        # logger.info(f" deleted sucessfully {students_list} ")
+        return Response({"Completed": "Student Un-Placed Successfully"}, status=status.HTTP_201_CREATED)
 
 
 

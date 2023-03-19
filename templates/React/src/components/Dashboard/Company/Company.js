@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import basicSuccess from "../../../CommonFunctions/UniversalForm/BasicSuccess";
 import {Create_Company} from "../../../features/company/Create_Company";
 import {useDispatch, useSelector} from "react-redux";
-import AddIcon from '@mui/icons-material/Add';
 import {store} from "../../../app/store";
 import {DialogSlice} from "../../../features/dialogSlicer";
 import UpperHoc from "../../../CommonFunctions/UpperCLouser/CustomHoc";
@@ -14,6 +13,8 @@ import {Company_Search} from "../../../features/company/Company_Search";
 import {Link} from "react-router-dom";
 import {logdata} from "../../../CommonFunctions/Logger/Logevents";
 import onSelectFile from "../../../CommonFunctions/File_upload";
+import TableChartIcon from '@mui/icons-material/TableChart';
+import abc from "./../../../assets/images/undraw_Active_support_re_b7sj.png"
 
 
 export default function  Company(props)  {
@@ -133,10 +134,12 @@ export default function  Company(props)  {
                         </div>
                     </form>
 
-                    <div className="hidden md:flex flex-row bg-indigo-600 rounded-full px-4 py-2 cursor-pointer" onClick={open}>
-                        <a href="#" className="px-2"><i className='bx bx-plus-circle text-white text-3xl'></i></a>
-                        <p className="text-sm text-white px-2 font-bold">New company</p>
-                    </div>
+                    <Link to={`/dashboard/companyVisitStats/`}>
+                        <div className="hidden md:flex flex-row bg-indigo-600 rounded-full px-4 py-2 cursor-pointer">
+                            <a href="#" className="px-2"><i className='bx bx-table text-white text-3xl'></i></a>
+                            <p className="text-sm text-white px-2 font-bold">Company Stats</p>
+                        </div>
+                    </Link>
                 </div>
             </div>
 
@@ -166,10 +169,19 @@ export default function  Company(props)  {
                             </>
                         })}
                     </>:<>
-                    {/*TODO: empty favicon*/}
                     <p>
-                        empty favicon
 
+                        <div className="flex flex-col md:flex-row">
+                            <div
+                                className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
+                                <h1 className="text-4xl font-medium leading-none md:text-6xl text-violet-800" >
+                            No company Profile created yet.
+                        </h1>
+                      </div>
+                    <div class=" flex ">
+                        <img src={abc} alt=""/>
+                      </div>
+                  </div>
                     </p>
                     </>}
 
@@ -178,52 +190,67 @@ export default function  Company(props)  {
         </UpperHoc>
 
             <div className="md:hidden" >
-                <Fab color="primary" aria-label="add" style={{
-                    margin: 0,
-                    top: 'auto',
-                    right: 10,
-                    bottom: 70,
-                    left: 'auto',
-                    position: 'fixed',
-                }} onClick={open}
-                >
-                    <AddIcon />
-                </Fab>
+                <Link to={`/dashboard/companyVisitStats/`}>
+                    <Fab color="primary" aria-label="add" style={{
+                        margin: 0,
+                        top: 'auto',
+                        right: 10,
+                        bottom: 70,
+                        left: 'auto',
+                        position: 'fixed',
+                    }}
+                    >
+                        <TableChartIcon />
+                    </Fab>
+                </Link>
             </div>
 
-            <DialogManual  tittle={"Company"} Content={"Creat a new Company Profile"}
-                           Success={SuccessSelector}
-                           dispatch_function={dispatch_function} Error={selectError}>
-                <TextField  label="Company Name" type="search" fullWidth variant="standard"  margin="dense"
-                            value={state.Company_name}
-                            onChange={ev=>basicSuccess(ev,{state,setState,name:"Company_name"})} />
-                <TextField id="standard-basic" label="Employers Website field" type="search" fullWidth variant="standard"  margin="dense"
-                           value={state.Employers_Website}
-                           onChange={ev=>basicSuccess(ev,{state,setState,name:"Employers_Website"})}
-                />
 
-                <div className="flex items-start justify-center pt-2">
-                    <div className="datepicker relative form-floating mb-3 xl:w-96">
-                        <label htmlFor="floatingInput" className="text-gray-700">Company Logo</label>
-                        <br />
-                        <Button
-                            variant="contained"
-                            component="label"
-                        >
-                            Upload File
-                            <input
-                                accept="image/*"
-                                type="file"
-                                onChange={ev=>onSelectFile(ev,update_file)}
-                                hidden
-                            />
-                        </Button>
+            {/*<div className="md:hidden" >*/}
+            {/*    <Fab color="primary" aria-label="add" style={{*/}
+            {/*        margin: 0,*/}
+            {/*        top: 'auto',*/}
+            {/*        right: 10,*/}
+            {/*        bottom: 70,*/}
+            {/*        left: 'auto',*/}
+            {/*        position: 'fixed',*/}
+            {/*    }} onClick={open}*/}
+            {/*    >*/}
+            {/*        <AddIcon />*/}
+            {/*    </Fab>*/}
+            {/*</div>*/}
 
-                    </div>
-                </div>
+            {/*<DialogManual  tittle={"Company"} Content={"Creat a new Company Profile"}*/}
+            {/*               Success={SuccessSelector}*/}
+            {/*               dispatch_function={dispatch_function} Error={selectError}>*/}
+            {/*    <TextField  label="Company Name" type="search" fullWidth variant="standard"  margin="dense"*/}
+            {/*                value={state.Company_name}*/}
+            {/*                onChange={ev=>basicSuccess(ev,{state,setState,name:"Company_name"})} />*/}
+            {/*    <TextField id="standard-basic" label="Employers Website field" type="search" fullWidth variant="standard"  margin="dense"*/}
+            {/*               value={state.Employers_Website}*/}
+            {/*               onChange={ev=>basicSuccess(ev,{state,setState,name:"Employers_Website"})}*/}
+            {/*    />*/}
 
+            {/*    <div className="flex items-start justify-center pt-2">*/}
+            {/*        <div className="datepicker relative form-floating mb-3 xl:w-96">*/}
+            {/*            <label htmlFor="floatingInput" className="text-gray-700">Company Logo</label>*/}
+            {/*            <br />*/}
+            {/*            <Button*/}
+            {/*                variant="contained"*/}
+            {/*                component="label"*/}
+            {/*            >*/}
+            {/*                Upload File*/}
+            {/*                <input*/}
+            {/*                    accept="image/*"*/}
+            {/*                    type="file"*/}
+            {/*                    onChange={ev=>onSelectFile(ev,update_file)}*/}
+            {/*                    hidden*/}
+            {/*                />*/}
+            {/*            </Button>*/}
 
-            </DialogManual>
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</DialogManual>*/}
         </>
     );
 

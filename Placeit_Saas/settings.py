@@ -275,3 +275,6 @@ TEMPLATES = [
         },
     },
 ]
+
+
+departments_key={}

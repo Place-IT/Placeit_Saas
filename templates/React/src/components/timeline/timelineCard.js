@@ -11,9 +11,12 @@ import ErrorBoundary from "../../CommonFunctions/Error_controlReact/ErrorBoundar
 import {logdata} from "../../CommonFunctions/Logger/Logevents";
 import {Link} from "react-router-dom";
 import ReadMoreReact from "read-more-react";
+import {selectLogin} from "../../features/UserAuth/AuthSlicer";
+import { RWebShare } from "react-web-share";
 
 export default function  TimelineCard(props)
 {
+    const Login_state = useSelector(selectLogin);
     const Dialog_state = useSelector(selectState);
     const [ar,setAr]=useState(false)
     const [display,setDisplay]=useState(false)
@@ -214,27 +217,78 @@ export default function  TimelineCard(props)
                             </div>
                         </Link>
                     </>:<>
-                        {props.data.User_submitted ?<>
-                            <div
-                                className="py-2 px-10 f underline  cursor-pointer  text-indigo-700 opacity-50 cursor-not-allowed  transition duration-300 w-full text-center"
-                            >Submitted</div
-                            >
-                        </>:<>
-                            <div className="mx-4 flex justify-between">
+                        {Login_state.Login?<>
+                            {props.data.expired?<>
                                 <div
-                                    className="py-2 select-none px-10 f rounded-3xl border-2 border-slate-400 cursor-pointer  text-red-700 border-2 border-gray-200 shadow-lg hover:bg-red-700  hover:text-white rounded-2xl  transition duration-300"
-                                    onClick={Reject_callback}
-                                >Reject</div
-                                >
-                                <div onClick={Accept_callback}
-                                     className="py-2 select-none px-10 f rounded-3xl border-2 border-slate-400 cursor-pointer  text-indigo-700 border-2 border-gray-200 shadow-lg hover:bg-indigo-700  hover:text-white rounded-2xl  transition duration-300"
-                                >Apply</div
+                                    className="py-2 px-10 f underline  cursor-pointer  text-red-700 opacity-50 cursor-not-allowed  transition duration-300 w-full text-center"
+                                >Expired - sorry cannot submit the response</div>
+
+                            </>:<>
+
+                                {props.data.User_submitted ?<>
+                                    <div
+                                        className="py-2 px-10 f underline  cursor-pointer  text-indigo-700 opacity-50 cursor-not-allowed  transition duration-300 w-full text-center"
+                                    >Submitted</div
+                                    >
+                                </>:<>
+                                    {props.data.is_user_eligible ?<>
+                                        <div className="mx-4 flex justify-between">
+                                            <div
+                                                className="py-2 select-none px-10 f rounded-3xl border-2 border-slate-400 cursor-pointer  text-red-700 border-2 border-gray-200 shadow-lg hover:bg-red-700  hover:text-white rounded-2xl  transition duration-300"
+                                                onClick={Reject_callback}
+                                            >Reject</div
+                                            >
+                                            <div onClick={Accept_callback}
+                                                 className="py-2 select-none px-10 f rounded-3xl border-2 border-slate-400 cursor-pointer  text-indigo-700 border-2 border-gray-200 shadow-lg hover:bg-indigo-700  hover:text-white rounded-2xl  transition duration-300"
+                                            >Apply</div
+                                            >
+                                        </div>
+
+                                    </>:<>
+                                        <div
+                                            className="py-2 px-10 f underline  cursor-pointer  text-red-700 opacity-50 cursor-not-allowed  transition duration-300 w-full text-center"
+                                        >Not eligible</div
+                                        >
+                                    </>
+                                    }
+
+
+                                </>}
+
+                            </>}
+
+                        </>:<>
+                            <div
+                                className="py-2 px-10 f underline  cursor-pointer  text-red-700 opacity-50 cursor-not-allowed  transition duration-300 w-full text-center"
+                            >Login in to respond</div
                             >
-                            </div>
                         </>}
+
+
+
 
                     </>}
 
+                    <RWebShare
+                        data={{
+                            text: `${props.data.Originator_email} post for ${props.data.Company_name} visitng on ${props.data.Visitng_record.visiting_date}`,
+                            url: `${window.location.origin}/post/${props.data.id}`,
+                            title: "Post share",
+                        }}
+                        onClick={() => console.log("shared successfully!")}
+                    >
+                    <div className="flex justify-center m-4 ">
+                        <button type="button"
+                                className="text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center justify-center w-full">
+                            <svg className="w-4 h-4 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" width="24"
+                                 height="24" viewBox="0 0 24 24" style={{"fill": "rgba(255, 252, 252, 1)"}}>
+                                <path
+                                    d="M3 12c0 1.654 1.346 3 3 3 .794 0 1.512-.315 2.049-.82l5.991 3.424c-.018.13-.04.26-.04.396 0 1.654 1.346 3 3 3s3-1.346 3-3-1.346-3-3-3c-.794 0-1.512.315-2.049.82L8.96 12.397c.018-.131.04-.261.04-.397s-.022-.266-.04-.397l5.991-3.423c.537.505 1.255.82 2.049.82 1.654 0 3-1.346 3-3s-1.346-3-3-3-3 1.346-3 3c0 .136.022.266.04.397L8.049 9.82A2.982 2.982 0 0 0 6 9c-1.654 0-3 1.346-3 3z"></path>
+                            </svg>
+                            Share
+                        </button>
+                    </div>
+                    </RWebShare>
                 </div>
             </div>
         </div>

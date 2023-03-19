@@ -2,7 +2,7 @@ from django.conf.global_settings import EMAIL_HOST_USER
 from django.contrib.auth.hashers import make_password
 from django.utils import timezone
 from django.core.validators import validate_email, MinValueValidator, \
-    MaxValueValidator, RegexValidator, validate_image_file_extension
+    MaxValueValidator, RegexValidator, validate_image_file_extension, FileExtensionValidator
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, Group
 from django.core.mail import EmailMultiAlternatives
@@ -150,15 +150,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         code='invalid_username'
     )], null=True, blank=True, )
 
-    Resume_profile = models.URLField(null=True, blank=True, validators=[RegexValidator(
-        regex="((http|https)://)(www.)?" +
-              "[a-zA-Z0-9@:%._\\+~#?&//=]" +
-              "{2,256}\\.[a-z]" +
-              "{2,6}\\b([-a-zA-Z0-9@:%" +
-              "._\\+~#?&//=]*)",
-        message='Username must be Alphanumeric',
-        code='invalid_username'
-    )])
+    Resume_profile =models.FileField( blank=True,null=True,
+                                      upload_to="students/Resume/" ,validators=[FileExtensionValidator(allowed_extensions=["pdf"])])
 
     Internship = models.TextField(null=True, blank=True)
 
@@ -189,7 +182,30 @@ class User(AbstractBaseUser, PermissionsMixin):
     def Full_name(self):
         return f'{self.First_name} {self.middle_name} {self.Last_name}'
 
-    #
+    @property
+    def avg_sem(self):
+        count=0
+        if not(self.Sem1 == None):
+            count+=1
+        if not(self.Sem2 == None):
+            count+=1
+        if not(self.Sem3 == None):
+            count+=1
+        if not(self.Sem4 == None):
+            count+=1
+        if not(self.Sem5 == None):
+            count+=1
+        if not(self.Sem6 == None):
+            count+=1
+        if not(self.Sem7 == None):
+            count+=1
+        if not(self.Sem8 == None):
+            count+=1
+        if count != 0:
+            return ((self.Sem1 or 0.0) + (self.Sem2 or 0.0)  + (self.Sem3 or 0.0)  + (self.Sem4 or 0.0) + (self.Sem5 or 0.0) + (self.Sem6 or 0.0)  + (self.Sem7 or 0.0)  + (self.Sem8 or 0.0))/count
+        else:
+            return 0.0
+
     # @property
     # def name(self):
     #     return f'{self.First_name} {self.Last_name}'

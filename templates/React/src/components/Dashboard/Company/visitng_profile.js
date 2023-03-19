@@ -69,6 +69,8 @@ export default function  Visiting_profile (props)  {
                             </div>
                             <div className="w-full md:w-2/3  flex flex-col  space-y-2 p-3 ">
                                 <h3 className=" font-semibold text-gray-800 md:text-3xl text-xl">{data[0].Company_name}</h3>
+                                <h3 className=" font-semibold text-gray-800 md:text-3xl text-xl">{data[0].String_repr}</h3>
+
                                 <a href={data[0].Employers_Website} className="flex flex-row font-medium text-blue-800 cursor-pointer break-words">
                                     <i className='bx bx-link text-2xl'></i>
                                     <p className="text-xl">

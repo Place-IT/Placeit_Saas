@@ -20,6 +20,9 @@ export default async function FetchCall(url,method,body,content_Type='applicatio
             {
                 //because if image object is strigified before
                 req_obj.body=body.form_data
+
+                delete req_obj.headers['Content-Type']
+
             }
             else
             {
@@ -50,7 +53,6 @@ export default async function FetchCall(url,method,body,content_Type='applicatio
  {
     logdata("FetchCall_success_failure_Key","init",`Data url:"${url}" method:"${method}" body:"${body}" successFunc:"${successFunc}"`)
     let response=await FetchCall(url, method, body,content_type);
-
      let response_up=false
      let indicator=0
     success.forEach(ev=>{

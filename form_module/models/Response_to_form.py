@@ -6,7 +6,7 @@ class ResponseFromUser(models.Model):
     Form_id=models.ForeignKey(Form,on_delete=models.CASCADE)
     major_Response=models.BooleanField(default=False)
     user=models.ForeignKey("user_module.User",on_delete=models.CASCADE,null=True)
-    # include department if necessary for query
+
 
 
     def __str__(self):

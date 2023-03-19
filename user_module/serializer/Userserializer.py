@@ -22,6 +22,7 @@ class Userserializer(serializers.ModelSerializer):
  'Diploma',
  'First_name',
  'Full_name',
+ "avg_sem",
  'Gate_Status',
  'Github_profile',
  'HSC',

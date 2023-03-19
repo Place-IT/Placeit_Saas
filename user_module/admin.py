@@ -7,7 +7,7 @@ from user_module.models import User
 class Usermodeladmin(admin.ModelAdmin):
     list_display = ['First_name', 'email', "id"]
     search_fields = ['First_name', "email", 'Last_name', 'email']
-
+    readonly_fields=['Full_name',"avg_sem"]
     class Meta:
         model = User
 

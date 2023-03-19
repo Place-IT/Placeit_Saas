@@ -33,5 +33,5 @@ class Visiting_company_record(models.Model):
 
 
     def __str__(self):
-        return f"{self.company.Company_name} {self.visiting_date}"
+        return f"{self.id} {self.company.Company_name} {self.visiting_date} {self.HRName}"
 

@@ -48,9 +48,6 @@ export default function  Department (props)  {
     useEffect(ev=>{
         logdata("Department","init",`Department initated`)
     },[])
-
-    const years=[2020,2023,2024,2025,2026,2027,2028,2029,2030]
-
     const [departments,setDepartments]=useState(window.department_list[0])
     const [year,setYear]=useState(years[0])
 
@@ -73,7 +70,7 @@ export default function  Department (props)  {
         exportEnabled: true,
         animationEnabled: true,
         title: {
-            text: ""
+            text: "Student Distribution."
         },
         data: [{
             type: "pie",
@@ -104,7 +101,7 @@ export default function  Department (props)  {
         setDataprepared(true)
         Prepare_data_according_to_department(data[departments],setRows,setDatapoints)
     }
-    console.log(data)
+    // console.log(data)
     return (
         <>
             <UpperHoc  Re={false}  Status={selectStatus} Error={selectError} Success={SuccessSelector}>

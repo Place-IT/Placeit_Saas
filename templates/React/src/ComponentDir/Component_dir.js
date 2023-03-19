@@ -39,6 +39,11 @@ export default function  Component_dir(props)
                         </Protected>
                     </ErrorBoundary>
                 </Route>
+                <Route path="/post/:pkId/">
+                    <ErrorBoundary component_name={"Timeline_master_component"}>
+                            <Timeline_master_component />
+                    </ErrorBoundary>
+                </Route>
 
             </>
         );

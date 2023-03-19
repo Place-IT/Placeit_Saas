@@ -1,13 +1,15 @@
 import React from "react";
+
 import {
     Route,
     useRouteMatch
 } from "react-router-dom";
-import Dashboard_index from "../components/Dashboard/dashboard_index";
+
 import ErrorBoundary from "../CommonFunctions/Error_controlReact/ErrorBoundary";
 import dahbard_img from "./../assets/images/dashboard.png"
 import {logdata} from "../CommonFunctions/Logger/Logevents";
 
+import Dashboard_index from "../components/Dashboard/dashboard_index";
 import Company from "../components/Dashboard/Company/Company";
 import Company_profile from "../components/Dashboard/Company/Company_profile";
 import Visiting_profile from "../components/Dashboard/Company/visitng_profile";
@@ -16,6 +18,8 @@ import Post_list from "../components/Dashboard/Post/post_list";
 import College from "../components/Dashboard/College/College";
 import PostDetail from "../components/Dashboard/Post/Post_detail";
 import Department from "../components/Dashboard/department";
+import CompanyVisitStats from "../components/Dashboard/Company/Company_visit_stats";
+import PostCreate from "../components/Dashboard/Post/Post_create";
 
 
 export default function  Dashboard_dir(props)
@@ -58,6 +62,11 @@ export default function  Dashboard_dir(props)
                                 <Student />
                             </ErrorBoundary>
                         </Route>
+                    <Route path={`${match.url}/companyVisitStats/`}>
+                        <ErrorBoundary component_name={"companyVisitStats"}>
+                            <CompanyVisitStats />
+                        </ErrorBoundary>
+                    </Route>
                         <Route path={`${match.url}/company_search/`}>
                             <ErrorBoundary component_name={"Company"}>
                                 <Company />
@@ -76,6 +85,11 @@ export default function  Dashboard_dir(props)
                     <Route path={`${match.url}/post_list/`}>
                         <ErrorBoundary component_name={"Post_list"}>
                             <Post_list />
+                        </ErrorBoundary>
+                    </Route>
+                    <Route path={`${match.url}/post_Create/`}>
+                        <ErrorBoundary component_name={"PostCreate"}>
+                            <PostCreate />
                         </ErrorBoundary>
                     </Route>
                     <Route path={`${match.url}/post_detail/:pkId/`}>

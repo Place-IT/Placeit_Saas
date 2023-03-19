@@ -4,6 +4,7 @@ import CompanySlicer from "../features/company/CompanySlicer";
 import DialogSlice from "../features/dialogSlicer";
 import StudentSlice from "../features/Department/StudentSLicer";
 import FeedSlice from "../features/timeline/Timelineslicer";
+import PostSlice from "../features/post/PostSlicer";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     Feed:FeedSlice,
     Student:StudentSlice,
     Company:CompanySlicer,
-  },
+    Post:PostSlice
+  }
 });

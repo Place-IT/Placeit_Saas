@@ -1,2 +1,3 @@
 from .Company import Company_Serailizer
 from .Visiting_company_record_Serailizer import Visiting_company_record_Serailizer
+from .Visitng_stats import Visiting_company_Stats_record_Serailizer

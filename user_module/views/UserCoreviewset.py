@@ -65,7 +65,7 @@ class UserCoreOperationsViewset(CustomViewset,Gurdian_model_viewset, viewsets.Mo
                         logger.info(f' User Created  {user.id}')
                         auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 
-                        email_verfy_core(email, host=request.get_host())
+                        email_verfy_core(email, request)
 
                         self.add_permissions(user,user)
 
@@ -117,11 +117,8 @@ class UserCoreOperationsViewset(CustomViewset,Gurdian_model_viewset, viewsets.Mo
             if user.email_verified == True:
                 return Response({'success': f'email already verified '}, status=status.HTTP_200_OK)
             user.email_verified = True
-            # user.aff = True
-            auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-
             user.save()
-
+            auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             logger.info(f'{user.email} email-verify conform')
 
             return Response({'success': f'email verified '}, status=status.HTTP_201_CREATED)

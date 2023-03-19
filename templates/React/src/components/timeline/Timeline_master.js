@@ -15,6 +15,7 @@ import {selectError, selectStatus, SuccessSelector} from "../../features/timelin
 import Empty_feed_component from "./empty_feed_component";
 import ErrorBoundary from "../../CommonFunctions/Error_controlReact/ErrorBoundary";
 import {logdata} from "../../CommonFunctions/Logger/Logevents";
+import { withRouter } from "react-router";
 
 class Timeline_master_component extends React.Component {
     constructor(props) {
@@ -29,7 +30,16 @@ class Timeline_master_component extends React.Component {
     }
     componentDidMount() {
         logdata("Timeline_master_component","info",`Timeline_master_component initated`)
-        this.props.FetchFeed()
+        if(this.props.match.params.pkId !== undefined && typeof(this.props.match.params.pkId) !== "number")
+        {
+            console.log(this.props.match.params.pkId)
+            this.props.FetchFeed(this.props.match.params.pkId)
+        }
+        else
+        {
+            this.props.FetchFeed(false)
+        }
+
         this.setState({fetch:true})
     }
 
@@ -136,7 +146,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        FetchFeed: () => dispatch(FetchFeed(false))
+        FetchFeed: (id) => dispatch(FetchFeed(id))
     }
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Timeline_master_component)
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Timeline_master_component))

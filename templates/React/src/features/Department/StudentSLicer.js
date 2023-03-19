@@ -52,6 +52,7 @@ export const StudentSlice = createSlice({
                 {
                     state.status = 'loading';
                     state.error=false
+                    state.update=false
                     state.Success=false
                 }
             })

@@ -115,7 +115,6 @@ export default function UpperHoc (props)
                             }
                         })()
                     }
-
                 </>}
 
             {props.Re === false && Success.Success === true && props.mode === true &&

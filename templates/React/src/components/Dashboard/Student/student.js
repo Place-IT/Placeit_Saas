@@ -185,7 +185,7 @@ export default function  Student(props)  {
                 </div>
                 <div className="row-span-3 lg:col-span-3 col-span-5 rounded-2xl  mt-8 overflow-y-scroll">
                     <div>
-                        <Paper elevation={3} >
+                        <Paper elevation={3}  style={{width:"fit-content"}}>
                         <Table >
                             <TableHead>
                                 <TableRow>
