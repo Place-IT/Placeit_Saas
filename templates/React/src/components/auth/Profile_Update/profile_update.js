@@ -11,6 +11,7 @@ import {Divider, TextField} from "@mui/material";
 import basicSuccess from "../../../CommonFunctions/UniversalForm/BasicSuccess";
 import {ProfileUpdate} from "../../../features/UserAuth/profileUpdate";
 import {logdata} from "../../../CommonFunctions/Logger/Logevents";
+import {Link} from "react-router-dom";
 
 
 
@@ -85,14 +86,23 @@ export default function  Profile_update (props)  {
     return (
         <>
             <UpperHoc  redirect="/auth/profile/" Re={true} hard={true} Status={selectStatus} Error={selectError} Success={SuccessSelector}>
-                <div className="mx-2 my-10 flex flex-col justify-center">
+                <div className="m-4 lg:m-10 ">
+                    <div className="flex m-4  text-md justify-between">
+                        <Link to={`/auth/settings/`}>
+                            <div className="flex  flex-row  rounded-full py-2 cursor-pointer" >
+                                <p href="#" className=""><i className='bx bxs-chevron-left  lg:text-3xl'></i></p>
+                                <p className="lg:text-2xl px-2 border-b-4 border-indigo-800">Back</p>
+                            </div>
+                        </Link>
+                    </div>
                     <div className="px-5 mx-10 max-w-fit border-b-4 text-3xl border-indigo-700 font-bold">
                         Profile Update
                     </div>
+                </div>
 
-
+                <div className="mx-2 my-10 flex flex-col justify-center">
                     <div
-                        className="m-10 md:mx-20 mx-0 p-5 flex flex-col space-x-4  border-2  p-2 rounded-2xl">
+                        className="md:mx-20 mx-0 p-5 flex flex-col space-x-4  border-2  p-2 rounded-2xl">
 
                         <br/>
 
@@ -108,7 +118,7 @@ export default function  Profile_update (props)  {
                                 <div className="md:w-1/3">
                                     <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                            htmlFor="inline-full-name">
-                                        First-Name :
+                                        First-Name* :
                                     </label>
                                 </div>
                                 <div className="md:w-1/3">
@@ -261,119 +271,119 @@ export default function  Profile_update (props)  {
 
                         </form>
                         <br/>
+                        {/*Address*/}
+                        <div
+                            className="px-5 py-1 max-w-fit border-b-2  border-indigo-300 font-bold">
+                            Address
+                        </div>
+                        <form className="  items-center max-w-full items-center">
+                            {/*Building_name_And_RoomNumber*/}
+                            <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
+                                <div className="md:w-1/3">
+                                    <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
+                                           htmlFor="inline-full-name">
+                                        Building-name And Room-Number :
+                                    </label>
+                                </div>
+                                <div className="md:w-1/3">
+                                    <InputCreator
+                                        key="Building_name_And_RoomNumber" input={{
+                                        nolabel:true,
+                                        type:"text",
+                                        state: state,
+                                        setState: setState,
+                                        labelText:"Building_name_And_RoomNumber",
+                                        name:"Building_name_And_RoomNumber" }
+                                    }/>
+                                </div>
+                            </div>
+                            {/*Locality_name*/}
+                            <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
+                                <div className="md:w-1/3">
+                                    <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
+                                           htmlFor="inline-full-name">
+                                        LocalityName :
+                                    </label>
+                                </div>
+                                <div className="md:w-1/3">
+                                    <InputCreator
+                                        key="Locality_name" input={{
+                                        nolabel:true,
+                                        type:"text",
+                                        state: state,
+                                        setState: setState,
+                                        labelText:"Locality_name",
+                                        name:"Locality_name" }
+                                    }/>
+                                </div>
+                            </div>
+                            {/*PostalCode*/}
+                            <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
+                                <div className="md:w-1/3">
+                                    <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
+                                           htmlFor="inline-full-name">
+                                        Postal Code :
+                                    </label>
+                                </div>
+                                <div className="md:w-1/3">
+                                    <InputCreator
+                                        key="Last_name" input={{
+                                        nolabel:true,
+                                        type:"text",
+                                        state: state,
+                                        setState: setState,
+                                        labelText:"PostalCode",
+                                        name:"PostalCode" }
+                                    }/>
+                                </div>
+                            </div>
+                            {/*State_name*/}
+                            <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
+                                <div className="md:w-1/3">
+                                    <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
+                                           htmlFor="inline-full-name">
+                                        State Name :
+                                    </label>
+                                </div>
+                                <div className="md:w-1/3">
+                                    <InputCreator
+                                        key="State_name" input={{
+                                        nolabel:true,
+                                        type:"text",
+                                        state: state,
+                                        setState: setState,
+                                        labelText:"State_name",
+                                        name:"State_name" }
+                                    }/>
+                                </div>
+                            </div>
+                            {/*Country_name*/}
+                            <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
+                                <div className="md:w-1/3">
+                                    <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
+                                           htmlFor="inline-full-name">
+                                        Country Name :
+                                    </label>
+                                </div>
+                                <div className="md:w-1/3">
+                                    <InputCreator
+                                        key="Country_name" input={{
+                                        nolabel:true,
+                                        type:"text",
+                                        state: state,
+                                        setState: setState,
+                                        labelText:"Country_name",
+                                        name:"Country_name" }
+                                    }/>
+                                </div>
+                            </div>
+                            <Divider />
+                        </form>
+                        <br/>
+
 
                         {UserDetail.groups.includes("Faculty") === false &&
                         <>
-                            {/*Address*/}
-                            <div
-                                className="px-5 py-1 max-w-fit border-b-2  border-indigo-300 font-bold">
-                                Address
-                            </div>
-                            <form className="  items-center max-w-full items-center">
-                                {/*Building_name_And_RoomNumber*/}
-                                <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
-                                    <div className="md:w-1/3">
-                                        <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
-                                               htmlFor="inline-full-name">
-                                            Building-name And Room-Number :
-                                        </label>
-                                    </div>
-                                    <div className="md:w-1/3">
-                                        <InputCreator
-                                            key="Building_name_And_RoomNumber" input={{
-                                            nolabel:true,
-                                            type:"text",
-                                            state: state,
-                                            setState: setState,
-                                            labelText:"Building_name_And_RoomNumber",
-                                            name:"Building_name_And_RoomNumber" }
-                                        }/>
-                                    </div>
-                                </div>
-                                {/*Locality_name*/}
-                                <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
-                                    <div className="md:w-1/3">
-                                        <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
-                                               htmlFor="inline-full-name">
-                                            LocalityName :
-                                        </label>
-                                    </div>
-                                    <div className="md:w-1/3">
-                                        <InputCreator
-                                            key="Locality_name" input={{
-                                            nolabel:true,
-                                            type:"text",
-                                            state: state,
-                                            setState: setState,
-                                            labelText:"Locality_name",
-                                            name:"Locality_name" }
-                                        }/>
-                                    </div>
-                                </div>
-                                {/*PostalCode*/}
-                                <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
-                                    <div className="md:w-1/3">
-                                        <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
-                                               htmlFor="inline-full-name">
-                                            Postal Code :
-                                        </label>
-                                    </div>
-                                    <div className="md:w-1/3">
-                                        <InputCreator
-                                            key="Last_name" input={{
-                                            nolabel:true,
-                                            type:"text",
-                                            state: state,
-                                            setState: setState,
-                                            labelText:"PostalCode",
-                                            name:"PostalCode" }
-                                        }/>
-                                    </div>
-                                </div>
-                                {/*State_name*/}
-                                <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
-                                    <div className="md:w-1/3">
-                                        <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
-                                               htmlFor="inline-full-name">
-                                            State Name :
-                                        </label>
-                                    </div>
-                                    <div className="md:w-1/3">
-                                        <InputCreator
-                                            key="State_name" input={{
-                                            nolabel:true,
-                                            type:"text",
-                                            state: state,
-                                            setState: setState,
-                                            labelText:"State_name",
-                                            name:"State_name" }
-                                        }/>
-                                    </div>
-                                </div>
-                                {/*Country_name*/}
-                                <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
-                                    <div className="md:w-1/3">
-                                        <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
-                                               htmlFor="inline-full-name">
-                                            Country Name :
-                                        </label>
-                                    </div>
-                                    <div className="md:w-1/3">
-                                        <InputCreator
-                                            key="Country_name" input={{
-                                            nolabel:true,
-                                            type:"text",
-                                            state: state,
-                                            setState: setState,
-                                            labelText:"Country_name",
-                                            name:"Country_name" }
-                                        }/>
-                                    </div>
-                                </div>
-                                <Divider />
-                            </form>
-                            <br/>
-
                             {/*Links*/}
                             <div
                                 className="px-5 py-1 max-w-fit border-b-2  border-indigo-300 font-bold">

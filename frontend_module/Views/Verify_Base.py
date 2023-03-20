@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from frontend_module.Views import BaseReactView
-from frontend_module.Views.Affliated_to_department import Affliated_to_department_or_not
+
 
 
 def Verifie(request):
@@ -14,10 +14,19 @@ def Verifie(request):
     return True
 
 
+def Check_basic_detail_filled_or_not(request):
+
+    # "collage_passingYear","collage_joinig_year"
+    if request.path != reverse("ProfileUpdate"):
+        if request.user.is_authenticated == True :
+            for x in ["Affliated_Department","email","First_name","middle_name","Last_name","Date_Of_Birth"]:
+                if  getattr(request.user, x) is None:
+                    return HttpResponseRedirect(reverse("ProfileUpdate")+'?'+"next="+ request.path)
+    return True
 
 class DefaultVerifyReactView(BaseReactView):
 
     def condition_Check(self, request, context):
         self.condition_check_Function.append(Verifie)
-        self.condition_check_Function.append(Affliated_to_department_or_not)
+        self.condition_check_Function.append(Check_basic_detail_filled_or_not)
         return super().condition_Check(request, context)

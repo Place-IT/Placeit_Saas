@@ -38,6 +38,7 @@ export default function  Visiting_profile (props)  {
         dispatch(Compnay_visitng_record(vr))
         dispatch(GetUsers(vr))
     }
+    console.log(cvr)
 
     return (
         <>
@@ -59,7 +60,7 @@ export default function  Visiting_profile (props)  {
                     </div>
 
                     <div className=" border-2  relative space-y-3 md:space-y-0  rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto bg-gray-200">
-                        {Success.profile_fetch_success === true &&<>
+                        {Success.profile_fetch_success === true  && Success.cvr_fetch=== true && <>
                         <div className="flex flex-col md:flex-row">
 
                             <div className=" w-full md:w-1/3 bg-white rounded p-4 grid place-items-center ">
@@ -69,7 +70,7 @@ export default function  Visiting_profile (props)  {
                             </div>
                             <div className="w-full md:w-2/3  flex flex-col  space-y-2 p-3 ">
                                 <h3 className=" font-semibold text-gray-800 md:text-3xl text-xl">{data[0].Company_name}</h3>
-                                <h3 className=" font-semibold text-gray-800 md:text-3xl text-xl">{data[0].String_repr}</h3>
+                                <h3 className=" font-semibold text-gray-800 md:text-3xl text-xl">{cvr[0].String_repr}</h3>
 
                                 <a href={data[0].Employers_Website} className="flex flex-row font-medium text-blue-800 cursor-pointer break-words">
                                     <i className='bx bx-link text-2xl'></i>

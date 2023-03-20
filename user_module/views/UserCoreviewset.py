@@ -15,7 +15,7 @@ from ..serializer import UserserializerCoreOperations, PasswordSerializer
 from rest_framework.status import *
 import logging
 
-# from ..Permissions import Owneronly
+
 
 logger = logging.getLogger('UserLogger')
 

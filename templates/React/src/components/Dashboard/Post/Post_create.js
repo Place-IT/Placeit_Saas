@@ -49,7 +49,7 @@ export default function  PostCreate(props)  {
         a.questions=Object.values(questions)
         a.conditions_copy=a.conditions
         a.conditions=null
-        console.log(a,data,JSON.stringify(a),Object.values(questions),questions)
+        // console.log(a,data,JSON.stringify(a),Object.values(questions),questions)
         dispatch(PostCreation(a))
 
         logdata("dispatch_function","completed",`dispatch completefd`)

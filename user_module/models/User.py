@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django_rest_passwordreset.signals import reset_password_token_created
+from meta.models import ModelMeta
 
 from phonenumber_field.modelfields import PhoneNumberField
 from department_module.models import Department
@@ -63,7 +64,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(ModelMeta,AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(db_index=True, unique=True, validators=[validate_email,   RegexValidator(
         regex='^[a-zA-Z0-9._%+-]+\-coemumbai@bvp.edu.in$',
         message='Email does not belong to bvp.edu',
@@ -177,6 +178,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
 
     objects = UserManager()
+
+    _metadata = {
+        'title': 'Full_name',
+        'description': 'Bio',
+        'image': 'get_meta_image',
+    }
+
+    def get_meta_image(self):
+        print(self.i_card_image)
+        if self.i_card_image:
+            return self.i_card_image.url
 
     @property
     def Full_name(self):

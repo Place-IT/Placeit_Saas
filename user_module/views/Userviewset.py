@@ -1,6 +1,5 @@
 import logging
 from django_filters.rest_framework import DjangoFilterBackend
-from django.forms import DateInput
 from django_filters import rest_framework as filters
 from rest_framework import  mixins
 from rest_framework.decorators import action
@@ -12,7 +11,7 @@ from Custom_helper_functions import CustomViewset, ModelNamePermission
 from Custom_helper_functions.Permissions import obj_owner_edit_permission_or_admin_get
 from ..models import User
 from ..serializer import Userserializer
-from django.db.models import Q
+
 
 
 class UserFilter(filters.FilterSet):

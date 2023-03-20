@@ -4,6 +4,8 @@ bleach==6.0.0
 Django==4.1.6
 django-filter==22.1
 django-guardian==2.4.0
+django-log-viewer==1.1.6
+django-meta==2.1.0
 django-phonenumber-field==6.3.0
 django-rest-passwordreset==1.2.1
 djangorestframework==3.14.0

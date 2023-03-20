@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 from django.views.generic.edit import UpdateView
 from user_module.models import User
+import logging
 
+logger = logging.getLogger('UserLogger')
 
 class UserImageUploadView(UpdateView):
     model = User
@@ -17,6 +19,7 @@ class UserImageUploadView(UpdateView):
 
     def form_valid(self, form):
         self.object = form.save()
+
         return JsonResponse({'Success': 'Upload Sucesfully'})
 
     def form_invalid(self, form):

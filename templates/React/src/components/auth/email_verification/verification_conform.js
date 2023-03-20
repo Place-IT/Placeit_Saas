@@ -32,7 +32,7 @@ export default function Email_verification_conform(props)
         dispatch(emailverifyConform({token:token}))
     }
 
-    if(Basic_user.email_verified !== undefined && Basic_user.email_verified === false && state.Basic_checkup === false )
+    if((Basic_user.email_verified === undefined || Basic_user.email_verified === false) && state.Basic_checkup === false )
     {
         logdata("Email_verification_conform","info",`Condtion check${Basic_user.email_verified !== undefined && Basic_user.email_verified === false && state.Basic_checkup === false,Basic_user.email_verified !== undefined , Basic_user.email_verified === false , state.Basic_checkup === false,Basic_user.email_verified , Basic_user.email_verified, state.Basic_checkup }`)
         setState({Basic_checkup: true})

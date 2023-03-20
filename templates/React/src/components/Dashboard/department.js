@@ -49,7 +49,7 @@ export default function  Department (props)  {
         logdata("Department","init",`Department initated`)
     },[])
     const [departments,setDepartments]=useState(window.department_list[0])
-    const [year,setYear]=useState(years[0])
+    const [year,setYear]=useState(new Date().getFullYear())
 
     const [call,setCall]=useState(false)
     const [dataPrepared,setDataprepared]=useState(false)

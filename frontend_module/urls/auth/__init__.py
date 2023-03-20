@@ -10,7 +10,7 @@ def update_context(context,request,args,kwargs):
 
 urlpatterns = [
     path('login/',BaseReactView.as_view(condition_check_Function=[Notauth]),name="Login"),
-    path('signup/',DefaultVerifyReactView.as_view(condition_check_Function=[Notauth]),name="signup"),
+    path('signup/',BaseReactView.as_view(condition_check_Function=[Notauth]),name="signup"),
 
     path('profile/',login_required(DefaultVerifyReactView.as_view(template_name="Profile\profile.html",context_update=update_context)),name="profile"),
 

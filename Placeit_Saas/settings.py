@@ -110,11 +110,12 @@ INSTALLED_APPS = [
     # # additional dependencies
     'rest_framework',
     'django_rest_passwordreset',
-    # "log_viewer",
+    "log_viewer",
     'guardian',
     'django_filters',
     'drf_api_logger',
     "phonenumber_field",
+    'meta',
 
     ##########
     "user_module",
@@ -277,4 +278,128 @@ TEMPLATES = [
 ]
 
 
-departments_key={}
+
+# Log viewer settings
+LOG_VIEWER_FILES_PATTERN = '*.log*'
+LOG_VIEWER_FILES_DIR = 'logsdir/'
+LOG_VIEWER_PAGE_LENGTH = 25       # total log lines per-page
+LOG_VIEWER_MAX_READ_LINES = 1000  # total log lines will be read
+LOG_VIEWER_PATTERNS = ['INFO', 'DEBUG', 'WARNING', 'ERROR', 'CRITICAL']
+
+
+
+from pathlib import Path
+Path("./logsdir").mkdir(parents=True, exist_ok=True)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+
+        'console':{
+            'level':'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename':'./logsdir/root_logger.log',
+            'formatter': 'verbose'
+        },
+        'UserAuth':{
+            'level':'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename':'./logsdir/auth.log',
+            'formatter': 'verbose'
+        },
+        'Form_Admin':{
+            'level':'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename':'./logsdir/Form.log',
+            'formatter': 'verbose'
+        },
+        'Form_Response_toUser':{
+            'level':'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename':'./logsdir/Form_Response_toUser.log',
+            'formatter': 'verbose'
+        },
+        'Form_UserResponse':{
+            'level':'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename':'./logsdir/Form_UserResponse.log',
+            'formatter': 'verbose'
+        },
+        'Company_and_visiting':{
+            'level':'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename':'./logsdir/Company_and_visiting.log',
+            'formatter': 'verbose'
+        },
+        'Department':{
+            'level':'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename':'./logsdir/Department.log',
+            'formatter': 'verbose'
+        },
+
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'console': {
+            'handlers':['console'],
+            'level':'INFO',
+            'propogate':True,
+
+        },
+        'UserLogger': {
+            'handlers':['UserAuth'],
+            'level':'INFO',
+            'propogate':True,
+        },
+        'Form_Admin_Logger': {
+            'handlers':['Form_Admin'],
+            'level':'INFO',
+            'propogate':True,
+        },
+        'Form_Response_to_User_Logger': {
+            'handlers':['Form_Response_toUser'],
+            'level':'INFO',
+            'propogate':True,
+        },
+        'Form_UserResponse_Logger': {
+            'handlers':['Form_UserResponse'],
+            'level':'INFO',
+            'propogate':True,
+        },
+        'Company_and_visiting_Logger': {
+            'handlers':['Company_and_visiting'],
+            'level':'INFO',
+            'propogate':True,
+        },
+        'Department_Logger': {
+            'handlers':['Department'],
+            'level':'INFO',
+            'propogate':True,
+        },
+
+    },
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+    }
+}
+
+
+# drf logger
+DRF_API_LOGGER_DATABASE = True
+DRF_API_LOGGER_SIGNAL = True
+DRF_LOGGER_QUEUE_MAX_SIZE = 50
+DRF_API_LOGGER_EXCLUDE_KEYS = []
+
+
+META_SITE_PROTOCOL="http"
+META_SITE_DOMAIN="127.0.0.1:8000"
+META_USE_OG_PROPERTIES=True
+META_SITE_TYPE="educational"

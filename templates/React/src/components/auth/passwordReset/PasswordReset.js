@@ -22,7 +22,6 @@ export default function Password_update()
 
     return<>
         <UpperHoc  redirect="/auth/profile/" Re={true} Status={selectStatus} Error={selectError} Success={SuccessSelector}>
-
                 <UForm actionText="password reset"
                        Error={selectError}
                        Dispatch={Change_password} state={state}

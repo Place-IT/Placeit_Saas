@@ -177,17 +177,18 @@
                 </div>
             </div>
 
-            <div class="flex  mb-4 space-x-2 mx-2">
-                <div class=" text-sm md:text-xl">
-                    <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
-                        MIS no :
-                    </label>
-                </div>
-                <div class="text-sm md:text-xl">
-                    {{display_user_content.MIS_no}}
-                </div>
-            </div>
+
             {% if display_user_content|has_group:"Student" %}
+                <div class="flex  mb-4 space-x-2 mx-2">
+                    <div class=" text-sm md:text-xl">
+                        <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
+                            MIS no :
+                        </label>
+                    </div>
+                    <div class="text-sm md:text-xl">
+                        {{display_user_content.MIS_no}}
+                    </div>
+                </div>
                 <div class="flex  mb-4 space-x-2 mx-2">
                     <div class=" text-sm md:text-xl">
                         <label class="block text-gray-600 font-bold text-right" for="inline-full-name">

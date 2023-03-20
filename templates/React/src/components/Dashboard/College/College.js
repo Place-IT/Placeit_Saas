@@ -18,12 +18,6 @@ const columns = [
     { field: 'Mech', headerName: 'Mech',minWidth: 200}
 ];
 
-// const rows = [
-//     { id:"no. of students placed", Chem: 'Total Strength', Comp: 'Jon', Extc: 'Jon', it: 'Jon', instru: 'Jon', Mech: 'Jon'},
-//     { id:"no. of company visited", Chem: 'Total Strength', Comp: 'Jon', Extc: 'Jon', it: 'Jon', instru: 'Jon', Mech: 'Jon'},
-//     { id:"Average Package", Chem: 'Total Strength', Comp: 'Jon', Extc: 'Jon', it: 'Jon', instru: 'Jon', Mech: 'Jon'},
-//     { id:"Range (LPA)", Chem: 'Total Strength', Comp: 'Jon', Extc: 'Jon', it: 'Jon', instru: 'Jon', Mech: 'Jon'},
-// ];
 
 function prepare_data(data,setRows,setOptions)
 {
@@ -74,7 +68,7 @@ function prepare_data(data,setRows,setOptions)
 export default function  College (props)  {
 
     const dispatch = useDispatch();
-    const [year,setYear]=useState(years[0])
+    const [year,setYear]=useState(new Date().getFullYear())
     const [dataPrepared,setDataprepared]=useState(false)
     const [call,setCall]=useState(false)
 

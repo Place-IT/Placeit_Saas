@@ -8,6 +8,7 @@ urlpatterns = [
                   path('', include("frontend_module.urls"),),
                   path('admin/', admin.site.urls),
                   path('api/', include("api_module.urls"),),
+                  path('logs/', include('log_viewer.urls')),
               ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler403=hoc(403)
