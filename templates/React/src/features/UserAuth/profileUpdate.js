@@ -40,6 +40,7 @@ export const ProfileUpdate = createAsyncThunk(
         }
         else
         {
+             console.log("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
             response= await  FetchCallSFK(
                 `/api/auth/User/${body_sent.id}/`,  "Put",
                 body_sent,false,commonFailurerfunction,

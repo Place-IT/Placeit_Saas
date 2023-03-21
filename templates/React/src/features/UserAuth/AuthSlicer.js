@@ -156,8 +156,6 @@ export const AuthSlice = createSlice({
                 }
             })
             .addCase(ProfileUpdate.fulfilled, (state, action) => {
-
-                console.log(action)
                 if (action.payload.type === true)
                 {
 

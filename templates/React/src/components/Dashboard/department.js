@@ -34,11 +34,13 @@ function Prepare_data_according_to_department(data,setRow,setDatapoints)
         { id:  'Highest Packgae offered', firstName: data["Range_max"]},
         { id:  'Average  Salary', firstName: data["Average_Package"] },
     ]
+    let total=data["no_of_students_placed"]+data['Total_no_of_HIgher_Studies_students']+
+        data["Total_no_of_Gate_Studies_students"]+data["Total_no_of_Entrepreneurship_students"]
     let dataPoints= [
-        { y: data["no_of_students_placed"], label: "Total no of placed students" },
-        { y: data['Total_no_of_HIgher_Studies_students'], label: "Total no of HIgher Studies students" },
-        { y: data["Total_no_of_Gate_Studies_students"], label: "Total no of Gate students" },
-        { y: data["Total_no_of_Entrepreneurship_students"], label: "Total no of Enterpreneur students" },
+        { y: (data["no_of_students_placed"]/total)*100, label: "Total no of placed students" },
+        { y: (data['Total_no_of_HIgher_Studies_students']/total)*100, label: "Total no of HIgher Studies students" },
+        { y: (data["Total_no_of_Gate_Studies_students"]/total)*100, label: "Total no of Gate students" },
+        { y: (data["Total_no_of_Entrepreneurship_students"]/total)*100, label: "Total no of Enterpreneur students" },
     ]
     setRow(rows)
     setDatapoints(dataPoints)

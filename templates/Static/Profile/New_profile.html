@@ -602,7 +602,7 @@
     document.querySelector('#shareBtn')
         .addEventListener('click', event => {
 
-            if (navigator.share) {
+            if (navigator.share !== undefined) {
                 navigator.share({
                     title: 'Placeit',
                     url: "{% url 'Public_Profile' display_user_content.id %}"
@@ -643,7 +643,7 @@
               window.state = false
               window.modal_state=true
           }
-    console.log("ssssssssssssssss")
+
           modal.classList.remove('hidden')
       });
   }
@@ -651,7 +651,7 @@
     showModal.forEach(close => {
         close.addEventListener('click', function (ev) {
             modal.classList.remove('hidden');
-            console.log("ssssssssssssssss")
+
            if(window.modal_state)
            {
                window.modal_state=false

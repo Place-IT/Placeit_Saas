@@ -196,15 +196,15 @@ export default function  Student(props)  {
                                             </TableCell>
                                         </>
                                     })}
-                                    <TableCell align="center" >
+
                                     {sColumn.map(ev=>{
                                         return<>
-                                            {/*<TableCell align="center" >*/}
+                                            <TableCell align="center" >
                                                 <p> {ev.display} </p>
-                                            {/*</TableCell>*/}
+                                            </TableCell>
                                         </>
                                     })}
-                                    </TableCell>
+
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -214,23 +214,30 @@ export default function  Student(props)  {
                                     <TableRow>
                                             {columnDefs.map((ev,index)=>{
                                                 if(index === 0){return <>
-                                                        {item.form_responses.length === 1 ?
-                                                            <TableCell>
-                                                                <a href={`/profile/${item.id}/`}>
+                                                    {item.form_responses.length === 1 ?
+                                                        <TableCell>
+                                                            <a href={`/profile/${item.id}/`}>
                                                                 {item.email}
-                                                                </a>
-                                                            </TableCell>:
-                                                            <TableCell rowSpan={item.form_responses.length + 1}>
-                                                                <a href={`/profile/${item.id}/`}>
-                                                                    {item.email}
-                                                                </a>
-                                                            </TableCell>}</>}
+                                                            </a>
+                                                        </TableCell>:
+                                                        <TableCell rowSpan={item.form_responses.length + 1}>
+                                                            <a href={`/profile/${item.id}/`}>
+                                                                {item.email}
+                                                            </a>
+                                                        </TableCell>}</>}
+                                                else
+                                                {return <>
+                                                    {item.form_responses.length === 1 ?
+                                                        <TableCell>
+                                                            {item[ev.field]}
+                                                        </TableCell>:
+                                                        <TableCell rowSpan={item.form_responses.length + 1}>
+                                                            {item[ev.field]}
+                                                        </TableCell>}</>}
 
-                                                return<><TableCell align="center" >
-                                                        {item[ev.field]}
-                                                    </TableCell></>
+
                                             })}
-
+                                    </TableRow>
                                     {item.form_responses.map(ev=>{
                                         return<>
                                             <TableRow colSpan={2}>
@@ -243,14 +250,10 @@ export default function  Student(props)  {
                                                     else if(ev2.field ==="offer_letter" && ev[ev2.field] === null ) {
                                                         return <TableCell>not-Uploaded</TableCell>
                                                     }
-
-
                                                     return<TableCell><a href={`/dashboard/company_profile/${ev.company}/visitng_record/${ev.visiting_reocrd}/`}>{ev[ev2.field]}</a></TableCell>
                                                 })}
                                             </TableRow>
                                         </>})}
-
-                                    </TableRow>
                                     </>
                                 })}
 

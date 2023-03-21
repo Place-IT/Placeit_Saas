@@ -75,7 +75,9 @@ export default function  Profile_update (props)  {
     }
     function dispatch_function(ev)
     {
-        dispatch(ProfileUpdate(state))
+        let a= {...state}
+        delete  a.i_card_image
+        dispatch(ProfileUpdate(a))
     }
 
     useEffect(() => {

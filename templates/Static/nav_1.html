@@ -115,7 +115,7 @@
                 </div>
             </li>
 
-                {% if  request.user|has_group:"Faculty" %}
+                {% if  request.user|has_group:"Faculty" or request.user|has_group:"Head" %}
 
                 <li >
                     <a
