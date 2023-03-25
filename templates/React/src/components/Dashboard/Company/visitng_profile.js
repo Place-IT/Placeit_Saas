@@ -16,6 +16,8 @@ import {Link} from "react-router-dom";
 import {logdata} from "../../../CommonFunctions/Logger/Logevents";
 import {Compnay_visitng_record} from "../../../features/company/Visitng_record";
 import Empat from "../../../assets/images/undraw_Active_support_re_b7sj.png";
+import Poster_dialog from "../poster_dialog";
+import {BasicDetailsU} from "../../../features/UserAuth/AuthSlicer";
 
 export default function  Visiting_profile (props)  {
     useEffect(ev=>{
@@ -24,12 +26,13 @@ export default function  Visiting_profile (props)  {
 
     let { vr,pkId } = useParams();
     const [fet,setFet]=useState(false)
-
+    const [open,setOpen]=useState(false)
     const dispatch = useDispatch();
     const Success = useSelector(SuccessSelector);
     const cvr = useSelector(SelectCompnay_visitng_record);
     const User_list_ = useSelector(User_list);
     const data = useSelector(selectCompany_list);
+    const UserDetail = useSelector(BasicDetailsU);
 
     if(!fet)
     {
@@ -38,10 +41,29 @@ export default function  Visiting_profile (props)  {
         dispatch(Compnay_visitng_record(vr))
         dispatch(GetUsers(vr))
     }
-    console.log(cvr)
+
+    // console.log(User_list_)
+    list_of_student=[]
+    window.Company=undefined
+    if(Success.profile_fetch_success === true  && Success.cvr_fetch=== true)
+    {
+        Company={
+            name:data[0].Company_name,
+            logo:data[0].Company_logo
+        }
+    }
 
     return (
         <>
+            {open &&<>
+                    <Poster_dialog
+                        handleClose={ev=>{
+                            setOpen(false)
+                        }
+                        }
+                    />
+                </>
+            }
             <UpperHoc  Re={false}   Status={selectStatus} Error={selectError} Success={SuccessSelector}>
                 <div>
                 <div className="m-4 lg:m-10 ">
@@ -53,10 +75,15 @@ export default function  Visiting_profile (props)  {
                                 <p className="lg:text-2xl px-2 border-b-4 border-indigo-800">Back</p>
                             </div>
                         </Link>
-                        {/*<div className="hidden md:flex flex-row  bg-indigo-600 rounded-full px-4 py-2 cursor-pointer">*/}
-                        {/*    <p href="#" className="px-2"><i className='bx bx-plus-circle text-white text-3xl'></i></p>*/}
-                        {/*    <p className="text-2xl text-white px-2 font-bold">Create</p>*/}
-                        {/*</div>*/}
+                        {UserDetail.Cache_check=== true && UserDetail.groups.includes("Faculty")&&<>
+                        <div className="hidden md:flex flex-row  bg-indigo-600 rounded-full px-4 py-2 cursor-pointer"
+                             onClick={ev=>{
+                                 setOpen(true)
+                             }}>
+                            <p href="#" className="px-2"><i className='bx bx-receipt text-white text-2xl pr-2 '></i></p>
+                            <p className="text-2xl text-white px-2 font-bold ">Banner</p>
+                        </div>
+                        </> }
                     </div>
 
                     <div className=" border-2  relative space-y-3 md:space-y-0  rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto bg-gray-200">
@@ -184,6 +211,10 @@ export default function  Visiting_profile (props)  {
                                 </div>
                             </>:<>
                                 {User_list_.map(ev=>{
+                                    list_of_student.push({
+                                        name:`${ev.User_First_name} ${ev.User_Last_name}`,
+                                        image:ev.User_i_card_image
+                                    })
                                     return<>
                                         <div className="flex md:flex-row flex-col justify-between p-2 bg-white rounded w-full my-2">
                                             <a href={`/profile/${ev.User}/`} className={"no-underline hover:underline text-blue-600"}>
@@ -208,6 +239,7 @@ export default function  Visiting_profile (props)  {
                 </div>
 
             </UpperHoc>
+
         </>
 
     );

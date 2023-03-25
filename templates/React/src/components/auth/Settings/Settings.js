@@ -23,32 +23,41 @@ export default function Settings(props)
                 </div>
 
                 <div className="flex flex-row flex-wrap md:space-x-12  justify-center">
-                <Link to="/auth/settings/profileUpdate/" >
-                    <div
-                        className=" cursor-pointer w-80 px-5 my-8 py-5 place-items-center flex flex-row justify-center space-x-4 text-indigo-700 border-2 border-gray-200 shadow-lg hover:bg-indigo-700  hover:text-white rounded-2xl"
-                    >
-                        <i className="bx bx-cog text-6xl"></i>
-                        <p  className=" font-bold  text-lg">Profile Update</p>
-                    </div>
-                </Link>
 
-                <Link to="/auth/settings/profileImage_update/" >
-                    <div
-                        className="cursor-pointer  w-80 px-5 my-8 py-5 place-items-center flex flex-row justify-center space-x-4 text-indigo-700 border-2 border-gray-200 shadow-lg hover:bg-indigo-700  hover:text-white rounded-2xl"
-                    >
-                        <i className="bx bx-image-alt text-6xl"></i>
-                        <p  className=" font-bold  text-lg">Profile Photo Update</p>
-                    </div>
-                </Link>
+                    {
+                        User.Cache_check === true && User.email_verified === true &&<>
 
-                <Link to="/auth/settings/password_reset/" >
-                    <div
-                        className=" cursor-pointer w-80 px-5 my-8 py-5 place-items-center flex flex-row justify-center space-x-4 text-indigo-700 border-2 border-gray-200 shadow-lg hover:bg-indigo-700  hover:text-white rounded-2xl"
-                    >
-                        <i className="bx bx-check-shield text-6xl"></i>
-                        <p  className=" font-bold  text-lg">Password update</p>
-                    </div>
-                </Link>
+                            <Link to="/auth/settings/profileUpdate/" >
+                                <div
+                                    className=" cursor-pointer w-80 px-5 my-8 py-5 place-items-center flex flex-row justify-center space-x-4 text-indigo-700 border-2 border-gray-200 shadow-lg hover:bg-indigo-700  hover:text-white rounded-2xl"
+                                >
+                                    <i className="bx bx-cog text-6xl"></i>
+                                    <p  className=" font-bold  text-lg">Profile Update</p>
+                                </div>
+                            </Link>
+
+                            <Link to="/auth/settings/profileImage_update/" >
+                                <div
+                                    className="cursor-pointer  w-80 px-5 my-8 py-5 place-items-center flex flex-row justify-center space-x-4 text-indigo-700 border-2 border-gray-200 shadow-lg hover:bg-indigo-700  hover:text-white rounded-2xl"
+                                >
+                                    <i className="bx bx-image-alt text-6xl"></i>
+                                    <p  className=" font-bold  text-lg">Profile Photo Update</p>
+                                </div>
+                            </Link>
+
+                            <Link to="/auth/settings/password_reset/" >
+                                <div
+                                    className=" cursor-pointer w-80 px-5 my-8 py-5 place-items-center flex flex-row justify-center space-x-4 text-indigo-700 border-2 border-gray-200 shadow-lg hover:bg-indigo-700  hover:text-white rounded-2xl"
+                                >
+                                    <i className="bx bx-check-shield text-6xl"></i>
+                                    <p  className=" font-bold  text-lg">Password update</p>
+                                </div>
+                            </Link>
+
+                        </>
+
+
+                    }
 
 
                     <div

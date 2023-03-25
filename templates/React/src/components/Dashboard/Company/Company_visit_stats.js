@@ -155,7 +155,8 @@ export default function CompanyVisitStats(props)
         // console.log(cvr,row)
         modify_function(setModify,setRow,cvr)
     }
-    console.log(row,cvr)
+
+    // console.log(row,cvr)
     return <>
         <UpperHoc  Re={false}  Status={selectStatus} Error={selectError} Success={SuccessSelector}>
             <div>

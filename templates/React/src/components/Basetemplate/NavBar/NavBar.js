@@ -51,16 +51,32 @@ export default function NavBar()  {
     //list of nav elemts to display according to user
     if(UserDetail.groups.includes("Faculty") || UserDetail.groups.includes("Head") )
     {
-        list_of_nav_ele={"/dashboard/":"Dashboard","/auth/profile/":"Profile","/auth/settings/":"Settings"}
+        if(UserDetail.email_verified === false)
+        {
+            list_of_nav_ele={"/auth/settings/":"Settings"}
+        }
+        else {
+            list_of_nav_ele={"/dashboard/":"Dashboard","/auth/profile/":"Profile","/auth/settings/":"Settings"}
+        }
+
     }
     else
     {
-        list_of_nav_ele={"/timeline/":"Feed","/auth/profile/":"Profile","/auth/settings/":"Settings"}
+        if(UserDetail.email_verified === false)
+        {
+            list_of_nav_ele={"/auth/settings/":"Settings"}
+        }
+        else {
+            list_of_nav_ele={"/timeline/":"Feed","/auth/profile/":"Profile","/auth/settings/":"Settings"}
+        }
+
+
     }
 
 
     //dont load nav on this urls
-    const dontload_urls=["/auth/","/auth/login/","/auth/signup/","/auth/forgotPassword/"]
+    const dontload_urls=["/auth/","/auth/login/","/auth/signup/","/auth/forgotPassword/",
+       ]
 
 
         return (

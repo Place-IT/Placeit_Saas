@@ -1,0 +1,19 @@
+name: SSH into VM and run script on push to main
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  ssh-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH into VM and run script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            cd /path/to/script
+            sh script.sh
