@@ -79,7 +79,7 @@ load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('Secret_key')
-print(os.getenv('PG_ADMIN_DBName'))
+print(os.getenv('PG_ADMIN_DBName'),os.getenv('PG_ADMIN_PASSWORD'),os.getenv('PG_ADMIN_USERNAME'))
 if os.getenv("use_pg") == "False":
     DATABASES = {
         'default': {
@@ -91,9 +91,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.getenv('db_name'),
-            'USER': os.getenv('db_username'),
-            'PASSWORD': os.getenv('db_password'),
+            'NAME': os.getenv('PG_ADMIN_DBName'),
+            'USER': os.getenv('PG_ADMIN_USERNAME'),
+            'PASSWORD': os.getenv('PG_ADMIN_PASSWORD'),
             'HOST': 'localhost',
             'PORT': '5432',
         }
