@@ -12,7 +12,7 @@ urlpatterns = [
     path('login/',BaseReactView.as_view(condition_check_Function=[Notauth]),name="Login"),
     path('signup/',BaseReactView.as_view(condition_check_Function=[Notauth]),name="signup"),
 
-    path('profile/',login_required(DefaultVerifyReactView.as_view(template_name="Profile\profile.html",context_update=update_context)),name="profile"),
+    path('profile/',login_required(DefaultVerifyReactView.as_view(template_name="Profile/profile.html",context_update=update_context)),name="profile"),
 
     # path('verify/',login_required(BaseReactView.as_view()),name="verify"),
 

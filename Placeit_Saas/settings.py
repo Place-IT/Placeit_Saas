@@ -79,7 +79,7 @@ load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('Secret_key')
-print(os.getenv('PG_ADMIN_DBName'),os.getenv('PG_ADMIN_PASSWORD'),os.getenv('PG_ADMIN_USERNAME'))
+# print(os.getenv('PG_ADMIN_DBName'),os.getenv('PG_ADMIN_PASSWORD'),os.getenv('PG_ADMIN_USERNAME'))
 if os.getenv("use_pg") == "False":
     DATABASES = {
         'default': {
