@@ -43,6 +43,7 @@
     "@table-library/react-table-library": "^4.0.23",
     "ag-grid-react": "^28.2.0",
     "canvasjs-react-charts": "^1.0.5",
+    "dom-to-image": "^2.6.0",
     "flowbite": "^1.5.3",
     "flowbite-react": "^0.1.11",
     "moment": "^2.29.4",

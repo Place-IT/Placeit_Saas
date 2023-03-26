@@ -79,7 +79,7 @@ load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('Secret_key')
-
+print(os.getenv('PG_ADMIN_DBName'))
 if os.getenv("use_pg") == "False":
     DATABASES = {
         'default': {
@@ -95,10 +95,9 @@ else:
             'USER': os.getenv('db_username'),
             'PASSWORD': os.getenv('db_password'),
             'HOST': 'localhost',
-            'PORT': '',
+            'PORT': '5432',
         }
     }
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

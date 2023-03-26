@@ -9,6 +9,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import {useRef} from "react";
 import PptxGenJS from "pptxgenjs";
+import domToImage from 'dom-to-image';
+
 import logo from "../../assets/images/crop_logo.png";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -26,161 +28,147 @@ export default function Poster_dialog(props) {
     // console.log(pptx)
 
     const convertDivToPpt = () => {
-        // Create a new PptxGenJS instance
-        const pptx =  new PptxGenJS();
 
-        // const slide = pptx.addSlide();
-        // Get the HTML content from the div element
-        const divContent = divRef.current.innerHTML;
-
-        // Add a new slide to the presentation with the HTML content
-        const slide = pptx.addSlide({ html: divContent });
-
-        // const canvas = document.createElement("canvas");
-        // canvas.width = divRef.current.offsetWidth;
-        // canvas.height = divRef.current.offsetHeight;
-        // const context = canvas.getContext("2d");
-        // context.drawImage(divRef.current, 0, 0);
-        // const dataUrl = canvas.toDataURL("image/png");
-
-        // const slide = pptx.addSlide();
-        // slide.addImage({ data: dataUrl });
-        // Save the presentation
-        pptx.writeFile({ fileName: 'Browser-PowerPoint-Demo.pptx' })
-    .then(fileName => {
-            console.log(`created file: ${fileName}`);
-        });
+        domToImage.toPng(divRef.current)
+            .then(function (dataUrl) {
+                const pptx =  new PptxGenJS();
+                const slide = pptx.addSlide();
+                slide.addImage({ data: dataUrl });
+                pptx.writeFile({ fileName: 'Browser-PowerPoint-Demo.pptx' })
+                    .then(fileName => {
+                        console.log(`created file: ${fileName}`);
+                    });
+            })
+            .catch(function (error) {
+                console.error('Error converting element to image:', error);
+            });
     };
 
     // console.log(list_of_student)
-    // list_of_student=[
-    //     {
-    //     name:`abc`,
-    //     company:["a","v","d"],
-    //     image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },{
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },{
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },{
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },{
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },{
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },{
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },{
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },{
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },{
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:null
-    //     },
-    //     {
-    //         name:`abc`,
-    //         company:["a","v","d"],
-    //         image:undefined
-    //     },
-    // ]
+    list_of_student=[
+        {
+        name:`abc`,
+        company:["a","v","d"],
+        image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },{
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },{
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },{
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },{
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },{
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },{
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },{
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },{
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },{
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:"https://janak27.github.io/placeitui/img/cropped-cropped-cropped-logo.png"
+        },
+        {
+            name:`abc`,
+            company:["a","v","d"],
+            image:null
+        },
+
+    ]
     // Company={
     //     name:"abcbcbcbccbcbc",
     //     // logo:data[0].Company_logo
