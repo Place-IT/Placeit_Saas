@@ -16,6 +16,9 @@ export default function commonFailurerfunction (res){
         }
 
     })
+    console.log(
+        {response:{error:output},type:false}
+    )
     return {response:{error:output},type:false}
 
 }

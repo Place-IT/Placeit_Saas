@@ -43,6 +43,7 @@ const initialState = {
 
     Roll_no:"",
     MhCET:"",
+    JEE:"",
     SSC:"",
     HSC:"",
     Diploma: null,
@@ -240,8 +241,8 @@ export const AuthSlice = createSlice({
                 state.Diploma=action.payload.response.data.Diploma
                 state.Github_profile=action.payload.response.data.Github_profile
                 state.Affliated_Department=action.payload.response.data.Affliated_Department
-
-
+                state.MIS_no=action.payload.response.data.MIS_no
+                state.JEE=action.payload.response.data.JEE
             }else
                 {
                     state.error=true
@@ -488,6 +489,8 @@ export const BasicDetailsU = (state) => {
         Github_profile: state.Auth.Github_profile,
         Cache_check:state.Auth.Cache_check,
         Affliated_Department:state.Auth.Affliated_Department,
+        MIS_no:state.Auth.MIS_no,
+        JEE:state.Auth.JEE,
 
     }
 };

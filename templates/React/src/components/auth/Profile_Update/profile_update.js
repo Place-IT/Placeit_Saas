@@ -40,6 +40,7 @@ export default function  Profile_update (props)  {
         SSC:"",
         HSC:"",
         Diploma: null,
+        JEE:"",
 
         MIS_no: null,
         Roll_no:"",
@@ -70,13 +71,28 @@ export default function  Profile_update (props)  {
 
     if(UserDetail.Cache_check && update === false)
     {
-        setState({...UserDetail})
+        if(UserDetail.Affliated_Department != null)
+        {
+            setState({...UserDetail,Affliated_Department: UserDetail.Affliated_Department.id})
+        }
+        else
+        {
+            setState({...UserDetail})
+        }
         setUpdate(true)
     }
     function dispatch_function(ev)
     {
         let a= {...state}
         delete  a.i_card_image
+        delete a.Resume_profile
+
+
+        if(a.Affliated_Department != null)
+        {
+            a.Affliated_Department=Number(a.Affliated_Department)
+        }
+
         dispatch(ProfileUpdate(a))
     }
 
@@ -112,6 +128,11 @@ export default function  Profile_update (props)  {
                         {/*Personal Details*/}
                         <div
                             className="px-5 py-1 max-w-fit border-b-2  border-indigo-300 font-bold">
+                            Fill all * required field to proceed forward
+                        </div>
+
+                        <div
+                            className="px-5 py-1 max-w-fit border-b-2  border-indigo-300 font-bold">
                             Personal Details
                         </div>
                         <form className="  items-center max-w-full items-center">
@@ -140,7 +161,7 @@ export default function  Profile_update (props)  {
                                 <div className="md:w-1/3">
                                     <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                            htmlFor="inline-full-name">
-                                        Middle-Name :
+                                        Middle-Name* :
                                     </label>
                                 </div>
                                 <div className="md:w-1/3">
@@ -160,7 +181,7 @@ export default function  Profile_update (props)  {
                                 <div className="md:w-1/3">
                                     <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                            htmlFor="inline-full-name">
-                                        Last-Name :
+                                        Last-Name* :
                                     </label>
                                 </div>
                                 <div className="md:w-1/3">
@@ -182,7 +203,7 @@ export default function  Profile_update (props)  {
                                 <div className="md:w-1/3">
                                     <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                            htmlFor="inline-full-name">
-                                        Date-Of-Birth :
+                                        Date-Of-Birth* :
                                     </label>
                                 </div>
                                 <div className="md:w-1/3">
@@ -197,19 +218,19 @@ export default function  Profile_update (props)  {
                                     }/>
                                 </div>
                             </div>
-                            {UserDetail.groups.includes("Faculty") &&<>
+
                                 {/*Student_phone_number*/}
                                 <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
                                     <div className="md:w-1/3">
                                         <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                                htmlFor="inline-full-name">
-                                            {UserDetail.groups.includes("Faculty") ?<>Phonenumber :</>:<>Student-Phonenumber :</>}
+                                            {UserDetail.groups.includes("Faculty") ?<>Phonenumber* :</>:<>Student-Phonenumber* :</>}
 
                                         </label>
                                     </div>
                                     <div className="md:w-1/3">
                                         <InputCreator
-                                            key="Date_Of_Birth" input={{
+                                            key="Student_phone_number" input={{
                                             nolabel:true,
                                             type:"tel",
                                             state: state,
@@ -221,16 +242,16 @@ export default function  Profile_update (props)  {
                                 </div>
 
 
-                            </>}
 
                             {UserDetail.groups.includes("Faculty") === false&&<>
+
 
                                 {/*Parent_phone_number*/}
                             <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
                                 <div className="md:w-1/3">
                                     <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                            htmlFor="inline-full-name">
-                                        Parent-Phonenumber :
+                                        Parent-Phonenumber* :
                                     </label>
                                 </div>
                                 <div className="md:w-1/3">
@@ -264,7 +285,7 @@ export default function  Profile_update (props)  {
                                               placeholder="" />
 
 
-                                    
+
                                 </div>
                             </div>
 
@@ -448,7 +469,7 @@ export default function  Profile_update (props)  {
                                     <div className="md:w-1/3">
                                         <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                                htmlFor="inline-full-name">
-                                            MhCET :
+                                            MhCET* :
                                         </label>
                                     </div>
                                     <div className="md:w-1/3">
@@ -463,12 +484,32 @@ export default function  Profile_update (props)  {
                                         }/>
                                     </div>
                                 </div>
+                                {/*JEE*/}
+                                <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
+                                    <div className="md:w-1/3">
+                                        <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
+                                               htmlFor="inline-full-name">
+                                            JEE* :
+                                        </label>
+                                    </div>
+                                    <div className="md:w-1/3">
+                                        <InputCreator
+                                            key="JEE" input={{
+                                            nolabel:true,
+                                            type:"text",
+                                            state: state,
+                                            setState: setState,
+                                            labelText:"JEE",
+                                            name:"JEE" }
+                                        }/>
+                                    </div>
+                                </div>
                                 {/*SSC*/}
                                 <div className="md:flex md:items-center mb-4 space-x-6 mx-2">
                                     <div className="md:w-1/3">
                                         <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                                htmlFor="inline-full-name">
-                                            SSC :
+                                            SSC* :
                                         </label>
                                     </div>
                                     <div className="md:w-1/3">
@@ -488,7 +529,7 @@ export default function  Profile_update (props)  {
                                     <div className="md:w-1/3">
                                         <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                                htmlFor="inline-full-name">
-                                            HSC :
+                                            HSC* :
                                         </label>
                                     </div>
                                     <div className="md:w-1/3">
@@ -508,7 +549,7 @@ export default function  Profile_update (props)  {
                                     <div className="md:w-1/3">
                                         <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                                htmlFor="inline-full-name">
-                                            Diploma :
+                                            Diploma* :
                                         </label>
                                     </div>
                                     <div className="md:w-1/3">
@@ -538,7 +579,7 @@ export default function  Profile_update (props)  {
                                     <div className="md:w-1/3">
                                         <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                                htmlFor="inline-full-name">
-                                            MIS No :
+                                            MIS No* :
                                         </label>
                                     </div>
                                     <div className="md:w-1/3">
@@ -578,7 +619,7 @@ export default function  Profile_update (props)  {
                                     <div className="md:w-1/3">
                                         <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                                htmlFor="inline-full-name">
-                                            Collage Joinig Year :
+                                            Collage Joinig Year* :
                                         </label>
                                     </div>
                                     <div className="md:w-1/3">
@@ -598,7 +639,7 @@ export default function  Profile_update (props)  {
                                     <div className="md:w-1/3">
                                         <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                                htmlFor="inline-full-name">
-                                            Collage Passing Year :
+                                            Collage Passing Year* :
                                         </label>
                                     </div>
                                     <div className="md:w-1/3">
@@ -618,7 +659,7 @@ export default function  Profile_update (props)  {
                                     <div className="md:w-1/3">
                                         <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                                htmlFor="inline-full-name">
-                                            Department:
+                                            Department*:
                                         </label>
                                     </div>
                                     <div className="md:w-1/3">

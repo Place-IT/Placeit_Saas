@@ -526,7 +526,7 @@
 
                             {% else %}
                                 <header class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
-                                    <embed src='/media/{{ display_user_content.Resume_profile}}' class="hidden md:flex w-full h-72 md:h-screen">
+                                    <embed X_FRAME_OPTIONS = 'SAMEORIGIN' src='/media/{{ display_user_content.Resume_profile}}' class="hidden md:flex w-full h-72 md:h-screen">
                                     <div class="md:hidden flex justify-center">
                                         <a href='/media/{{ display_user_content.Resume_profile }}' type="button" class="text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center justify-center w-full">
                                             <svg class="w-4 h-4 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 252, 252, 1);">

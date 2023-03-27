@@ -51,6 +51,7 @@ export default async function FetchCall(url,method,body,content_Type='applicatio
                                             Failure=["success"],content_type='application/json'
                                              )
  {
+
     logdata("FetchCall_success_failure_Key","init",`Data url:"${url}" method:"${method}" body:"${body}" successFunc:"${successFunc}"`)
     let response=await FetchCall(url, method, body,content_type);
      let response_up=false
@@ -79,8 +80,10 @@ export default async function FetchCall(url,method,body,content_Type='applicatio
                      indicator=2
                      response_up={response: response, type: false}
                  } else {
+
                      indicator=3
                      response_up = FailureFunc(response)
+
                  }
              }
          })
