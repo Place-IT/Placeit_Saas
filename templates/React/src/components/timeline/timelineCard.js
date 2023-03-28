@@ -43,6 +43,7 @@ export default function  TimelineCard(props)
         setAr(false)
     }
     // console.log(props,display)
+    // console.log(props.data.is_user_eligible["final"])
     return<>
         <UpperHoc  redirect="/timeline/" Re={true} hard={true} Status={selectStatus} Error={selectError} Success={SuccessSelector}>
 
@@ -231,13 +232,12 @@ export default function  TimelineCard(props)
                                     >Submitted</div
                                     >
                                 </>:<>
-                                    {props.data.is_user_eligible ?<>
+                                    {props.data.is_user_eligible["final"] ?<>
                                         <div className="mx-4 flex justify-between">
                                             <div
                                                 className="py-2 select-none px-10 f rounded-3xl border-2 border-slate-400 cursor-pointer  text-red-700 border-2 border-gray-200 shadow-lg hover:bg-red-700  hover:text-white rounded-2xl  transition duration-300"
                                                 onClick={Reject_callback}
-                                            >Reject</div
-                                            >
+                                            >Reject</div>
                                             <div onClick={Accept_callback}
                                                  className="py-2 select-none px-10 f rounded-3xl border-2 border-slate-400 cursor-pointer  text-indigo-700 border-2 border-gray-200 shadow-lg hover:bg-indigo-700  hover:text-white rounded-2xl  transition duration-300"
                                             >Apply</div
@@ -247,7 +247,12 @@ export default function  TimelineCard(props)
                                     </>:<>
                                         <div
                                             className="py-2 px-10 f underline  cursor-pointer  text-red-700 opacity-50 cursor-not-allowed  transition duration-300 w-full text-center"
-                                        >Not eligible</div
+                                        >Not eligible
+                                            {
+                                            props.data.is_user_eligible["reason"].map(ev=>{
+                                                return <p>{ev}</p>
+                                            })}
+                                        </div
                                         >
                                     </>
                                     }

@@ -42,7 +42,7 @@ export const ProfileUpdate = createAsyncThunk(
         {
 
             response= await  FetchCallSFK(
-                `/api/auth/User/${body_sent.id}/`,  "Put",
+                `/api/auth/User/${body_sent.id}/`,  "Patch",
                 body_sent,false,commonFailurerfunction,
                 ["id"],[...window.list_of_all_fields],
             )

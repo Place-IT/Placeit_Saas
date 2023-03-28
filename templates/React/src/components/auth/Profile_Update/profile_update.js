@@ -39,7 +39,7 @@ export default function  Profile_update (props)  {
         MhCET:"",
         SSC:"",
         HSC:"",
-        Diploma: null,
+        Diploma: 0.0,
         JEE:"",
 
         MIS_no: null,
@@ -90,7 +90,7 @@ export default function  Profile_update (props)  {
 
         if(a.Affliated_Department != null)
         {
-            a.Affliated_Department=Number(a.Affliated_Department)
+            a.Affliated_Department_id=Number(a.Affliated_Department)
         }
 
         dispatch(ProfileUpdate(a))
@@ -626,7 +626,7 @@ export default function  Profile_update (props)  {
                                         <InputCreator
                                             key="collage_joinig_year" input={{
                                             nolabel:true,
-                                            type:"text",
+                                            type:"number",
                                             state: state,
                                             setState: setState,
                                             labelText:"collage_joinig_year",
@@ -675,8 +675,9 @@ export default function  Profile_update (props)  {
                                             <option value="1">Department Of Information Technology</option>
                                             <option value="2">Department Of Chemical Engineering</option>
                                             <option value="3">Department Of Computer Science</option>
-                                            <option value="4">Department Of Electronics and TelecomnicationsDepartment Of Instrumental</option>
-                                            <option value="5">Department Of Mechinical engineering</option>
+                                            <option value="4">Department Of Electronics and Telecomnications</option>
+                                            <option value="5">Department Of Instrumental</option>
+                                            <option value="6">Department Of Mechinical engineering</option>
                                         </select>
                                     </div>
                                 </div>

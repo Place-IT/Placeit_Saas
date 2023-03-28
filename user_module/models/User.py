@@ -214,7 +214,7 @@ class User(ModelMeta,AbstractBaseUser, PermissionsMixin):
         if not(self.Sem8 == None):
             count+=1
         if count != 0:
-            return ((self.Sem1 or 0.0) + (self.Sem2 or 0.0)  + (self.Sem3 or 0.0)  + (self.Sem4 or 0.0) + (self.Sem5 or 0.0) + (self.Sem6 or 0.0)  + (self.Sem7 or 0.0)  + (self.Sem8 or 0.0))/count
+            return ((float(self.Sem1 or 0.0)) + (float(self.Sem2 or 0.0))  + (float(self.Sem3 or 0.0))  + (float(self.Sem4 or 0.0)) + (float(self.Sem5 or 0.0)) + (float(self.Sem6 or 0.0))  + (float(self.Sem7 or 0.0))  + (float(self.Sem8 or 0.0)))/count
         else:
             return 0.0
 

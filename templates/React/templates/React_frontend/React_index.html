@@ -16,8 +16,35 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+
+        .loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        img{
+            height: 12rem;
+        }
+        
+        .loader--hide {
+            opacity: 0;
+        }
+
+
+    </style>
+
+
   </head>
-  <body id="app">
+{#  <body id="app">#}
+<body>
+    <div id="app"></div>
+    <div class="loader">
+        <img src='{% static "/img/loader.gif" %}' alt="">
+    </div>
     <script src='{% static "frontend/main.js" %}'></script>
-  </body>
+</body>
+
+{#  </body>#}
 </html>

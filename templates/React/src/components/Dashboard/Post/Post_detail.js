@@ -65,7 +65,7 @@ function create_question_and_answer(setQuestion,setResponse_1,setResponse_2,setR
                response_2.push(row)
            }
            else
-           if(ev.is_user_eligible)
+           if(ev.is_user_eligible["final"])
            {
                response_1.push(row)
            }

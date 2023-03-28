@@ -4,10 +4,14 @@ import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 
+const loader = document.querySelector('.loader');
+const hideLoader = () => loader.classList.add('loader--hide');
+
+
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
+            <App hideLoader={hideLoader} />
         </Provider>
     </React.StrictMode>,
     document.getElementById('app')

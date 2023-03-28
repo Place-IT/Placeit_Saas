@@ -127,7 +127,7 @@ export default function  Visiting_profile (props)  {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="bg-white rounded w-full md:w-2/3  flex flex-col md:-mt-10  p-3 ">
+                                <div className="bg-white rounded w-full md:w-2/3  flex flex-col md:-mt-20  p-3 ">
                                     <div className="flex justify-items-start mb-2">
                                         <div className="px-4">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

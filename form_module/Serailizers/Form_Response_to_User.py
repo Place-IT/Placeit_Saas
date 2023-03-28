@@ -26,4 +26,7 @@ class Form_Response_To_User_Serailizer(serializers.ModelSerializer):
         ]
     def get_User_i_card_image(self, obj):
         request = self.context.get("request")
-        return request.build_absolute_uri(obj.User.i_card_image.url)
+        if obj.User.i_card_image:
+            return request.build_absolute_uri(obj.User.i_card_image.url)
+        else:
+            return None

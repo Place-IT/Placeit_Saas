@@ -11,7 +11,7 @@ class Conditions(models.Model):
 
     conditon_2 = models.DecimalField(max_digits=5, decimal_places=2,
                                      validators=[MinValueValidator(0), MaxValueValidator(100)], null=True, blank=True,
-                                     default=0.00, help_text="10 percentage ")
+                                     default=0.00, help_text="10 percentage")
 
     conditon_3 = models.DecimalField(max_digits=5, decimal_places=2,
                                      validators=[MinValueValidator(0), MaxValueValidator(100)], null=True, blank=True,
