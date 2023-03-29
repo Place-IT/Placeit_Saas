@@ -33,7 +33,7 @@ export default function SignUp(props)
                        heading="Sign Up with your email"
                        p={<>
                            <p>
-                               Already have an account? <a href="/auth/login/" className="text-indigo-700" ><Link to="/auth/login/"  >Log in</Link></a>
+                               Already have an account? <a href="/auth/login/" className="text-indigo-700" ><Link to="/auth/login/"  >Sign In</Link></a>
                            </p>
                        </>}
                 >

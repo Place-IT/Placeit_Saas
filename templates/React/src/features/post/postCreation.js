@@ -10,7 +10,7 @@ export const PostCreation = createAsyncThunk(
     {
         logdata("PostCreation","init",`Data body_sent:"${body_sent}"`)
         const response= await  FetchCallSFK(
-            `/api/Form/Form_view/`,  "Post",
+                `/api/Form/Form_view/`,  "Post",
             body_sent,false,commonFailurerfunction,
             ["Completed"], ["detail","error","Visitng_record"],
         )

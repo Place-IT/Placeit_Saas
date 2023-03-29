@@ -27,7 +27,8 @@ class Form_View_Serailizer(serializers.ModelSerializer):
                   "Originator_i_card_image",
                   "Company_image",
                   "Company_name",
-                  "conditions"
+                  "conditions",
+                  "Creator_note"
                   ]
 
     def get_Company_image(self, obj):

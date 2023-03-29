@@ -8,6 +8,7 @@ import {BasicDetailsU} from "../../../features/UserAuth/AuthSlicer";
 import {PostCreation} from "../../../features/post/postCreation";
 import Question from "./Question";
 import {Compnay_visitng_record} from "../../../features/company/Visitng_record";
+import basicSuccess from "../../../CommonFunctions/UniversalForm/BasicSuccess";
 
 
 
@@ -20,8 +21,8 @@ export default function  PostCreate(props)  {
     const [data,setData]=useState({
         "Visitng_record":"",
         "Type":"sl",
-        "Creator_note":"ddddddddd",
-        "expire_date_time":"2022-09-07T19:55:29",
+        "Creator_note":"",
+        "expire_date_time":new Date().toISOString(),
         "Originator":1,
         "conditions": {
             "conditon_1": 0.00,
@@ -121,7 +122,6 @@ export default function  PostCreate(props)  {
                                 <select
                                     value={data.Visitng_record}
                                     onChange={ev=>{
-                                        console.log(ev.target.value)
                                         setData({...data,Visitng_record: ev.target.value})
                                     }}
                                     className="text-xl font-bold rounded border-2 border-purple-700 text-gray-600 h-14 w-full md:w-1/2 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
@@ -130,8 +130,7 @@ export default function  PostCreate(props)  {
                                 </select>
                             </div>
                             <div className="flex justify-center items-center flex-col ">
-
-                            <div className="text-xl font-bold w-full md:w-1/2 bg-white">
+                            <div className="text-xl font-bold w-full md:w-1/2 bg-white my-4">
                                 Post Exporation Date-Time
                             </div>
                             </div>
@@ -147,6 +146,24 @@ export default function  PostCreate(props)  {
 
                                 />
                             </div>
+
+                            </div>
+                            <div className="flex justify-center items-center flex-col ">
+                                <div className="text-xl font-bold w-full md:w-1/2 bg-white my-4">
+                                    Creator Note
+                                </div>
+                            </div>
+                            <div className="flex justify-center items-center flex-col ">
+
+                                <div className="w-full mb-4 md:w-1/2">
+                                    <textarea id="message" rows="4"
+                                              value={data.Creator_note}
+                                              onChange={ev=>setData({...data,Creator_note: ev.target.value})}
+                                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full "
+                                              placeholder="Enter the Post Expiration date Time"
+                                             />
+                                </div>
+
                             </div>
                         </div>
                         <div className="border-2 border-gray-300 m-4 rounded p-4">

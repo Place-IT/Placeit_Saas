@@ -28,7 +28,7 @@ export default function Login(props)
             <>
              <UpperHoc  redirect="/auth/profile/" Re={true} hard={true} Status={selectStatus} Error={selectError} Success={SuccessSelector}>
                         <UForm
-                            actionText="Login"
+                            actionText="Sign In"
                             Error={selectError}
                             Dispatch={LoginThunk} state={state}
                             heading="Sign in with your email"
