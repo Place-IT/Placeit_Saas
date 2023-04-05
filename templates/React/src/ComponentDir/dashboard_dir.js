@@ -20,6 +20,8 @@ import PostDetail from "../components/Dashboard/Post/Post_detail";
 import Department from "../components/Dashboard/department";
 import CompanyVisitStats from "../components/Dashboard/Company/Company_visit_stats";
 import PostCreate from "../components/Dashboard/Post/Post_create";
+import Company_Create from "../components/Dashboard/Company/Company_create_page";
+import Company_Visit_page from "../components/Dashboard/Company/Company_visit_page";
 
 
 export default function  Dashboard_dir(props)
@@ -72,14 +74,24 @@ export default function  Dashboard_dir(props)
                                 <Company />
                             </ErrorBoundary>
                         </Route>
+                    <Route path={`${match.url}/company_create/`}exact>
+                        <ErrorBoundary component_name={"company_create"}>
+                            <Company_Create />
+                        </ErrorBoundary>
+                    </Route>
                         <Route path={`${match.url}/company_profile/:pkId/`} exact>
                             <ErrorBoundary component_name={"Company_profile"}>
                                 <Company_profile />
                             </ErrorBoundary>
                         </Route>
-                        <Route path={`${match.url}/company_profile/:pkId/visitng_record/:vr`} >
+                    <Route path={`${match.url}/company_profile/:pkId/visitng_record/:vr/`} >
+                        <ErrorBoundary component_name={"company_visiting_create"}>
+                            <Visiting_profile />
+                        </ErrorBoundary>
+                    </Route>
+                        <Route path={`${match.url}/company_visiting_create/:pkId/`} exact >
                             <ErrorBoundary component_name={"Visiting_profile"}>
-                                <Visiting_profile />
+                                <Company_Visit_page />
                             </ErrorBoundary>
                         </Route>
                     <Route path={`${match.url}/post_list/`}>
@@ -89,12 +101,12 @@ export default function  Dashboard_dir(props)
                     </Route>
                     <Route path={`${match.url}/post_Create/`}>
                         <ErrorBoundary component_name={"PostCreate"}>
-                            <PostCreate />
+                            <PostCreate create={true} />
                         </ErrorBoundary>
                     </Route>
                     <Route path={`${match.url}/post_detail/:pkId/`}>
                         <ErrorBoundary component_name={"PostDetail"}>
-                            <PostDetail />
+                            <PostDetail  />
                         </ErrorBoundary>
                     </Route>
                 </Dashboard_index>

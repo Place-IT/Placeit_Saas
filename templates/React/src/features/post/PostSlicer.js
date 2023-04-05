@@ -154,12 +154,13 @@ export const PostSlice = createSlice({
                 }
             })
             .addCase(DeletePost.fulfilled, (state, action) => {
+                console.log(action.payload.type)
                 if (action.payload.type === true) {
                     state.error = false
                     state.status = "idle"
                     state.Success= true
                     state.SuccessMsg = action.payload.response["Completed"]
-                    window.location.href="/dashboard/post_list/"
+                    // window.location.href="/dashboard/post_list/"
                     state.update= true
                 } else {
                     state.status = "idle"

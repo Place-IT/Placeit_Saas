@@ -12,7 +12,7 @@ export const PostCreation = createAsyncThunk(
         const response= await  FetchCallSFK(
                 `/api/Form/Form_view/`,  "Post",
             body_sent,false,commonFailurerfunction,
-            ["Completed"], ["detail","error","Visitng_record"],
+            ["Completed"], ["detail","error","Visitng_record","Creator_note"],
         )
         logdata("PostCreation","complete",`Data response:"${response}"`)
         return response

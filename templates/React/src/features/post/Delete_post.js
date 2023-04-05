@@ -1,6 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import FetchCall, {FetchCallSFK} from "../../CommonFunctions/Fetch/FetchCall";
 import {logdata} from "../../CommonFunctions/Logger/Logevents";
+import {Delete_check} from "../../CommonFunctions/Error_controlReact/manageErrors";
 
 
 export const DeletePost = createAsyncThunk(
@@ -12,9 +13,9 @@ export const DeletePost = createAsyncThunk(
         const response= await  FetchCallSFK(
             `/api/Form/Form_view/${body_sent}/`,  "Delete",
             false,false,false   ,
-            ["Completed","count"], ["detail"],
+            ["Completed"], ["detail","error"],'application/json',[Delete_check]
         )
-        console.log(response,"SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+        console.log(response)
         logdata("DeletePost","complete",`Data response:"${response}"`)
         return response
     }

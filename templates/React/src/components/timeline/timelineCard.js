@@ -245,15 +245,15 @@ export default function  TimelineCard(props)
                                         </div>
 
                                     </>:<>
-                                        <div
-                                            className="py-2 px-10 f underline  cursor-pointer  text-red-700 opacity-50 cursor-not-allowed  transition duration-300 w-full text-center"
-                                        >Not eligible
-                                            {
-                                            props.data.is_user_eligible["reason"].map(ev=>{
-                                                return <p>{ev}</p>
-                                            })}
-                                        </div
-                                        >
+                                            <div
+                                                className="mx-auto items-center font-medium flex-col p-3 flex justify-center">
+                                                <ul className="text-red-900 list-disc list-inside">
+                                                    <h2> You are not eligible due to</h2>
+                                                    {props.data.is_user_eligible["reason"].map(ev=>{
+                                                            return <li>{ev}</li>
+                                                        })}
+                                                </ul>
+                                            </div>
                                     </>
                                     }
 

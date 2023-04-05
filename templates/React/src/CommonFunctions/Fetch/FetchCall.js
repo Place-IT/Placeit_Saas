@@ -1,8 +1,9 @@
 import getCookie from "./getCookie"
 import {logdata} from "../Logger/Logevents";
 
-export default async function FetchCall(url,method,body,content_Type='application/json')
+export default async function FetchCall(url,method,body,response_check,content_Type='application/json')
 {
+
 
     let req_obj={
         mode: 'cors',
@@ -34,9 +35,21 @@ export default async function FetchCall(url,method,body,content_Type='applicatio
 
     let req = new Request(url, req_obj);
     return await fetch(req)
-        // .then(ev=>manageErrorHoc(ev,function_to_run_on_error))
         .then(
-            ev => ev.json()
+            response => {
+                if(response_check.length === 0)
+                {
+                return response.json()
+                }
+                else
+                {
+                    console.log("helloooooooooooooooooooo")
+                    let ret= {}
+                    response_check.some(fun => fun(response,ret) === false)
+                    console.log(ret["response"])
+                    return ret["response"]
+                }
+            }
         )
 
 }
@@ -48,14 +61,15 @@ export default async function FetchCall(url,method,body,content_Type='applicatio
  async function FetchCall_success_failure_Key(
                                              url,method,body,successFunc=false,FailureFunc=false
                                             ,success=["success"],
-                                            Failure=["success"],content_type='application/json'
+                                            Failure=["success"],content_type='application/json',response_check=[]
                                              )
  {
 
     logdata("FetchCall_success_failure_Key","init",`Data url:"${url}" method:"${method}" body:"${body}" successFunc:"${successFunc}"`)
-    let response=await FetchCall(url, method, body,content_type);
+    let response=await FetchCall(url, method, body,response_check,content_type);
      let response_up=false
-     let indicator=0
+     let indicator=-1
+
     success.forEach(ev=>{
 
         if (Reflect.has(response,ev))
@@ -80,7 +94,6 @@ export default async function FetchCall(url,method,body,content_Type='applicatio
                      indicator=2
                      response_up={response: response, type: false}
                  } else {
-
                      indicator=3
                      response_up = FailureFunc(response)
 

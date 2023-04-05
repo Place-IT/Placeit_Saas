@@ -8,11 +8,17 @@ class UserModuleConfig(AppConfig):
     def ready(self):
         try:
             from django.contrib.auth.models import Group, Permission
+            from django.contrib.contenttypes.models import ContentType
             from guardian.shortcuts import assign_perm
 
             stu, created_stu=Group.objects.get_or_create(name='Student')
             group, created=Group.objects.get_or_create(name='Faculty')
-            permissions_list = Permission.objects.exclude(content_type__app_label='user_module', content_type__model='user')
+            permissions_list = Permission.objects.exclude(
+                content_type_id__in=[
+                    ContentType.objects.get(model='user').id,
+                    ContentType.objects.get(model='company').id,
+                    ContentType.objects.get(model='visiting_company_record').id
+                                    ])
             group.permissions.set(permissions_list)
 
             assign_perm(f"user_module.view_user", group)

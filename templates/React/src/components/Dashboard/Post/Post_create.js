@@ -14,6 +14,7 @@ import basicSuccess from "../../../CommonFunctions/UniversalForm/BasicSuccess";
 
 
 export default function  PostCreate(props)  {
+    // console.log(props)
     useEffect(()=>{
         logdata("Post_Detail","init",`Post_Detail init with following props:${props}`)
     },[])
@@ -62,12 +63,33 @@ export default function  PostCreate(props)  {
         data.conditions[condition]=value
         setData(data_)
     }
-    if(!Call && Successs.cvr_fetch === false)
+    if(!Call && props.create === false && props.data !== undefined)
+    {
+        setCall(true)
+        let c={
+            "Visitng_record":`${props.data.Visitng_record.id || "   "} ${props.data.Company_name}  ${props.data.Company_name} ${props.data.Visitng_record.visiting_date || "   "}  ${props.data.Visitng_record["HRName"] || "   "}`,
+            "Type":props.data["Type"],
+            "Creator_note":"",
+            "expire_date_time":props.data.expire_date_time,
+            "Originator":1,
+            "conditions": props.data.conditions,}
+        setData(c)
+        let b={}
+        props.data.questions_set.forEach(ev=>{
+            let a=Math.floor(Math.random() * 1000000000)
+            b[`${a}`]={"type":ev["type"],"Text_q":ev["Text_q"],"Extract_from":ev["Extract_from"]}
+        })
+        setQuestions(b)
+
+    }
+
+    if(!Call && props.create === true && Successs.cvr_fetch === false)
     {
         setCall(true)
         dispatch(Compnay_visitng_record(""))
     }
-    if(Call === true && Successs.cvr_fetch === true )
+
+    if(props.create === true && Call === true && Successs.cvr_fetch === true )
     {
         let c=[]
         data2.Compnay_visitng_record.forEach(ev=>{
@@ -102,6 +124,7 @@ export default function  PostCreate(props)  {
             <UpperHoc  redirect="/dashboard/post_list/" Re={true} hard={true}  Status={selectStatus} Error={selectError} Success={SuccessSelector}>
                 <div>
                     <div className="m-4 lg:m-10 ">
+                        {props.create &&
                         <div className="flex m-4  text-md justify-between">
                             <Link to={`/dashboard/post_list/`}>
                                 <div className="flex  flex-row  rounded-full py-2 cursor-pointer" >
@@ -109,25 +132,38 @@ export default function  PostCreate(props)  {
                                     <p className="lg:text-2xl px-2 border-b-4 border-indigo-800">Back</p>
                                 </div>
                             </Link>
-
                         </div>
-
+                        }
                         <div className="border-2 border-gray-300 m-4 rounded p-4">
                             <div
                                 className="px-5 my-8 md:mx-10 mx-auto max-w-fit border-b-4 text-3xl border-indigo-700 font-bold">
-                                Select visits
+                                {props.create ?<>Select</>:<>Selected</>}  visits
                             </div>
 
                             <div className="flex justify-center items-center flex-col ">
-                                <select
+                                {props.create? <select
+                                disabled={!props.create}
+                                value={data.Visitng_record}
+                                onChange={ev=>{
+                                    setData({...data,Visitng_record: ev.target.value})
+                                }}
+                                className="text-xl font-bold rounded border-2 border-purple-700 text-gray-600 h-14 w-full md:w-1/2 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                                <option value="" disabled selected hidden>Visiting Records</option>
+                                {vr.map(ev=><option value={ev.id}>{ev.vv}</option>)}
+                            </select>:
+                                <input
+                                    disabled={!props.create}
+                                    type="text"
+                                    id="first_name"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full "
+                                    placeholder="Enter the Post Expiration date Time"
                                     value={data.Visitng_record}
-                                    onChange={ev=>{
-                                        setData({...data,Visitng_record: ev.target.value})
-                                    }}
-                                    className="text-xl font-bold rounded border-2 border-purple-700 text-gray-600 h-14 w-full md:w-1/2 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
-                                    <option value="" disabled selected hidden>Visiting Records</option>
-                                    {vr.map(ev=><option value={ev.id}>{ev.vv}</option>)}
-                                </select>
+                                    // onChange={ev=>setData({...data,expire_date_time: ev.target.value})}
+
+                                />
+
+                                }
+
                             </div>
                             <div className="flex justify-center items-center flex-col ">
                             <div className="text-xl font-bold w-full md:w-1/2 bg-white my-4">
@@ -137,7 +173,9 @@ export default function  PostCreate(props)  {
                             <div className="flex justify-center items-center flex-col ">
 
                             <div className="w-full mb-4 md:w-1/2">
-                                <input  type="datetime-local"
+                                <input
+                                    disabled={!props.create}
+                                    type={props.create?"datetime-local":"text"}
                                         id="first_name"
                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full "
                                        placeholder="Enter the Post Expiration date Time"
@@ -156,7 +194,9 @@ export default function  PostCreate(props)  {
                             <div className="flex justify-center items-center flex-col ">
 
                                 <div className="w-full mb-4 md:w-1/2">
-                                    <textarea id="message" rows="4"
+                                    <textarea
+                                        disabled={!props.create}
+                                        id="message" rows="4"
                                               value={data.Creator_note}
                                               onChange={ev=>setData({...data,Creator_note: ev.target.value})}
                                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full "
@@ -178,6 +218,7 @@ export default function  PostCreate(props)  {
                                 <div className="w-full mb-4 md:w-1/2">
 
                                     <input
+                                        disabled={!props.create}
                                            type="number"
                                            min="0.00" max="100.00"
                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full "
@@ -195,6 +236,7 @@ export default function  PostCreate(props)  {
                                            className="block text-sm font-medium text-gray-900 dark:text-white">SSC
                                         marks</label>
                                     <input
+                                        disabled={!props.create}
                                         type="number"
                                         min="0.00" max="100.00"
                                         id="first_name"
@@ -212,6 +254,7 @@ export default function  PostCreate(props)  {
                                            className="block text-sm font-medium text-gray-900 dark:text-white">HSC
                                         marks</label>
                                     <input
+                                        disabled={!props.create}
                                            type="number"
                                            min="0.00" max="100.00"
                                            value={data.conditions.conditon_3}
@@ -223,7 +266,10 @@ export default function  PostCreate(props)  {
                                     Condition (About KTs)
                                 </div>
                                 <div className="w-full mb-4 md:w-1/2">
-                                    <input id="default-checkbox" type="checkbox"
+                                    <input
+                                            disabled={!props.create}
+                                            id="default-checkbox"
+                                            type="checkbox"
                                            value={data.conditions.conditon_4}
                                            onChange={ev=>Setcondition("conditon_4",ev.target.value)}
                                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 " />
@@ -231,7 +277,10 @@ export default function  PostCreate(props)  {
                                                className="ml-2 text-sm font-medium text-gray-900 ">No Live KTs</label>
                                 </div>
                                 <div className="w-full mb-4 md:w-1/2">
-                                    <input id="default-checkbox" type="checkbox"
+                                    <input
+                                            disabled={!props.create}
+                                            id="default-checkbox"
+                                            type="checkbox"
                                            value={data.conditions.conditon_5}
                                            onChange={ev=>Setcondition("conditon_5",ev.target.value)}
                                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" />
@@ -261,23 +310,28 @@ export default function  PostCreate(props)  {
                                           update_questions={setQuestions}
                                           data_questions={questions}
                                           HandleQuestionUpdate={HandleQuestionUpdate}
+                                        create={props.create}
                                 />
                             </>
                         })}
-                        <div className="px-4 py-4 flex justify-center space-x-4 font-bold">
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
-                                    id="copy-btn" onClick={HandleAddQuestion}>
-                                Add
-                            </button>
+                        {props.create === true &&
+                        <>
+                            <div className="px-4 py-4 flex justify-center space-x-4 font-bold">
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+                                        id="copy-btn" onClick={HandleAddQuestion}>
+                                    Add
+                                </button>
 
-                        </div>
-
-                        <div className="px-5 py-8 flex justify-center  font-bold" onClick={dispatch_function}>
-                            <div
-                               className="px-8 py-2 border-2 border-indigo-700 bg-indigo-700 text-white rounded-full font-bold">
-                                Submit
                             </div>
-                        </div>
+                            <div className="px-5 py-8 flex justify-center  font-bold" onClick={dispatch_function}>
+                                <div
+                                    className="px-8 py-2 border-2 border-indigo-700 bg-indigo-700 text-white rounded-full font-bold">
+                                    Submit
+                                </div>
+                            </div>
+
+                        </>
+                        }
                     </div>
                 </div>
             </UpperHoc>

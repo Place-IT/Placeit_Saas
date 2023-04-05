@@ -154,7 +154,7 @@ export default function  PostDetail(props)  {
         setRe(true)
         setRedirect("/dashboard/post_list/")
         dispatch(DeletePost(pkId))
-        window.location.href="/dashboard/post_list/"
+        // window.location.href="/dashboard/post_list/"
     }
     // console.log(data,check,data.data.length)
 
@@ -182,6 +182,7 @@ export default function  PostDetail(props)  {
 
                         <div className=" border-2  relative space-y-3 md:space-y-0  rounded-xl shadow-lg p-3    " style={{height:"100vh"}}>
                             <ScrollableTabsButtonForce
+                                data={data.data[0]}
                             Response_1={Response_1}
                             Response_2={Response_2}
                             Response_3={Response_3}

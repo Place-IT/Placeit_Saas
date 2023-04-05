@@ -19,6 +19,8 @@ import Empat from "../../../assets/images/undraw_Active_support_re_b7sj.png";
 import Poster_dialog from "../poster_dialog";
 import {BasicDetailsU} from "../../../features/UserAuth/AuthSlicer";
 
+import {DeleteVisitingRecord} from "../../../features/company/DeleteVisitingRecord";
+
 export default function  Visiting_profile (props)  {
     useEffect(ev=>{
         logdata("Visiting_profile","init",`Visiting_profile initated`)
@@ -33,6 +35,8 @@ export default function  Visiting_profile (props)  {
     const User_list_ = useSelector(User_list);
     const data = useSelector(selectCompany_list);
     const UserDetail = useSelector(BasicDetailsU);
+    const [re,setRe]= useState(false)
+    const [redirect,setRedirect]= useState(false)
 
     if(!fet)
     {
@@ -52,6 +56,13 @@ export default function  Visiting_profile (props)  {
             logo:data[0].Company_logo
         }
     }
+    function Delete()
+    {
+
+            setRe(true)
+            setRedirect(`/dashboard/company_profile/${pkId}/`)
+            dispatch(DeleteVisitingRecord(vr))
+    }
 
     return (
         <>
@@ -64,7 +75,7 @@ export default function  Visiting_profile (props)  {
                     />
                 </>
             }
-            <UpperHoc  Re={false}   Status={selectStatus} Error={selectError} Success={SuccessSelector}>
+            <UpperHoc  redirect={redirect}  Re={re}  Status={selectStatus} Error={selectError} Success={SuccessSelector}>
                 <div>
                 <div className="m-4 lg:m-10 ">
 
@@ -75,6 +86,17 @@ export default function  Visiting_profile (props)  {
                                 <p className="lg:text-2xl px-2 border-b-4 border-indigo-800">Back</p>
                             </div>
                         </Link>
+                        {UserDetail.Cache_check=== true && UserDetail.groups.includes("Head")&&<>
+                            <div
+                                onClick={ev=>{
+                                    Delete()
+                                }}
+                                className=" flex flex-row bg-red-600 rounded-full px-4 py-2 cursor-pointer">
+                                <p href="#" className="px-2"><i className='bx bx-task-x text-white text-xl md:text-3xl'></i></p>
+                                <p className="text-md md:text-2xl text-white md:px-2 font-bold">Delete</p>
+                            </div>
+                        </> }
+
                         {UserDetail.Cache_check=== true && UserDetail.groups.includes("Faculty")&&<>
                         <div className="hidden md:flex flex-row  bg-indigo-600 rounded-full px-4 py-2 cursor-pointer"
                              onClick={ev=>{
@@ -127,7 +149,7 @@ export default function  Visiting_profile (props)  {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="bg-white rounded w-full md:w-2/3  flex flex-col md:-mt-20  p-3 ">
+                                <div className="bg-white rounded w-full md:w-2/3  flex flex-col md:-mt-6  p-3 ">
                                     <div className="flex justify-items-start mb-2">
                                         <div className="px-4">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -206,7 +228,7 @@ export default function  Visiting_profile (props)  {
 
                         <div className="flex flex-col ">
                             {User_list_.length === 0?<>
-                                <div className="flex ">
+                                <div className="flex mt-6">
                                     <img src={Empat} alt=""/>
                                 </div>
                             </>:<>

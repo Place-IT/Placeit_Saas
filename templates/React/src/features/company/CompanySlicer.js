@@ -7,6 +7,8 @@ import {Compnay_visitng_record} from "./Visitng_record";
 import {Create_Company_visitng} from "./create_visitng_record";
 import {GetUsers} from "./get_placed_user";
 import {Compnay_visitngStats_record} from "./stats_data";
+import {DeleteVisitingRecord} from "./DeleteVisitingRecord";
+import {DeleteCompany} from "./DeleteCompany";
 
 const initialState = {
     error_msg:"",
@@ -87,6 +89,25 @@ export const Company = createSlice({
 
                 }
             })
+            .addCase(DeleteCompany.pending, (state) => {
+                state.status = 'loading';
+                state.error=false
+                state.Success=false
+                state.cvr_fetch=false
+            })
+            .addCase(DeleteCompany.fulfilled, (state, action) => {
+                if(action.payload.type === true) {
+                    state.error = false
+                    state.status = "idle"
+                    state.Success = true
+                    state.SuccessMsg = action.payload.response["Completed"]
+                } else {
+                    state.status = "idle"
+                    state.error = true
+                    state.error_msg = action.payload.response["error"]
+
+                }
+            })
             .addCase(Compnay_visitng_record.pending, (state) => {
                 state.status = 'loading';
                 state.error=false
@@ -157,6 +178,25 @@ export const Company = createSlice({
                     state.status = "idle"
                     state.error = true
                     state.error_msg = action.payload.response["error"]
+                }
+            })
+            .addCase(DeleteVisitingRecord.pending, (state) => {
+                state.status = 'loading';
+                state.error=false
+                state.Success=false
+                state.cvr_fetch=false
+            })
+            .addCase(DeleteVisitingRecord.fulfilled, (state, action) => {
+                if(action.payload.type === true) {
+                    state.error = false
+                    state.status = "idle"
+                    state.Success = true
+                    state.SuccessMsg = action.payload.response["Completed"]
+                } else {
+                    state.status = "idle"
+                    state.error = true
+                    state.error_msg = action.payload.response["error"]
+
                 }
             })
     }

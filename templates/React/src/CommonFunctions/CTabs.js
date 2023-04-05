@@ -4,6 +4,8 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import {DataGrid, GridToolbarContainer, GridToolbarExport} from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
+import PostCreate from "../components/Dashboard/Post/Post_create";
+import ErrorBoundary from "./Error_controlReact/ErrorBoundary";
 
 function HHoc(valuse,Selectedrows,callBack)
 {
@@ -63,12 +65,20 @@ export default function ScrollableTabsButtonForce(props) {
             >
                 <Tab label="Valid-Responses" value={0} />
                 <Tab label="Placed-Student" value={1}/>
-                <Tab label="Un-Eligible Student" val0e={2} />
+                <Tab label="Un-Eligible Student" value={2} />
+                <Tab label="Post-Detail" value={3} />
             </Tabs>
         {value === 0 && <><Data_grid setSelectedrows={setSelectedrows} Selectedrows={Selectedrows} callBack={props.place_student} question={props.question} value={value} Response={props.Response_1} /></>}
         {value === 1 && <><Data_grid setSelectedrows={setSelectedrows} Selectedrows={Selectedrows} callBack={props.unPlaceStudent} question={props.question} value={value} Response={props.Response_2} /></>}
         {value === 2 && <><Data_grid setSelectedrows={setSelectedrows} question={props.question} value={value} Response={props.Response_3} /></>}
-        {value === 3 && <><Data_grid setSelectedrows={setSelectedrows} question={props.question} value={value} Response={props.Response_3} /></>}
+            {value === 3 && <>  <div
+            style={{
+                overflow:"scroll",
+                height:"80vh"
+            }}
+            >
+                <PostCreate create={false} data={props.data} />
+            </div></>}
 
         </Box>
     );

@@ -30,7 +30,7 @@ class FormFilter(filters.FilterSet):
 
 
 class Form_viewset(CustomViewset, Gurdian_model_viewset):
-    queryset = Form.objects.all().order_by("-Creation_Date")
+    queryset = Form.objects.all().order_by("Creation_Date")
     serializer_class = Form_Serailizer
 
     permission_classes = [ModelNamePermission("form", "form_module", custom_check_view=Get_Allow_list_permission_GET), ]
@@ -42,20 +42,20 @@ class Form_viewset(CustomViewset, Gurdian_model_viewset):
 
     def filter_returner(self, queryset, request):
        # for post
-       print(request.query_params.get("id"))
+       # print(request.query_params.get("id"))
        if request.query_params.get("id") != "":
            return queryset
 
        # for timeline
        if request.user.groups.filter(name="Faculty").exists():
-           print("Faculty")
+           # print("Faculty")
            return queryset.annotate(
                no_of_user_enroled=Count("responsefromuser"),
            ) \
                .filter(Originator=request.user.id) \
                .order_by("-expire_date_time", "-Creation_Date","pk")
        elif request.user.groups.filter(name="Student").exists():
-           print("Student")
+           # print("Student")
            return queryset.annotate(
             no_of_user_enroled=Count("responsefromuser"),
             User_submitted=Exists(ResponseFromUser.objects.filter(user__id=request.user.id, Form_id=OuterRef('pk')))

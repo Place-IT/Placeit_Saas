@@ -1,15 +1,5 @@
  function manageError(response) {
-    if (response.status === 500) {
-        window.location.href = "/error/500/"
-    } else if (response.status === 400) {
-        window.location.href = "/error/400/"
-    } else if (response.status === 403) {
-        window.location.href = "/error/403/"
-    } else if (response.status === 404) {
-        window.location.href = "/error/404/"
-    } else {
-        return response
-    }
+
 }
 
 export default function manageErrorHoc(ev,function_to_run_on_error)
@@ -20,3 +10,21 @@ export default function manageErrorHoc(ev,function_to_run_on_error)
     }
     return ev
 }
+
+function set_response(data,ret)
+{
+    ret["response"]=data
+}
+ export function Delete_check(response,ret) {
+     if (response.ok) {
+         set_response({Completed:"Succesfully deleted"},ret)
+         return true
+     } else if (response.status === 204) {
+         console.log("successss")
+         set_response({Completed:"Succesfully deleted"},ret)
+         return true
+     } else {
+         set_response({error:"some error has occured"},ret)
+         return false
+     }
+ }

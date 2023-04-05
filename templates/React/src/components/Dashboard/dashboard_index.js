@@ -26,9 +26,13 @@ export default function  Dashboard_index (props)  {
         ]
     }
 
+
     return (
         <>
-            {(window.location.href.search("company_profile") === -1 && window.location.href.search("post_detail") === -1 && window.location.href.search("companyVisitStats") === -1 && window.location.href.search("post_Create") === -1 )  ?
+            {["post_detail",
+                "company_profile",
+                "post_Create",
+                "companyVisitStats","company_create","company_visiting_create"].every(ev=>window.location.href.search(ev) === -1) === true  ?
             <div className="justify-center items-center  mt-2 ml-3 ">
                 <div className="grid grid-rows-4 grid-cols-4 gap-6 gap-y-4 h-screen">
                     <div className="hidden lg:block row-span-3 h-screen">

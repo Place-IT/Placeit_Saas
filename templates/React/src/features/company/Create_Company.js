@@ -10,15 +10,18 @@ export const Create_Company = createAsyncThunk(
     {
         logdata("Create_Company","init",`Data body_sent:"${body_sent}"`)
         let form_data = new FormData();
-        for ( var key in body_sent ) {
-            form_data.append(key, body_sent[key]);
+        if( body_sent.image !== undefined){
+            form_data.append("Company_logo", body_sent.image,body_sent.name);
         }
-        console.log(form_data)
+        form_data.append("Company_name", body_sent.data.Company_name);
+        form_data.append("Employers_Website", body_sent.data.Employers_Website);
+
         const response= await  FetchCallSFK(
-            "/api/Company/Company/",  "Post",
-            form_data,false,commonFailurerfunction,
-            ["id"], ["Company_name","Company_logo","Employers_Website"],'multipart/form-data;boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
+            "/api/Company/Company/", "Post",
+            {form_data:form_data,image:true},false,commonFailurerfunction,
+            ["id"], ["Company_name","Company_logo","Employers_Website"],
         )
+
         logdata("Create_Company","complete",`Data response:"${response}"`)
         return response
     }

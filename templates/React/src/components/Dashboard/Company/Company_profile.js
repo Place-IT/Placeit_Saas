@@ -12,16 +12,11 @@ import {
 import {Company_Profile} from "../../../features/company/CompanyProfile";
 import errorRedirect from "../../../CommonFunctions/Error_controlReact/error_redirect";
 import {Compnay_visitng_record} from "../../../features/company/Visitng_record";
-import DialogManual from "../../Basetemplate/Dialog_manula";
-import {Fab, InputAdornment, TextareaAutosize, TextField} from "@mui/material";
-import basicSuccess from "../../../CommonFunctions/UniversalForm/BasicSuccess";
 import {Link, useRouteMatch} from "react-router-dom";
-import {store} from "../../../app/store";
-import {DialogSlice} from "../../../features/dialogSlicer";
-import AddIcon from "@mui/icons-material/Add";
-import {Create_Company_visitng} from "../../../features/company/create_visitng_record";
 import {logdata} from "../../../CommonFunctions/Logger/Logevents";
 import Empat from "../../../assets/images/undraw_Active_support_re_b7sj.png";
+import {BasicDetailsU} from "../../../features/UserAuth/AuthSlicer";
+import {DeleteCompany} from "../../../features/company/DeleteCompany";
 
 
 export default function  Company_profile (props)  {
@@ -29,26 +24,14 @@ export default function  Company_profile (props)  {
         logdata("Company_profile","init",`Company initated`)
     },[])
     let { pkId } = useParams();
-    const [re,setRe]=useState({
-        re:false,
-        to:"/dashboard/company_profile/"
-    })
+    const [re,setRe]=useState(true)
     const ss2=useSelector(SuccessSelector)
-
     let match = useRouteMatch();
     const dispatch = useDispatch();
     const [search,setSearch]=useState({first:false,seacond:false,});
-    const [state,setState]=useState({
-        visiting_date:"",
-        HRName:"",
-        Position:"",
-        MinLpa_offered:"",
-        MaxLpa_offered:"",
-        Description:"",
-        Company_image:"",
-        company:pkId
-    });
+
     const data = useSelector(selectCompany_list);
+    const UserDetail = useSelector(BasicDetailsU);
     const success = useSelector(SuccessSelector);
     const visitng_list = useSelector(selectCompany_visitng_list);
 
@@ -69,31 +52,19 @@ export default function  Company_profile (props)  {
         else
         {
             setSearch({...search,seacond: true})
-            setState({...state,company:pkId})
             dispatch(Compnay_visitng_record({id:pkId}))
         }
     }
-    function dispatch_function(ev)
-    {
-        logdata("dispatch_function","init",`dispatch_function with following state ${state}`)
-        setRe({re:true})
-        store.dispatch(DialogSlice.actions.dialogState())
-        dispatch(Create_Company_visitng(state))
-        logdata("dispatch_function","completed",`dispatch_function completed`)
-    }
 
-    function open(ev)
+    function Delete()
     {
-        logdata("open","init",`open completed`)
-        store.dispatch(DialogSlice.actions.dialogState())
-        logdata("open","complete",`open completed`)
+       dispatch(DeleteCompany(pkId))
     }
 
     return (
         <>
-            <UpperHoc  Re={re.re} redirect={ss2.to}  hard={re.re}   Status={selectStatus} Error={selectError} Success={SuccessSelector}>
+            <UpperHoc  Re={re} redirect={"/dashboard/company_search/"}  hard={re}   Status={selectStatus} Error={selectError} Success={SuccessSelector}>
                 <div>
-
                 <div className="m-4 lg:m-10 ">
                     <div className="flex m-4  text-md justify-between">
                         <Link to={`/dashboard/company_search/`}>
@@ -102,11 +73,18 @@ export default function  Company_profile (props)  {
                                 <p className="lg:text-2xl px-2 border-b-4 border-indigo-800">Back</p>
                             </div>
                         </Link>
+                        {UserDetail.Cache_check=== true && UserDetail.groups.includes("Head")&&<>
+                            <div
+                                onClick={ev=>{
+                                    Delete()
+                                }}
+                                className="flex flex-row bg-red-600 rounded-full px-2 text-white text-sm md:text-xl md:px-4 cursor-pointer font-bold py-2 text-center">
+                                <p href="#" className="px-2"><i className='bx bx-task-x text-white text-xl md:text-3xl'></i></p>
+                                <p className="text-md md:text-2xl text-white md:px-2 font-bold">Delete</p>
+                            </div>
 
-                        {/*<div className="hidden md:flex flex-row bg-indigo-600 rounded-full w-fit cursor-pointer" onClick={open}>*/}
-                        {/*    <a href="#" className="py-4 px-4"><i className="bx bx-plus-circle text-white text-2xl"></i></a>*/}
-                        {/*    <p className="py-4 pr-6 text-xl text-white font-bold">New visit</p>*/}
-                        {/*</div>*/}
+                        </> }
+
                     </div>
 
                     <div
@@ -138,6 +116,17 @@ export default function  Company_profile (props)  {
 
                             </>
                         })}
+                        {UserDetail.Cache_check=== true && UserDetail.groups.includes("Head")&&<>
+                            <div className="flex flex-row space-x-4  justify-end">
+                                <Link to={`/dashboard/company_visiting_create/${pkId}/`}>
+                                    <div
+                                        className="flex flex-row bg-indigo-600 rounded-full px-2 text-white text-sm md:text-xl md:px-4 cursor-pointer font-bold py-2 text-center">
+                                        <p  className="md:px-1"><i className="bx bx-plus-circle "></i></p>
+                                        <p className="px-1">Create</p>
+                                    </div>
+                                </Link>
+                            </div>
+                        </>}
 
                         <div className="flex flex-col md:flex-row">
                             <div className="w-full md:w-1/3 px-1 md:py-2">
@@ -163,86 +152,11 @@ export default function  Company_profile (props)  {
                                     </>
                                 })}
                             </>}
-                            
-
-
                         </div>
                     </div>
-                </div>
-
-                {/*<div className="md:hidden" >*/}
-                {/*    <Fab color="primary" aria-label="add" style={{*/}
-                {/*        margin: 0,*/}
-                {/*        top: 'auto',*/}
-                {/*        right: 10,*/}
-                {/*        bottom: 70,*/}
-                {/*        left: 'auto',*/}
-                {/*        position: 'fixed',*/}
-                {/*    }} onClick={open}*/}
-                {/*    >*/}
-                {/*        <AddIcon />*/}
-                {/*    </Fab>*/}
-                {/*</div>*/}
-
-
-
-                <DialogManual  tittle={"Visiting Record"} Content={"create a new visitng record"}
-                               Success={SuccessSelector}
-                               dispatch_function={dispatch_function} Error={selectError}>
-
-                    <div className="flex items-start pt-1">
-                        <div className="datepicker relative form-floating mb-3 xl:w-96">
-                            <label htmlFor="floatingInput" className="text-gray-700">Visiting Date</label>
-                            <input type="date"
-                                   className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   placeholder="Visiting Date"
-                                   min={new Date().toISOString().split('T')[0]}
-                                   value={state.visiting_date}
-                                   onChange={ev=>basicSuccess(ev,{state,setState,name:"visiting_date"})}
-                            />
-
-                        </div>
+                    </div>
                     </div>
 
-                    <TextField  label="HRName" type="search" fullWidth variant="standard"  margin="dense"
-                                value={state.HRName}
-                                onChange={ev=>basicSuccess(ev,{state,setState,name:"HRName"})} />
-                    <TextField id="standard-basic" label="Position" type="search" fullWidth variant="standard"  margin="dense"
-                               value={state.Position}
-                               onChange={ev=>basicSuccess(ev,{state,setState,name:"Position"})}
-                    />
-                    <TextField  label="MinLpa_offered" type="search" fullWidth variant="standard"  margin="dense"
-                                value={state.MinLpa_offered}
-                                aria-describedby="outlined-weight-helper-text"
-                                inputProps={{
-                                    'aria-label': 'weight',
-                                }}
-                                endAdornment={<InputAdornment position="end">lpa</InputAdornment>}
-                                onChange={ev=>basicSuccess(ev,{state,setState,name:"MinLpa_offered"})}
-                    />
-
-                    <TextField id="standard-basic" label="MaxLpa_offered" type="search" fullWidth variant="standard"  margin="dense"
-                               value={state.MaxLpa_offered}
-                               endAdornment={<InputAdornment position="end">lpa</InputAdornment>}
-                               aria-describedby="outlined-weight-helper-text"
-                               inputProps={{
-                                   'aria-label': 'weight',
-                               }}
-                               onChange={ev=>basicSuccess(ev,{state,setState,name:"MaxLpa_offered"})}
-                    />
-
-                    <TextField
-                        value={state.Description}
-                        onChange={ev=>basicSuccess(ev,{state,setState,name:"Description"})}
-                        multiline
-                        rows={4}
-                        id="standard-basic" label="Description" type="search" fullWidth variant="standard"  margin="dense"
-                    />
-
-
-
-                </DialogManual>
-                    </div>
 
             </UpperHoc>
 

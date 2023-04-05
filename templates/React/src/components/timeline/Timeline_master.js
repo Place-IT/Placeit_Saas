@@ -29,6 +29,7 @@ class Timeline_master_component extends React.Component {
         this.update_array=this.update_array.bind(this)
     }
     componentDidMount() {
+        console.log("helooo")
         logdata("Timeline_master_component","info",`Timeline_master_component initated`)
         if(this.props.match.params.pkId !== undefined && typeof(this.props.match.params.pkId) !== "number")
         {
