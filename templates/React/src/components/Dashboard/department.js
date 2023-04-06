@@ -1,7 +1,7 @@
 import React, {Component, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {CanvasJSChart} from "canvasjs-react-charts";
-import { DataGrid } from '@mui/x-data-grid';
+import {DataGrid, GridToolbarContainer, GridToolbarExport} from '@mui/x-data-grid';
 import {BasicDetailsU} from "../../features/UserAuth/AuthSlicer";
 import {FetchStats} from "../../features/Department/fetch_stats";
 import {selectError, selectResult, selectStatus, SuccessSelector} from "../../features/Department/StudentSLicer";
@@ -45,7 +45,12 @@ function Prepare_data_according_to_department(data,setRow,setDatapoints)
     setRow(rows)
     setDatapoints(dataPoints)
 }
-
+function MyExportButton_dada() {
+    return (
+        <GridToolbarContainer>
+            <GridToolbarExport />
+        </GridToolbarContainer>
+    );}
 export default function  Department (props)  {
     useEffect(ev=>{
         logdata("Department","init",`Department initated`)
@@ -150,6 +155,9 @@ export default function  Department (props)  {
                             rows={rows}
                             columns={columns}
                             pageSize={7}
+                            components={{
+                                Toolbar: MyExportButton_dada,
+                            }}
                         />
                     <div className={"h-32 w-full"}></div>
                 </div>

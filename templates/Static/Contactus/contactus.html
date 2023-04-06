@@ -1,0 +1,159 @@
+{% extends "Base.html" %}
+{% load static %}
+
+
+{% block nav %}
+    {% include 'nav_1.html' %}
+{% endblock %}
+{% block title %}Placeit {% endblock %}
+
+{% block Body %}
+    <div class="max-w-6xl  border-2 border-black-400 mx-auto m-4">
+        <div class="m-4">
+            <div class="pt-5 mx-auto  max-w-fit border-b-4 text-3xl border-indigo-700 font-bold">
+                Contact us
+            </div>
+            <div class="pt-4 mx-auto max-w-fit text-gray-500 text-xl ">
+                lets get this Conversation started. Tell us a bit about yourself, and we'll get in touch as soon as we
+                can.
+            </div>
+        </div>
+
+        <div class="m-4">
+            <form>
+                <div class="mb-6 ">
+                    <div class="flex">
+                        <label for="email" class="block mb-2 text-md font-medium text-gray-900 ">Full Name</label>
+                        <p class=" text-red-500 ">*</p>
+                    </div>
+                    <input type=" " id="full_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder=" " required fdprocessedid="tgedac">
+                </div>
+
+                <div class="mb-6 ">
+                    <div class="flex">
+                        <label for="email" class="block mb-2 text-md font-medium text-gray-900 ">Email</label>
+                        <p class=" text-red-500 ">*</p>
+                    </div>
+                    <input type=" " id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder=" " required fdprocessedid="c6mgz">
+                </div>
+
+                <div class="mb-6 ">
+                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 ">Your
+                        message</label>
+                    <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Write your message here..."></textarea>
+                </div>
+
+                <div class="mb-6 ">
+                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 ">Upload your
+                        screenshot</label>
+
+                    <div class="flex items-center justify-center w-full">
+                        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                    </path>
+                                </svg>
+                                <p class="mb-2 text-sm text-gray-500 "><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                <p class="text-xs text-gray-500 ">SVG, PNG, JPG or GIF (MAX.
+                                    800x400px)</p>
+                            </div>
+                            <input
+                                    id="dropzone-file"
+                                    type="file"
+                                    class="hidden"
+                                    accept="image/*",
+                            >
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="text-white submit bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " fdprocessedid="wbesf5">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="backdrop hidden"  >
+
+        <div class="loader">
+            <img src="{% static "/img/loader.gif"%}" alt="">
+        </div>
+
+    </div>
+<style>
+.backdrop{
+    width:100vw;
+    height:100vh;
+    position: fixed;
+    top:0;
+    background-color: rgba(39, 41, 39,0.8);
+}
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+img{
+    height: 12rem;
+}
+.hidden{
+    display: none;
+}
+
+</style>
+
+    <script>
+        const modal = document.querySelector('.backdrop');
+        const submit = document.querySelector('.submit');
+        const form = document.querySelector('form');
+        form.addEventListener("submit",ev=>{ev.preventDefault()})
+
+        submit.addEventListener("click",fetch_call)
+        function fetch_call() {
+            modal.classList.toggle('hidden');
+
+            var formdata = new FormData();
+            if(document.querySelector('#dropzone-file').files[0] !== undefined)
+            {
+                formdata.append('images', document.querySelector('#dropzone-file').files[0]);
+            }
+            formdata.append('Full_name', document.querySelector('#full_name').value);
+            formdata.append('Email', document.querySelector('#email').value);
+            formdata.append('message', document.querySelector('#message').value);
+
+
+            var csrf = "{{ csrf_token }}"
+            formdata.append('csrfmiddlewaretoken', csrf);
+
+            fetch("/api/auth/Contactus/", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': csrf,
+                },
+                body: formdata
+            })
+                .then(response => {
+                    modal.classList.toggle('hidden');
+                    if (response.status === 201) {
+                        console.log("done")
+                        return true
+                    } else {
+                        console.log("not-done")
+                        return false
+                    }
+                })
+
+            return false;
+
+        }
+
+
+    </script>
+{% endblock %}
+
+{#{% block fotter %}#}
+{#    {% include 'fotter.html' %}#}
+{#{% endblock %}#}

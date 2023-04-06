@@ -54,12 +54,12 @@ export default function  TimelineCard(props)
         </>}
         <div className="flex justify-center my-4">
             <div
-                className=" shadow-lg bg-white max-w-lg mx-4  border-slate-700 p-6 rounded-2xl "
+                className=" shadow-lg bg-white md:w-3/5 w-96 mx-4  border-slate-700 p-6 rounded-2xl "
             style={{"box-shadow":"rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px"}}
             >
              <div className="w-full flex  items-start justify-start divide-y flex-col ">
                 <div className="flex items-center">
-                    {props.data.Originator_i_card_image === null?<>
+                    {props.data.Originator_i_card_image === null || props.data.Originator_i_card_image === ""?<>
                         <img className="w-10 h-10 rounded-full mr-4" src={`/static/img/default-avatar.png`}
                              alt="originator_avtar" /></>:<>
                         <img className="w-10 h-10 rounded-full mr-4" src={`/media/${props.data.Originator_i_card_image}`}
@@ -85,7 +85,7 @@ export default function  TimelineCard(props)
                     </a>
                 </div>
                 <div className="p-4">
-                    <h5  className="text-black-900 text-xl font-bold mx-4 m-3">{props.data.Visitng_record.company.Company_name}</h5>
+                    <h5  className="text-black-900 text-xl font-bold mx-4 m-3">{props.data.Company_name}</h5>
                     <div className="mx-4 flex justify-items-start mb-2">
                         <div className="px-4">
                             <svg

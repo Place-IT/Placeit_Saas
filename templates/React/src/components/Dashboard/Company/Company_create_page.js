@@ -128,10 +128,17 @@ export default function  Company_Create(props)  {
                             {selectedFile &&
                             <>
 
-                                <div className="w-full md:w-1/3 bg-white rounded p-4 ">
+                                <div className="w-full md:w-1/3 bg-white rounded p-4 " style={{
+                                    width: "100%",
+                                    height: "40vh",
+                                    display: "flex",
+                                    "justify-content": "center",
+
+                                }}>
                                     <img
                                         src={preview}
                                         alt=" "
+                                        style={{height:"100%"}}
                                         className="rounded-xl"/>
                                 </div>
                             </>}

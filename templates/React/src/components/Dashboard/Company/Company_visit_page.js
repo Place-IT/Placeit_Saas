@@ -237,23 +237,28 @@ export default function  Company_Visit_page(props)  {
                             </div>
                             {selectedFile &&
                             <>
-                                <div className=" w-full md:w-1/3 bg-white rounded p-4 grid place-items-center ">
+                            <div className="w-full md:w-1/3 bg-white rounded p-4 " style={{
+                                width: "100%",
+                                height: "60vh",
+                                display: "flex",
+                                "justify-content": "center",
 
+                            }}>
                                     <embed X_FRAME_OPTIONS='SAMEORIGIN'
                                            src={preview}
-                                           className="flex w-full h-72 h-screen" />
+                                           style={{height:"100%",width:"70vw"}}
+                                           className="flex w-full  h-screen" />
 
                                 </div>
                             </>}
+
                             <div className="flex justify-center items-center flex-col ">
-                                <div className="w-full mb-4 md:w-1/2">
+                                <div className="w-64 bg-white text-center p-4">
                                     <div  onClick={ev=>{
-                                        // console.log(myRef)
                                         myRef.current.click();
                                     }}
-                                          className="text-md text-blue-600 font-semibold md:text-2xl">Upload
-                                        PDF</div>
-
+                                          className="text-sm p-2  cursor-pointer hover:bg-indigo-700 hover:text-white border-2 rounded-full border-indigo-600 text-blue-600 font-bold md:text-2xl">Upload
+                                        Photo</div>
                                     <input
                                         ref={myRef}
                                         type='file'
@@ -261,9 +266,8 @@ export default function  Company_Visit_page(props)  {
                                         style={{display:"none"}}
                                         accept="application/pdf"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full "
-
+                                        placeholder="Enter the Post Expiration date Time"
                                     />
-
                                 </div>
                             </div>
 

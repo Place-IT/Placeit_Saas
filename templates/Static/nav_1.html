@@ -46,6 +46,17 @@
                         class="py-4 px-2 text-gray-500 font-semibold hover:text-indigo-500 transition duration-300"
                 >Settings</a>
 
+                    <a
+                            aaaaa="{% url  'contactus' as contact%}"
+                            href="{% url 'contactus' %}"
+                            {% if request.path == contact  %}
+                            class="py-4 px-2 text-indigo-500 border-b-4 border-indigo-500 font-semibold"
+                            {% else%}
+                            class="py-4 px-2 text-gray-500 font-semibold hover:text-indigo-500 transition duration-300"
+                            {% endif%}
+                    >Contact Us</a
+                    >
+
             </div>
 
             <a href="{% url 'profile' %}">
@@ -149,7 +160,13 @@
                 >Settings</a
                 >
             </li>
-
+            <li>
+                <a
+                        href="{% url 'contactus' %}"
+                        class="block font-semibold hover:bg-indigo-500 hover:text-white text-sm px-14 py-4 transition duration-300"
+                >Contact Us</a
+                >
+            </li>
             {% else %}
             <li>
                 <a

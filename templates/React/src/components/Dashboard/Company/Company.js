@@ -123,24 +123,30 @@ export default function  Company(props)  {
                             </button>
                         </div>
                     </form>
+                </div>
+                <div className="flex mx-4 space-x-4 justify-end" style={{"z-index": "-1"}}>
                     {UserDetail.Cache_check=== true && UserDetail.groups.includes("Head")&&<>
                     <Link to={`/dashboard/company_create/`}>
-                        <div className="hidden md:flex flex-row bg-indigo-600 rounded-full px-4 py-2 cursor-pointer">
-                            <a href="#" className="px-2"><i className='bx bx-plus-circle text-white  text-3xl'></i></a>
-                            <p className="text-sm text-white px-2 font-bold">Create Company</p>
+                        <div
+                            className="flex flex-row bg-indigo-600 rounded-lg text-white text-sm md:text-xl cursor-pointer">
+                            <a href="#" className="pl-2 pt-2"><i className="bx bx-plus-circle"></i></a>
+                            <p className="p-2 font-bold ">Create Company</p>
                         </div>
                     </Link>
                     </>}
                     <Link to={`/dashboard/companyVisitStats/`}>
-                        <div className="hidden md:flex flex-row bg-indigo-600 rounded-full px-4 py-2 cursor-pointer">
-                            <a href="#" className="px-2"><i className='bx bx-table text-white text-3xl'></i></a>
-                            <p className="text-sm text-white px-2 font-bold">Company Stats</p>
+                        <div
+                            className="flex flex-row bg-indigo-600 rounded-lg text-white text-sm md:text-xl cursor-pointer">
+                            <a href="#" className="pl-2 pt-2"><i className="bx bx-note"></i></a>
+                            <p className="p-2 font-bold ">Compnay Stats</p>
                         </div>
                     </Link>
+
                 </div>
+
             </div>
 
-            <div className="row-span-3 lg:col-span-3 col-span-5 rounded-2xl -mt-4 "
+            <div className="row-span-3 lg:col-span-3 col-span-5 rounded-2xl mt-4 "
             >
                 <div className="flex flex-row flex-wrap">
                     {data.length > 0?<>
@@ -185,25 +191,6 @@ export default function  Company(props)  {
                 </div>
             </div>
         </UpperHoc>
-
-
-            <div className="md:hidden" >
-                <Link to={`/dashboard/companyVisitStats/`}>
-                    <Fab color="primary" aria-label="add" style={{
-                        margin: 0,
-                        top: 'auto',
-                        right: 10,
-                        bottom: 70,
-                        left: 'auto',
-                        position: 'fixed',
-                    }}
-                    >
-                        <TableChartIcon />
-                    </Fab>
-                </Link>
-            </div>
-
-
         </>
     );
 

@@ -2,10 +2,11 @@ import React, {Component, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import UpperHoc from "../../../CommonFunctions/UpperCLouser/CustomHoc";
 import {CanvasJSChart} from 'canvasjs-react-charts'
-import {DataGrid} from "@mui/x-data-grid";
+import {DataGrid, GridToolbarContainer, GridToolbarExport} from "@mui/x-data-grid";
 import {logdata} from "../../../CommonFunctions/Logger/Logevents";
 import {selectError, selectResult, selectStatus, SuccessSelector} from "../../../features/Department/StudentSLicer";
 import {FetchStats} from "../../../features/Department/fetch_stats";
+import Button from "@mui/material/Button";
 
 
 const columns = [
@@ -64,7 +65,12 @@ function prepare_data(data,setRows,setOptions)
     logdata("prepare_data ","completed",`called data data:${rows} `)
 }
 
-
+function MyExportButton_dada() {
+    return (
+        <GridToolbarContainer>
+            <GridToolbarExport />
+        </GridToolbarContainer>
+    );}
 export default function  College (props)  {
 
     const dispatch = useDispatch();
@@ -146,6 +152,10 @@ export default function  College (props)  {
                         rows={rows}
                         columns={columns}
                         pageSize={5}
+                        components={{
+                            Toolbar: MyExportButton_dada,
+                        }}
+
                     />
                     <div className={"h-32 w-full"}></div>
 

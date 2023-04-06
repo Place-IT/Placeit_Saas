@@ -36,5 +36,7 @@ class UserModuleConfig(AppConfig):
             Head, created_Head=Group.objects.get_or_create(name='Head')
             Head.permissions.set(Permission.objects.all())
 
+            Developer, created_Developer=Group.objects.get_or_create(name='Developer')
+
         except Exception as e:
             print(e)

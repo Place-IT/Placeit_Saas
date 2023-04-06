@@ -133,8 +133,8 @@ export default function  Visiting_profile (props)  {
                         </>}
                         {Success.cvr_fetch=== true &&<>
                             <div className="flex flex-col md:flex-row">
-                                <div className="w-full md:w-1/3 px-2 py-2">
-                                    <div className="p-4 flex flex-row">
+                                <div className="w-full mt-8 md:w-1/3 px-2 py-2">
+                                    <div className="p-2 flex border-2 border-indigo-800 rounded-3xl bg-white flex-row">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                              style={{fill: "rgba(0, 0, 0, 1)"}}>
                                             <path
@@ -149,7 +149,7 @@ export default function  Visiting_profile (props)  {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="bg-white rounded w-full md:w-2/3  flex flex-col md:-mt-6  p-3 ">
+                                <div className="bg-white rounded w-full md:w-2/3  flex flex-col md:mt-8  p-3 ">
                                     <div className="flex justify-items-start mb-2">
                                         <div className="px-4">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -167,9 +167,21 @@ export default function  Visiting_profile (props)  {
                                             <h4>{cvr[0].visiting_date}</h4>
                                         </div>
                                     </div>
-                                    <div className="px-4">
-                                        <h4>{cvr[0].Position}</h4>
+                                    <div className="flex justify-items-start mb-2">
+                                        <div className="px-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" style={{fill: "rgba(0, 0, 0, 1)"}}>
+                                                <path
+                                                    d="M20 2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h3v3.767L13.277 18H20c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm0 14h-7.277L9 18.233V16H4V4h16v12z"></path>
+                                                <path
+                                                    d="m17.207 7.207-1.414-1.414L11 10.586 8.707 8.293 7.293 9.707 11 13.414z"></path>
+                                            </svg>
+                                        </div>
+                                        <div className="px-4">
+                                            <h4>{cvr[0].Position}</h4>
+                                        </div>
                                     </div>
+
                                     <div className=" flex justify-items-start mb-2">
                                         <div className="px-4">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

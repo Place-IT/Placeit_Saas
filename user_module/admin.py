@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # from guardian.admin import GuardedModelAdmin
-from user_module.models import User
+from user_module.models import User,Contactus
 
 
 class Usermodeladmin(admin.ModelAdmin):
@@ -14,8 +14,15 @@ class Usermodeladmin(admin.ModelAdmin):
 
 admin.site.register(User, Usermodeladmin)
 
-# class AuthorAdmin(GuardedModelAdmin):
-#     class Meta:
-#         model = User
-#
-# admin.site.register(User, AuthorAdmin)
+
+
+class ConactUsAdmin(admin.ModelAdmin):
+    list_display = ['Full_name', 'Email', "id"]
+    search_fields = ['Full_name', "Email"]
+    class Meta:
+        model = Contactus
+
+
+admin.site.register(Contactus, ConactUsAdmin)
+
+

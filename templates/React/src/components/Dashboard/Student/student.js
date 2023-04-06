@@ -19,7 +19,7 @@ export default function  Student(props)  {
     const [call,setCall]=useState(false)
     const [open,setOpen]=useState(false)
     const [departments,setDepartments]=useState(window.department_list[0])
-    const [year,setYear]=useState(years[0])
+    const [year,setYear]=useState(new Date().getFullYear())
 
     const [first ,setFirst]=useState(false)
     const UserDetail = useSelector(BasicDetailsU);
@@ -217,12 +217,11 @@ export default function  Student(props)  {
                                 <TableRow>
                                     {columnDefs.map(ev=>{
                                         return<>
-                                            <TableCell align="center" >
+                                            <TableCell align="center"  >
                                                 {ev.display}
                                             </TableCell>
                                         </>
                                     })}
-
                                     {sColumn.map(ev=>{
                                         return<>
                                             <TableCell align="center" >
@@ -243,35 +242,26 @@ export default function  Student(props)  {
                                     }
                                     let b=<>
                                     <TableRow>
-                                            {columnDefs.map((ev,index)=>{
-                                                if(index === 0){return <>
-                                                    {item.form_responses.length === 1 ?
-                                                        <TableCell>
-                                                            <a href={`/profile/${item.id}/`}>
-                                                                {item.email}
-                                                            </a>
-                                                        </TableCell>:
-                                                        <TableCell rowSpan={item.form_responses.length + 1}>
-                                                            <a href={`/profile/${item.id}/`}>
-                                                                {item.email}
-                                                            </a>
-                                                        </TableCell>}</>}
-                                                else
-                                                {return <>
-                                                    {item.form_responses.length === 1 ?
-                                                        <TableCell>
-                                                            {item[ev.field]}
-                                                        </TableCell>:
-                                                        <TableCell rowSpan={item.form_responses.length + 1}>
-                                                            {item[ev.field]}
-                                                        </TableCell>}</>}
+                                        {columnDefs.map((ev,index)=>{
+                                            if(index === 0){return <>
+                                                <TableCell rowSpan={item.form_responses.length + 1}>
+                                                    <a href={`/profile/${item.id}/`}>
+                                                        {item.email}
+                                                    </a>
+                                                </TableCell>
+                                            </>}
+                                            else
+                                            {return <>
+                                                <TableCell rowSpan={item.form_responses.length + 1}>
+                                                    {item[ev.field]}
+                                                </TableCell></>}
 
 
-                                            })}
+                                        })}
                                     </TableRow>
                                     {item.form_responses.map(ev=>{
                                         return<>
-                                            <TableRow colSpan={2}>
+                                            <TableRow >
                                                 {sColumn.map(ev2=>{
                                                     a.company.push(ev[ev2.field])
                                                     if(ev2.field ==="offer_letter" && ev[ev2.field] !== null )

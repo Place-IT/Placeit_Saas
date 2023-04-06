@@ -56,7 +56,7 @@ export default function NavBar()  {
             list_of_nav_ele={"/auth/settings/":"Settings"}
         }
         else {
-            list_of_nav_ele={"/dashboard/":"Dashboard","/auth/profile/":"Profile","/auth/settings/":"Settings"}
+            list_of_nav_ele={"/dashboard/":"Dashboard","/auth/profile/":"Profile","/auth/settings/":"Settings","/contactus/":"Contact Us"}
         }
 
     }
@@ -67,7 +67,7 @@ export default function NavBar()  {
             list_of_nav_ele={"/auth/settings/":"Settings"}
         }
         else {
-            list_of_nav_ele={"/timeline/":"Feed","/auth/profile/":"Profile","/auth/settings/":"Settings"}
+            list_of_nav_ele={"/timeline/":"Feed","/auth/profile/":"Profile","/auth/settings/":"Settings","/contactus/":"Contact Us"}
         }
 
 

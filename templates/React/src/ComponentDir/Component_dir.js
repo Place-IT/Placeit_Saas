@@ -10,6 +10,7 @@ import {selectLogin} from "../features/UserAuth/AuthSlicer";
 import Timeline_master_component from "../components/timeline/Timeline_master";
 import ErrorBoundary from "../CommonFunctions/Error_controlReact/ErrorBoundary";
 import Dashboard_dir from "./dashboard_dir";
+import Profile from "../components/auth/profile/Profile";
 
 
 
@@ -28,6 +29,13 @@ export default function  Component_dir(props)
                     <ErrorBoundary component_name={"Timeline_master_component"}>
                         <Protected isLoggedIn={Login_state}>
                             <Dashboard_dir />
+                        </Protected>
+                    </ErrorBoundary>
+                </Route>
+                <Route path="/contactus/">
+                    <ErrorBoundary component_name={"Profile_contatus"}>
+                        <Protected isLoggedIn={Login_state}>
+                            <Profile />
                         </Protected>
                     </ErrorBoundary>
                 </Route>

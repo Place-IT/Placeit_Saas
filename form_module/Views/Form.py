@@ -30,7 +30,7 @@ class FormFilter(filters.FilterSet):
 
 
 class Form_viewset(CustomViewset, Gurdian_model_viewset):
-    queryset = Form.objects.all().order_by("Creation_Date")
+    queryset = Form.objects.all().order_by("-Creation_Date","id")
     serializer_class = Form_Serailizer
 
     permission_classes = [ModelNamePermission("form", "form_module", custom_check_view=Get_Allow_list_permission_GET), ]
@@ -53,7 +53,7 @@ class Form_viewset(CustomViewset, Gurdian_model_viewset):
                no_of_user_enroled=Count("responsefromuser"),
            ) \
                .filter(Originator=request.user.id) \
-               .order_by("-expire_date_time", "-Creation_Date","pk")
+               .order_by("-Creation_Date","-expire_date_time","pk")
        elif request.user.groups.filter(name="Student").exists():
            # print("Student")
            return queryset.annotate(
@@ -61,7 +61,7 @@ class Form_viewset(CustomViewset, Gurdian_model_viewset):
             User_submitted=Exists(ResponseFromUser.objects.filter(user__id=request.user.id, Form_id=OuterRef('pk')))
         ) \
             .filter(Originator__Affliated_Department__id=request.user.Affliated_Department.id) \
-            .order_by("-expire_date_time", "-Creation_Date","pk")
+            .order_by("-Creation_Date","-expire_date_time","pk")
 
        return queryset
 

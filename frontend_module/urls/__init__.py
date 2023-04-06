@@ -22,6 +22,7 @@ def update_context_post(context,request,args,kwargs):
 urlpatterns = [
     path('post/<int:pk>/',FormView.as_view(context_update=update_context_post),name="Post"),
     path('profile/<int:pk>/',ProfileView.as_view(template_name="Profile/profile.html",context_update=update_context),name="Public_Profile"),
+    path('contactus/', login_required(BaseReactView.as_view(template_name="Contactus/contactus.html")),name="contactus"),
     path('timeline/', include(Timelineurlpatterns), name="Timelineurlpatterns"),
     path('dashboard/', include(dashboardurlpatterns), name="dashboardurlpatterns"),
     path('auth/', include(Authurlpatterns), name="Authurlpatterns"),
