@@ -18,7 +18,7 @@ export const ProfileUpdate = createAsyncThunk(
             if(Object.keys(body_sent).includes("delete"))
             {
                 response= await  FetchCallSFK(
-                    `/api/auth/User/${body_sent.id}/`,  "Patch",
+                    `/api/auth/User/${body_sent.id}/`,  "PATCH",
                     {
                         "i_card_image":null
                     },false,commonFailurerfunction,
