@@ -1,7 +1,8 @@
+from django.db.models import Exists
 from rest_framework import serializers
-
+from django.db.models import OuterRef, Subquery
 from Custom_helper_functions import check_eligible
-from form_module.models import Form
+from form_module.models import Form, ResponseFromUser
 from django.utils import timezone
 
 
@@ -10,7 +11,8 @@ class Form_Serailizer(serializers.ModelSerializer):
     Originator_id = serializers.SlugField(source="Originator.id", read_only=True)
     Originator_email = serializers.SlugField(source="Originator.email", read_only=True)
     Originator_i_card_image = serializers.SlugField(source="Originator.i_card_image", read_only=True)
-    User_submitted = serializers.BooleanField(read_only=True)
+    # User_submitted = serializers.BooleanField(read_only=True)
+    User_submitted = serializers.SerializerMethodField(read_only=True)
     Company_image = serializers.SerializerMethodField()
     Company_name = serializers.SlugField(source="Visitng_record.company.Company_name", read_only=True)
     is_user_eligible = serializers.SerializerMethodField()
@@ -51,3 +53,19 @@ class Form_Serailizer(serializers.ModelSerializer):
             return True
         else:
             return False
+    def get_User_submitted(self, obj):
+        request = self.context.get("request")
+        user_has_response = ResponseFromUser.objects.filter(
+            user_id=request.user.id,
+            Form_id=obj.id
+        ).annotate(
+            has_response=Exists(
+                Subquery(
+                    ResponseFromUser.objects.filter(
+                        user_id=request.user.id,
+                        Form_id=obj.id
+                    ).values('id')
+                )
+            )
+        ).values('has_response').first()
+        return user_has_response['has_response'] if user_has_response else False

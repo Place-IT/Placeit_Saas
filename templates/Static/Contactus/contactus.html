@@ -8,7 +8,7 @@
 {% block title %}Placeit {% endblock %}
 
 {% block Body %}
-    <div class="max-w-6xl  border-2 border-black-400 mx-auto m-4">
+    <div class="max-w-6xl  border-2 border-black-400 mx-auto m-4  form_nav">
         <div class="m-4">
             <div class="pt-5 mx-auto  max-w-fit border-b-4 text-3xl border-indigo-700 font-bold">
                 Contact us
@@ -67,6 +67,9 @@
                         </label>
                     </div>
                 </div>
+                <div class="pt-4 mx-auto max-w-fit text-red-500 text-xl hidden error_msg">
+                    some error
+                </div>
                 <button type="submit" class="text-white submit bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " fdprocessedid="wbesf5">Submit</button>
             </form>
 
@@ -106,6 +109,8 @@ img{
     <script>
         const modal = document.querySelector('.backdrop');
         const submit = document.querySelector('.submit');
+        const form_nav = document.querySelector('.form_nav');
+        const error_msg = document.querySelector('.error_msg');
         const form = document.querySelector('form');
         form.addEventListener("submit",ev=>{ev.preventDefault()})
 
@@ -139,8 +144,12 @@ img{
                     modal.classList.toggle('hidden');
                     if (response.status === 201) {
                         console.log("done")
+                        form_nav.innerHtml=`
+                        Sucessfull
+                        `
                         return true
                     } else {
+                        error_msg.classList.remove("hidden");
                         console.log("not-done")
                         return false
                     }
