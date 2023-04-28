@@ -26,14 +26,14 @@ class ContactusViewset(mixins.CreateModelMixin,
                 'created_now':serializer.data["created_now"],
             }
 
-            email_html_message = render_to_string('email/Email_verify.html', context)
+            email_html_message = render_to_string('email/contactUS.html', context)
             email_plaintext_message = render_to_string('email/user_reset_password.txt', context)
 
 
 
             msg = EmailMultiAlternatives(
                 # title:
-                "Email verification PLaceit ",
+                "New Issue From User",
                 # message:
                 email_plaintext_message,
                 # from:

@@ -258,7 +258,7 @@ export default function  Company_Visit_page(props)  {
                                         myRef.current.click();
                                     }}
                                           className="text-sm p-2  cursor-pointer hover:bg-indigo-700 hover:text-white border-2 rounded-full border-indigo-600 text-blue-600 font-bold md:text-2xl">Upload
-                                        Photo</div>
+                                        PDF</div>
                                     <input
                                         ref={myRef}
                                         type='file'

@@ -213,7 +213,7 @@ export default function  PostCreate(props)  {
                             </div>
                             <div className="flex justify-center items-center flex-col ">
                                 <div className="text-xl font-bold w-full md:w-1/2 bg-white">
-                                    Condition (Sem avg percentage)
+                                    Condition (Sem avg cgpa)
                                 </div>
                                 <div className="w-full mb-4 md:w-1/2">
 
@@ -229,12 +229,12 @@ export default function  PostCreate(props)  {
                                 </div>
 
                                 <div className="text-xl font-bold w-full md:w-1/2 bg-white">
-                                    Condition (10th marks)
+                                    Condition (10th percentage)
                                 </div>
                                 <div className="w-full mb-4 md:w-1/2">
                                     <label htmlFor=""
                                            className="block text-sm font-medium text-gray-900 dark:text-white">SSC
-                                        marks</label>
+                                        percentage</label>
                                     <input
                                         disabled={!props.create}
                                         type="number"
@@ -247,12 +247,12 @@ export default function  PostCreate(props)  {
                                     />
                                 </div>
                                 <div className="text-xl font-bold w-full md:w-1/2 bg-white">
-                                    Condition (12th marks)
+                                    Condition (12th percentage)
                                 </div>
                                 <div className="w-full mb-4 md:w-1/2">
                                     <label htmlFor=""
                                            className="block text-sm font-medium text-gray-900 dark:text-white">HSC
-                                        marks</label>
+                                        percentage</label>
                                     <input
                                         disabled={!props.create}
                                            type="number"

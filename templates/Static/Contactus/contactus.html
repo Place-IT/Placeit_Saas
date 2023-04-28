@@ -47,25 +47,41 @@
                     <label for="message" class="block mb-2 text-sm font-medium text-gray-900 ">Upload your
                         screenshot</label>
 
-                    <div class="flex items-center justify-center w-full">
-                        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
-                                    </path>
-                                </svg>
-                                <p class="mb-2 text-sm text-gray-500 "><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                                <p class="text-xs text-gray-500 ">SVG, PNG, JPG or GIF (MAX.
-                                    800x400px)</p>
+                    <div x-data="showImage()" class="flex items-center justify-center ">
+                        <div class="bg-white rounded-lg w-full">
+                            <div class="m-4">
+                                <div class="flex items-center border-4 border-dashed justify-center w-full">
+                                    <label class="flex flex-col w-full h-72  hover:bg-gray-100 hover:border-gray-300">
+                                        <div class="relative flex flex-col items-center justify-center pt-7">
+                                            <img id="preview" class="absolute inset-0 w-full h-72 object-scale-down">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                                Select a photo</p>
+                                        </div>
+                                        <input type="file" class="opacity-0  jankaimage" accept="image/*" @change="showPreview(event)">
+                                    </label>
+                                </div>
                             </div>
-                            <input
-                                    id="dropzone-file"
-                                    type="file"
-                                    class="hidden"
-                                    accept="image/*",
-                            >
-                        </label>
+                        </div>
                     </div>
+                    <script>
+                        function showImage() {
+                            return {
+                                showPreview(event) {
+                                    if (event.target.files.length > 0) {
+                                        var src = URL.createObjectURL(event.target.files[0]);
+                                        var preview = document.getElementById("preview");
+                                        preview.src = src;
+                                        preview.style.display = "block";
+                                    }
+                                }
+                            }
+                        }
+                    </script>
+
+
                 </div>
                 <div class="pt-4 mx-auto max-w-fit text-red-500 text-xl hidden error_msg">
                     some error
@@ -75,6 +91,29 @@
 
         </div>
     </div>
+
+
+    <div class=" success_display hidden">
+
+        <div class="max-w-6xl border-2 border-black-400 mx-auto m-4">
+            <div class="m-4">
+                <div class="pt-5 mx-auto  max-w-fit border-b-4 text-3xl border-indigo-700 font-bold">
+                    Contact us
+                </div>
+                <div class="pt-4 mx-auto max-w-fit text-gray-500 text-xl ">
+                    Submission sent successfully..
+                </div>
+            </div>
+
+            <div class="m-4 flex  justify-center ">
+                <img src='{% static "/img/undraw_Completed_03xt.png"%}'  class ="h-96" alt="">
+                <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+            </div>
+        </div>
+
+
+    </div>
+
 
     <div class="backdrop hidden"  >
 
@@ -110,6 +149,7 @@ img{
         const modal = document.querySelector('.backdrop');
         const submit = document.querySelector('.submit');
         const form_nav = document.querySelector('.form_nav');
+        const success_display = document.querySelector('.success_display');
         const error_msg = document.querySelector('.error_msg');
         const form = document.querySelector('form');
         form.addEventListener("submit",ev=>{ev.preventDefault()})
@@ -119,9 +159,9 @@ img{
             modal.classList.toggle('hidden');
 
             var formdata = new FormData();
-            if(document.querySelector('#dropzone-file').files[0] !== undefined)
+            if(document.querySelector('.jankaimage').files[0] !== undefined)
             {
-                formdata.append('images', document.querySelector('#dropzone-file').files[0]);
+                formdata.append('images', document.querySelector('.jankaimage').files[0]);
             }
             formdata.append('Full_name', document.querySelector('#full_name').value);
             formdata.append('Email', document.querySelector('#email').value);
@@ -144,9 +184,8 @@ img{
                     modal.classList.toggle('hidden');
                     if (response.status === 201) {
                         console.log("done")
-                        form_nav.innerHtml=`
-                        Sucessfull
-                        `
+                        form_nav.classList.add("hidden")
+                        success_display.classList.toggle('hidden');
                         return true
                     } else {
                         error_msg.classList.remove("hidden");
@@ -162,7 +201,3 @@ img{
 
     </script>
 {% endblock %}
-
-{#{% block fotter %}#}
-{#    {% include 'fotter.html' %}#}
-{#{% endblock %}#}

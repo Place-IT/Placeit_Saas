@@ -20,6 +20,7 @@ import Poster_dialog from "../poster_dialog";
 import {BasicDetailsU} from "../../../features/UserAuth/AuthSlicer";
 
 import {DeleteVisitingRecord} from "../../../features/company/DeleteVisitingRecord";
+import getYear from "../../../CommonFunctions/getYear";
 
 export default function  Visiting_profile (props)  {
     useEffect(ev=>{
@@ -68,6 +69,7 @@ export default function  Visiting_profile (props)  {
         <>
             {open &&<>
                     <Poster_dialog
+                        year={getYear(cvr[0].visiting_date)}
                         handleClose={ev=>{
                             setOpen(false)
                         }

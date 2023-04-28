@@ -61,7 +61,7 @@ export default function Poster_dialog(props) {
 
         return acc;
     }, []);
-    console.log(list_of_student)
+    // console.log(list_of_student)
 
     return (
 
@@ -96,10 +96,8 @@ export default function Poster_dialog(props) {
                             <div className="w-full m-2 ">
                                 <p className=" m-2 font-bold text-4xl text-red-500 uppercase">Bharati Vidyapeeth College
                                     of Engineering,Navi mumbai</p>
-
-                                {/*Addaptic Changes : change the passing year here*/}
                                 <p className=" flex items-center justify-center font-bold text-2xl text-red-500 uppercase">campus
-                                    Placement - Information Technology Department, Year 2020-2021</p>
+                                    Placement - Information Technology Department, Year {props.year}</p>
                             </div>
                     </div>
                     {Company === undefined ?<>

@@ -7,6 +7,7 @@ import {Paper, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/mate
 import {logdata} from "../../../CommonFunctions/Logger/Logevents";
 import {BasicDetailsU} from "../../../features/UserAuth/AuthSlicer";
 import Poster_dialog from "../poster_dialog";
+import getYear from "../../../CommonFunctions/getYear";
 
 
 
@@ -99,6 +100,7 @@ export default function  Student(props)  {
         <>{
             open &&<>
                 <Poster_dialog
+                    year={getYear(year)}
                 handleClose={ev=>{
                 setOpen(false)
                 }
