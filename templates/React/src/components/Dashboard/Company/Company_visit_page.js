@@ -237,7 +237,7 @@ export default function  Company_Visit_page(props)  {
                             </div>
                             {selectedFile &&
                             <>
-                            <div className="w-full md:w-1/3 bg-white rounded p-4 " style={{
+                            <div className="w-full w-1/3 bg-white rounded p-4" style={{
                                 width: "100%",
                                 height: "60vh",
                                 display: "flex",

@@ -26,6 +26,7 @@ class Userserializer(serializers.ModelSerializer):
  'DeadKT',
  'Diploma',
  'First_name',
+"future_options",
  'Full_name',
  "avg_sem",
  'Gate_Status',

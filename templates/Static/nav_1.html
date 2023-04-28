@@ -12,6 +12,7 @@
                 </div>
             </div>
             <!-- Primary Navbar items -->
+
             {% if user.is_authenticated %}
 
             <div class="hidden md:flex items-center space-x-4">
@@ -62,18 +63,17 @@
             <a href="{% url 'profile' %}">
             <div class="hidden md:flex items-center space-x-8" style="margin-top:10px;" >
                 <div class="flex items-center space-x-4">
-                    <div class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
+                    <div class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full ">
                         <svg class="absolute -left-1 w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
                     </div>
 
-                    <div class="font-medium dark:text-white">
+                    <div class="font-medium ">
                         <div class="break-normal md:break-all">{{ user.email }}</div>
                     </div>
                 </div>
             </div>
             </a>
             {% else %}
-
             <div class="hidden md:flex items-center space-x-8">
                 <a
                         href="{% url 'Login' %}"
@@ -119,7 +119,7 @@
                         <svg class="absolute -left-1 w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
                     </div>
 
-                    <div class="h-10 w-9/12 break-normal md:break-all font-medium dark:text-white">
+                    <div class="h-10 w-9/12 break-normal md:break-all font-medium ">
                         <div>{{ user.email }}</div>
 
                     </div>

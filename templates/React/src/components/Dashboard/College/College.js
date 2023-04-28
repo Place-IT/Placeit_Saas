@@ -14,8 +14,8 @@ const columns = [
     { field: 'Chem', headerName:"Chem",minWidth: 200},
     { field: 'Comp', headerName: 'Comp',minWidth: 200},
     { field: 'Extc', headerName: 'Extc',minWidth: 200},
-    { field: 'it', headerName:"it",minWidth: 200 },
-    { field: 'instru', headerName: 'instru',minWidth: 200},
+    { field: 'It', headerName:"It",minWidth: 200 },
+    { field: 'Instru', headerName: 'Instru',minWidth: 200},
     { field: 'Mech', headerName: 'Mech',minWidth: 200}
 ];
 
@@ -42,10 +42,25 @@ function prepare_data(data,setRows,setOptions)
         exportEnabled: true,
         theme: "light2",
         title:{
-            text: "Number of Student Placemend."
+            text: "Number of Student Placed."
         },
         axisY: {
             includeZero: true
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1,
+                        callback: function(value, index, values) {
+                            if (Math.floor(value) === value) {
+                                return value;
+                            }
+                        }
+                    }
+                }]
+            }
         },
         data: [{
             type: "column",
@@ -91,6 +106,21 @@ export default function  College (props)  {
         },
         axisY: {
             includeZero: true
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1,
+                        callback: function(value, index, values) {
+                            if (Math.floor(value) === value) {
+                                return value;
+                            }
+                        }
+                    }
+                }]
+            }
         },
         data: [{
             type: "column",
@@ -149,9 +179,11 @@ export default function  College (props)  {
                     <CanvasJSChart options = {options}/>
                     <div className={"h-20 w-full"}></div>
                     <DataGrid
+
                         rows={rows}
                         columns={columns}
                         pageSize={5}
+                        hideFooterPagination={true}
                         components={{
                             Toolbar: MyExportButton_dada,
                         }}

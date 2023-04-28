@@ -469,7 +469,7 @@ export default function  Profile_update (props)  {
                                     <div className="md:w-1/3">
                                         <label className="block text-gray-700 font-semibold md:text-right mb-1 md:mb-0 p-4"
                                                htmlFor="inline-full-name">
-                                            MhCET* :
+                                            MHT-CET* :
                                         </label>
                                     </div>
                                     <div className="md:w-1/3">

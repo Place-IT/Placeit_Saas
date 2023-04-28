@@ -142,12 +142,12 @@ class User(ModelMeta,AbstractBaseUser, PermissionsMixin):
 
     linkedin_profile = models.URLField(validators=[RegexValidator(
         regex="^https?://((www|\w\w)\.)?linkedin.com/((in/[^/]+/?)|(pub/[^/]+/((\w|\d)+/?){3}))$",
-        message='Username must be Alphanumeric',
+        message='Invalid Github url',
         code='invalid_username'
     )], null=True, blank=True, )
     Github_profile = models.URLField(validators=[RegexValidator(
-        regex="^https?://((www|\w\w)\.)?github.com/((in/[^/]+/?)|(pub/[^/]+/((\w|\d)+/?){3}))$",
-        message='Username must be Alphanumeric',
+        regex="^(?:https?://)?(?:www\.)?github\.com/([a-zA-Z0-9_-]+)$",
+        message='Invalid Github url',
         code='invalid_username'
     )], null=True, blank=True, )
 

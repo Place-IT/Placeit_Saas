@@ -155,6 +155,7 @@ export default function  Department (props)  {
                             rows={rows}
                             columns={columns}
                             pageSize={7}
+                            hideFooterPagination={true}
                             components={{
                                 Toolbar: MyExportButton_dada,
                             }}

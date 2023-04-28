@@ -83,7 +83,7 @@
 
 
                 </div>
-                <div class="pt-4 mx-auto max-w-fit text-red-500 text-xl hidden error_msg">
+                <div class="pt-4 mx-auto max-w-fit text-red-500 text-xl hid_den error_msg">
                     some error
                 </div>
                 <button type="submit" class="text-white submit bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " fdprocessedid="wbesf5">Submit</button>
@@ -93,7 +93,7 @@
     </div>
 
 
-    <div class=" success_display hidden">
+    <div class=" success_display hid_den">
 
         <div class="max-w-6xl border-2 border-black-400 mx-auto m-4">
             <div class="m-4">
@@ -115,35 +115,35 @@
     </div>
 
 
-    <div class="backdrop hidden"  >
+    <div class="backdrop hid_den"  >
 
         <div class="loader">
             <img src="{% static "/img/loader.gif"%}" alt="">
         </div>
 
     </div>
-<style>
-.backdrop{
-    width:100vw;
-    height:100vh;
-    position: fixed;
-    top:0;
-    background-color: rgba(39, 41, 39,0.8);
-}
-.loader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-img{
-    height: 12rem;
-}
-.hidden{
-    display: none;
-}
+    <style>
+        .backdrop{
+            width:100vw;
+            height:100vh;
+            position: fixed;
+            top:0;
+            background-color: rgba(39, 41, 39,0.8);
+        }
+        .loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        img{
+            height: 12rem;
+        }
+        .hid_den{
+            display: none;
+        }
 
-</style>
+    </style>
 
     <script>
         const modal = document.querySelector('.backdrop');
@@ -156,7 +156,7 @@ img{
 
         submit.addEventListener("click",fetch_call)
         function fetch_call() {
-            modal.classList.toggle('hidden');
+            modal.classList.toggle('hid_den');
 
             var formdata = new FormData();
             if(document.querySelector('.jankaimage').files[0] !== undefined)
@@ -181,14 +181,14 @@ img{
                 body: formdata
             })
                 .then(response => {
-                    modal.classList.toggle('hidden');
+                    modal.classList.toggle('hid_den');
                     if (response.status === 201) {
                         console.log("done")
-                        form_nav.classList.add("hidden")
-                        success_display.classList.toggle('hidden');
+                        form_nav.classList.add("hid_den")
+                        success_display.classList.toggle('hid_den');
                         return true
                     } else {
-                        error_msg.classList.remove("hidden");
+                        error_msg.classList.remove("hid_den");
                         console.log("not-done")
                         return false
                     }

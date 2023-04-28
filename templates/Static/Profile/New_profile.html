@@ -129,7 +129,7 @@
             <div class="flex flex-row mb-4 space-x-2 mx-2">
                 <div class=" text-sm md:text-xl">
                     <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
-                        Second-Name :
+                        Middle-Name :
                     </label>
                 </div>
                 <div class="text-sm md:text-xl">
@@ -215,12 +215,6 @@
                 </div>
 
             {% endif%}
-
-
-
-            <div class="name font-semibold text-xl  md:text-2xl mx-10 mb-4 mx-auto">
-                Address-
-            </div>
             <div class="flex  mb-4 space-x-2 mx-2">
                 <div class=" text-sm md:text-xl">
                     <label class="block text-gray-600 font-bold text-right" for="inline-full-name">
@@ -272,16 +266,7 @@
                 </div>
             </div>
 
-            {#            <div class="flex  mb-4 space-x-2 mx-2">#}
-{#                <div class="text-sm md:text-xl">#}
-{#                    <label class="block text-gray-900 font-bold text-right" for="inline-full-name">#}
-{#                        <i class='bx bxl-gmail' style='color:#bb001b'></i>#}
-{#                    </label>#}
-{#                </div>#}
-{#                <div class="text-sm md:text-xl">#}
-{#                    avhadjanak@gmail.com#}
-{#                </div>#}
-{#            </div>#}
+
         </div>
     </div>
     <div class="hidden p-4 max-w-6xl mx-auto rounded-lg" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab"   >
@@ -291,35 +276,35 @@
         <div class="container flex sm:flex-row flex-col flex-wrap">
             <div
                     class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                <p>sem 1: {{display_user_content.Sem1}}</p>
+                <p>Sem 1: {{display_user_content.Sem1}}</p>
             </div>
             <div
                     class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                <p>sem 2 : {{display_user_content.Sem2}}</p>
+                <p>Sem 2 : {{display_user_content.Sem2}}</p>
             </div>
             <div
                     class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                <p>sem 3 : {{display_user_content.Sem3}}</p>
+                <p>Sem 3 : {{display_user_content.Sem3}}</p>
             </div>
             <div
                     class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                <p>sem 4 : {{display_user_content.Sem4}}</p>
+                <p>Sem 4 : {{display_user_content.Sem4}}</p>
             </div>
             <div
                     class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                <p>sem 5: {{display_user_content.Sem5}}</p>
+                <p>Sem 5: {{display_user_content.Sem5}}</p>
             </div>
             <div
                     class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                <p>sem 6 : {{display_user_content.Sem6}}</p>
+                <p>Sem 6 : {{display_user_content.Sem6}}</p>
             </div>
             <div
                     class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                <p>sem 7 : {{display_user_content.Sem7}}</p>
+                <p>Sem 7 : {{display_user_content.Sem7}}</p>
             </div>
             <div
                     class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/5">
-                <p>sem 8 : {{display_user_content.Sem8}}</p>
+                <p>Sem 8 : {{display_user_content.Sem8}}</p>
             </div>
         </div>
 
@@ -385,7 +370,7 @@
             </div>
             <div
                     class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
-                <p>MhCET Score : {{display_user_content.MhCET}}</p>
+                <p>MHT-CET Score : {{display_user_content.MhCET}}</p>
             </div>
             <div
                     class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
@@ -402,7 +387,7 @@
             </div>
             <div
                     class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
-                <p>Future Options : {{display_user_content.future_options}}</p>
+                <p>Future Options : {{display_user_content.get_future_options_display}}</p>
             </div>
             <div
                     class="mx-2 my-2 flex items-center justify-center border-2 border-indigo-700 p-2 rounded-2xl basis-1/3">
@@ -523,7 +508,7 @@
                                 </header>
                             {% endif %}
 
-                            {% if request.user.is_authenticated and  request.user.id == display_user_content.id%}
+                            {% if request.user.is_authenticated and  request.user.id == display_user_content.id %}
 
                             <header class="my-4 border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
                                 <button id="button" class="mt-2 show-modal-resume rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
