@@ -1,0 +1,35 @@
+{% load meta %}
+<!DOCTYPE html>
+<html lang="en">
+<head    {% meta_namespaces %}>
+
+    {% load static %}
+    {% include "meta/meta.html" %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}PlaceIT{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href='{% static "img/favicon_io/favicon.ico" %}'>
+    <link rel="manifest" href="{% static "manifest.json" %}">
+    <script src="{% static "/js/installsw.js"%}"></script>
+
+
+<!--    <script defer  src="https://cdn.tailwindcss.com"></script>-->
+{#<!--    <link rel="stylesheet" href='{% static "/css/input.css"%}' />-->#}
+{#<!--    <link rel="stylesheet" href='{% static "/css/flowbite.min.css"%}'/>-->#}
+    <script src='{% static "/js/flowbite.js"%}'></script>
+    <script src='{% static "/js/tailwindcss.js"%}'></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer=""></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    {% block css_files %}{% endblock %}
+</head>
+<body>
+{% block nav %}{% endblock %}
+{% block Body %}{% endblock %}
+{% block fotter %}{% endblock %}
+{% block js %}
+<script src='{% static "/js/index.js" %}' >
+</script>
+{% endblock %}
+</body>
+</html>

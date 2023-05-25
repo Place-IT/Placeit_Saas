@@ -64,7 +64,7 @@ export default  function Post_card(props)
         // setState({...state,answer: a})
         setQuestions(a)
         logdata("Post_card questions","error",`Post_card initated ${a}`)
-        // console.log(a)
+        // console.log(a,question)
     }, []);
 
 
@@ -80,10 +80,12 @@ export default  function Post_card(props)
     {
 
 
+        console.log(question[q_text])
         let b={...question}
-        b[`${q_text}`]={"Answer": ev.target.value,"form":ev.form,"Question":ev.id}
+        b[`${q_text}`]={"Answer": ev.target.value,"form":question[q_text].form,"Question":question[q_text].Question}
         logdata("Post_card Custom_success","info",`Custom_success data:${b}`)
         setQuestions(b)
+        // console.log(b)
     }
     return<>
         <DialogManual  tittle={props.tittle} Content={Content}

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import UpperHoc from "../../../CommonFunctions/UpperCLouser/CustomHoc";
 import {selectError, selectStatus, SuccessSelector,selectResult} from "../../../features/post/PostSlicer";
+import { SuccessSelector as SuccessSelectorcvr } from "../../../features/company/CompanySlicer";
 import {Link} from "react-router-dom";
 import {logdata} from "../../../CommonFunctions/Logger/Logevents";
 import {useDispatch, useSelector} from "react-redux";
@@ -40,6 +41,7 @@ export default function  PostCreate(props)  {
     const [questions,setQuestions]=useState({})
     const UserDetail = useSelector(BasicDetailsU);
     const Successs = useSelector(SuccessSelector);
+    const Successs_cvr_fetch = useSelector(SuccessSelectorcvr);
     const data2=useSelector(selectResult);
     const dispatch = useDispatch();
 
@@ -83,15 +85,17 @@ export default function  PostCreate(props)  {
 
     }
 
-    if(!Call && props.create === true && Successs.cvr_fetch === false)
+    if(!Call && props.create === true && Successs_cvr_fetch.cvr_fetch === false)
     {
         setCall(true)
         dispatch(Compnay_visitng_record(""))
     }
+    // console.log(Successs_cvr_fetch.cvr_fetch)
 
-    if(props.create === true && Call === true && Successs.cvr_fetch === true )
+    if(props.create === true && Call === true && Successs_cvr_fetch.cvr_fetch === true )
     {
         let c=[]
+        console.log(Successs_cvr_fetch.cvr_fetch,"1111243khhhfhwh")
         data2.Compnay_visitng_record.forEach(ev=>{
             c.push({vv:ev.String_repr,id:ev.id})
         })

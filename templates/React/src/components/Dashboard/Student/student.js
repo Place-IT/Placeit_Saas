@@ -17,18 +17,17 @@ export default function  Student(props)  {
     },[])
     const dispatch = useDispatch();
 
-    const [call,setCall]=useState(false)
-    const [open,setOpen]=useState(false)
-    const [departments,setDepartments]=useState(window.department_list[0])
-    const [year,setYear]=useState(new Date().getFullYear())
-
-    const [first ,setFirst]=useState(false)
+    const [call,setCall]=useState(false);
+    const [open,setOpen]=useState(false);
+    const [departments,setDepartments]=useState(window.department_list[0]);
+    const [year,setYear]=useState(new Date().getFullYear());
+    const [first ,setFirst]=useState(false);
     const UserDetail = useSelector(BasicDetailsU);
     const data = useSelector(selectSResult);
 
     const [search,setSearch]=useState({
         search:"",
-    })
+    });
     if(!first && UserDetail.Cache_check)
     {
         if(UserDetail.groups.includes("Faculty"))
@@ -81,7 +80,6 @@ export default function  Student(props)  {
     const sColumn=[
         { field: 'company_name' ,display:"Company Name"},
         { field: 'offer_letter' ,display:"Offer Letter"},
-        // { field: 'visiting_reocrd' },
     ]
 
     function dispatch_search(ev)
@@ -284,9 +282,6 @@ export default function  Student(props)  {
                                     }
                                     return b
                                 })}
-
-
-
                             </TableBody>
                         </Table>
                         </Paper>

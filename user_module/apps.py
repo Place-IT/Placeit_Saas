@@ -24,8 +24,12 @@ class UserModuleConfig(AppConfig):
             assign_perm(f"user_module.view_user", group)
             assign_perm(f"user_module.change_user", group)
             assign_perm(f"user_module.add_user", group)
+            assign_perm(f"form_module.view_form", group)
+            assign_perm(f"form_module.view_responsefromuser", group)
+            assign_perm(f"form_module.view_response_to_user", group)
             assign_perm(f"user_module.view_user", stu)
             assign_perm(f"user_module.change_user", stu)
+
 
             assign_perm(f"form_module.view_form", stu)
             assign_perm(f"form_module.add_responsefromuser", stu)

@@ -1,0 +1,203 @@
+{% extends "Base.html" %}
+{% load static %}
+
+
+{% block nav %}
+    {% include 'nav_1.html' %}
+{% endblock %}
+{% block title %}Placeit {% endblock %}
+
+{% block Body %}
+    <div class="max-w-6xl  border-2 border-black-400 mx-auto m-4  form_nav">
+        <div class="m-4">
+            <div class="pt-5 mx-auto  max-w-fit border-b-4 text-3xl border-indigo-700 font-bold">
+                Contact us
+            </div>
+            <div class="pt-4 mx-auto max-w-fit text-gray-500 text-xl ">
+                lets get this Conversation started. Tell us a bit about yourself, and we'll get in touch as soon as we
+                can.
+            </div>
+        </div>
+
+        <div class="m-4">
+            <form>
+                <div class="mb-6 ">
+                    <div class="flex">
+                        <label for="email" class="block mb-2 text-md font-medium text-gray-900 ">Full Name</label>
+                        <p class=" text-red-500 ">*</p>
+                    </div>
+                    <input type=" " id="full_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder=" " required fdprocessedid="tgedac">
+                </div>
+
+                <div class="mb-6 ">
+                    <div class="flex">
+                        <label for="email" class="block mb-2 text-md font-medium text-gray-900 ">Email</label>
+                        <p class=" text-red-500 ">*</p>
+                    </div>
+                    <input type=" " id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder=" " required fdprocessedid="c6mgz">
+                </div>
+
+                <div class="mb-6 ">
+                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 ">Your
+                        message</label>
+                    <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Write your message here..."></textarea>
+                </div>
+
+                <div class="mb-6 ">
+                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 ">Upload your
+                        screenshot</label>
+
+                    <div x-data="showImage()" class="flex items-center justify-center ">
+                        <div class="bg-white rounded-lg w-full">
+                            <div class="m-4">
+                                <div class="flex items-center border-4 border-dashed justify-center w-full">
+                                    <label class="flex flex-col w-full h-72  hover:bg-gray-100 hover:border-gray-300">
+                                        <div class="relative flex flex-col items-center justify-center pt-7">
+                                            <img id="preview" class="absolute inset-0 w-full h-72 object-scale-down">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                                Select a photo</p>
+                                        </div>
+                                        <input type="file" class="opacity-0  jankaimage" accept="image/*" @change="showPreview(event)">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        function showImage() {
+                            return {
+                                showPreview(event) {
+                                    if (event.target.files.length > 0) {
+                                        var src = URL.createObjectURL(event.target.files[0]);
+                                        var preview = document.getElementById("preview");
+                                        preview.src = src;
+                                        preview.style.display = "block";
+                                    }
+                                }
+                            }
+                        }
+                    </script>
+
+
+                </div>
+                <div class="pt-4 mx-auto max-w-fit text-red-500 text-xl hid_den error_msg">
+                    some error
+                </div>
+                <button type="submit" class="text-white submit bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " fdprocessedid="wbesf5">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
+
+    <div class=" success_display hid_den">
+
+        <div class="max-w-6xl border-2 border-black-400 mx-auto m-4">
+            <div class="m-4">
+                <div class="pt-5 mx-auto  max-w-fit border-b-4 text-3xl border-indigo-700 font-bold">
+                    Contact us
+                </div>
+                <div class="pt-4 mx-auto max-w-fit text-gray-500 text-xl ">
+                    Submission sent successfully..
+                </div>
+            </div>
+
+            <div class="m-4 flex  justify-center ">
+                <img src='{% static "/img/undraw_Completed_03xt.png"%}'  class ="h-96" alt="">
+                <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="backdrop hid_den"  >
+
+        <div class="loader">
+            <img src="{% static "/img/loader.gif"%}" alt="">
+        </div>
+
+    </div>
+    <style>
+        .backdrop{
+            width:100vw;
+            height:100vh;
+            position: fixed;
+            top:0;
+            background-color: rgba(39, 41, 39,0.8);
+        }
+        .loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        img{
+            height: 12rem;
+        }
+        .hid_den{
+            display: none;
+        }
+
+    </style>
+
+    <script>
+        const modal = document.querySelector('.backdrop');
+        const submit = document.querySelector('.submit');
+        const form_nav = document.querySelector('.form_nav');
+        const success_display = document.querySelector('.success_display');
+        const error_msg = document.querySelector('.error_msg');
+        const form = document.querySelector('form');
+        form.addEventListener("submit",ev=>{ev.preventDefault()})
+
+        submit.addEventListener("click",fetch_call)
+        function fetch_call() {
+            modal.classList.toggle('hid_den');
+
+            var formdata = new FormData();
+            if(document.querySelector('.jankaimage').files[0] !== undefined)
+            {
+                formdata.append('images', document.querySelector('.jankaimage').files[0]);
+            }
+            formdata.append('Full_name', document.querySelector('#full_name').value);
+            formdata.append('Email', document.querySelector('#email').value);
+            formdata.append('message', document.querySelector('#message').value);
+
+
+            var csrf = "{{ csrf_token }}"
+            formdata.append('csrfmiddlewaretoken', csrf);
+
+            fetch("/api/auth/Contactus/", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': csrf,
+                },
+                body: formdata
+            })
+                .then(response => {
+                    modal.classList.toggle('hid_den');
+                    if (response.status === 201) {
+                        console.log("done")
+                        form_nav.classList.add("hid_den")
+                        success_display.classList.toggle('hid_den');
+                        return true
+                    } else {
+                        error_msg.classList.remove("hid_den");
+                        console.log("not-done")
+                        return false
+                    }
+                })
+
+            return false;
+
+        }
+
+
+    </script>
+{% endblock %}

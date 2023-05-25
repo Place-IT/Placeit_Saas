@@ -26,14 +26,14 @@ export default function  Post_list(props)  {
                         Post DashBoard
                     </div>
                 </div>
-                <Link to={`/dashboard/post_Create/`}>
+                <a href={`/dashboard/post_Create/`}>
                     <div className="flex flex-row justify-between my-8 ">
                         <div className="hidden md:flex flex-row bg-indigo-600 rounded-full px-4 py-2 cursor-pointer"  >
                             <i className='bx bx-plus-circle text-white text-2xl'></i>
                             <p className="text-lg text-white px-2 font-bold">New post</p>
                         </div>
                     </div>
-                </Link>
+                </a>
             </div>
             <div className="row-span-3 lg:col-span-3 col-span-5 rounded-2xl lg:h-screen  md:mt-0 -mt-28  ">
                 <ErrorBoundary component_name={"Timeline_master_component"}>
