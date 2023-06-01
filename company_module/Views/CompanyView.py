@@ -9,7 +9,7 @@ from company_module.serializer import Company_Serailizer
 
 class Company_viewset(Gurdian_model_viewset):
 
-    queryset = Company.objects.all()
+    queryset = Company.objects.all().order_by("Company_name")
     serializer_class = Company_Serailizer
     permission_classes = [ModelNamePermission("company", "company_module")]
     modelname="company"

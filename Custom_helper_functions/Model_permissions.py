@@ -1,5 +1,5 @@
 from rest_framework import permissions
-
+from django.contrib.auth.models import Permission
 
 def ModelNamePermission(ModelName: str, AppName: str, custom_check_view=None, custom_check_object=None, ):
     class ModelNamePermission_Class(permissions.BasePermission):
@@ -36,6 +36,8 @@ def ModelNamePermission(ModelName: str, AppName: str, custom_check_view=None, cu
 
         def has_object_permission(self, request, view, obj):
             # print("111111111111111111111111111111111111111111")
+            permissions = Permission.objects.filter(user=request.user)
+            print(permissions)
             if custom_check_object is not None:
                 res = custom_check_object(request, obj)
                 # print(res, "ressssss")
@@ -44,7 +46,10 @@ def ModelNamePermission(ModelName: str, AppName: str, custom_check_view=None, cu
                 elif res == False:
                     return False
 
+
             if request.user.is_authenticated:
+                if request.user.groups.filter(name="Head").exists():
+                    return True
                 if request.method in ['GET']:
                     return request.user.has_perm(f'{self.appname}.view_{self.modelname}', obj)
                 if request.method in ['POST']:
@@ -52,8 +57,8 @@ def ModelNamePermission(ModelName: str, AppName: str, custom_check_view=None, cu
                 if request.method in ['PUT', 'PATCH']:
                     return request.user.has_perm(f'{self.appname}.change_{self.modelname}', obj)
                 if request.method in ['DELETE']:
+                    print("hhellodsjfsdhfsdhfsdf",request.user.has_perm(f'{self.appname}.delete_{self.modelname}', obj), obj)
                     return request.user.has_perm(f'{self.appname}.delete_{self.modelname}', obj)
-
             return False
 
     return ModelNamePermission_Class
