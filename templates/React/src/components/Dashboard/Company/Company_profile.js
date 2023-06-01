@@ -105,7 +105,7 @@ export default function  Company_profile (props)  {
                                         <h3 className=" font-semibold text-gray-800 md:text-3xl text-xl">{ev.Company_name}</h3>
                                         <a href={ev.Employers_Website} className="flex flex-row font-medium text-blue-800 cursor-pointer break-words">
                                             <i className='bx bx-link text-2xl'></i>
-                                            <p className="text-xl">
+                                            <p className="text-md">
                                                 {ev.Employers_Website}
                                             </p>
                                         </a>
