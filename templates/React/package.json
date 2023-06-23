@@ -46,6 +46,7 @@
     "dom-to-image": "^2.6.0",
     "flowbite": "^1.5.3",
     "flowbite-react": "^0.1.11",
+    "html2canvas": "^1.4.1",
     "moment": "^2.29.4",
     "postcss": "^8.4.17",
     "postcss-preset-env": "^7.8.2",

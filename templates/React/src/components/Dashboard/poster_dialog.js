@@ -9,7 +9,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import {useRef} from "react";
 import PptxGenJS from "pptxgenjs";
-import domToImage from 'dom-to-image';
+// import domToImage from 'dom-to-image';
+import html2canvas from 'html2canvas';
 
 import logo from "../../assets/images/crop_logo.png";
 
@@ -28,13 +29,13 @@ export default function Poster_dialog(props) {
     // console.log(pptx)
 
     const convertDivToPpt = () => {
-
-        domToImage.toPng(divRef.current)
-            .then(function (dataUrl) {
-                const pptx =  new PptxGenJS();
+        html2canvas(divRef.current)
+            .then(function (canvas) {
+                const dataUrl = canvas.toDataURL('image/png');
+                const pptx = new PptxGenJS();
                 const slide = pptx.addSlide();
                 slide.addImage({ data: dataUrl });
-                pptx.writeFile({ fileName: 'Browser-PowerPoint-Demo.pptx' })
+                pptx.writeFile({ fileName: 'Banner-PowerPoint.pptx' })
                     .then(fileName => {
                         console.log(`created file: ${fileName}`);
                     });
@@ -42,7 +43,12 @@ export default function Poster_dialog(props) {
             .catch(function (error) {
                 console.error('Error converting element to image:', error);
             });
-    };
+
+    }
+
+
+
+
 
     const chunks = list_of_student.reduce((acc, el, index) => {
        let chunkIndex=0
