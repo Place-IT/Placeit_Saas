@@ -23,20 +23,21 @@ const columns = [
 function prepare_data(data,setRows,setOptions)
 {
     logdata("prepare_data ","init",`called data data:${data}`)
-
+    // console.log(data["Department Of Information Technology"].no_of_students_placed,data["Department Of Information Technology"],)
     let rows=[]
-    rows.push({ id:"no. of students placed", Chem: data["Department Of Chemical Engineering"].no_of_students_placed, Comp: data["Department Of Computer Science"].no_of_students_placed, Extc: data["Department Of Electronics and Telecomnications"].no_of_students_placed, it: data["Department Of Information Technology"].no_of_students_placed, instru: data["Department Of Instrumental"].no_of_students_placed, Mech: data["Department Of Mechinical engineering"].no_of_students_placed},)
-    rows.push({ id:"no. of company visited", Chem: data["Department Of Chemical Engineering"].no_of_company_visited, Comp: data["Department Of Computer Science"].no_of_company_visited, Extc: data["Department Of Electronics and Telecomnications"].no_of_company_visited, it: data["Department Of Information Technology"].no_of_company_visited, instru: data["Department Of Instrumental"].no_of_company_visited, Mech: data["Department Of Mechinical engineering"].no_of_company_visited},)
-    rows.push({ id:"Average Package", Chem: data["Department Of Chemical Engineering"].Average_Package, Comp: data["Department Of Computer Science"].Average_Package, Extc: data["Department Of Electronics and Telecomnications"].Average_Package, it: data["Department Of Information Technology"].Average_Package, instru: data["Department Of Instrumental"].Average_Package, Mech: data["Department Of Mechinical engineering"].Average_Package},)
+    rows.push({ id:"no. of students placed", Chem: data["Department Of Chemical Engineering"].no_of_students_placed, Comp: data["Department Of Computer Science"].no_of_students_placed, Extc: data["Department Of Electronics and Telecomnications"].no_of_students_placed, It: data["Department Of Information Technology"].no_of_students_placed, Instru: data["Department Of Instrumental"].no_of_students_placed, Mech: data["Department Of Mechinical engineering"].no_of_students_placed},)
+    rows.push({ id:"no. of company visited", Chem: data["Department Of Chemical Engineering"].no_of_company_visited, Comp: data["Department Of Computer Science"].no_of_company_visited, Extc: data["Department Of Electronics and Telecomnications"].no_of_company_visited, It: data["Department Of Information Technology"].no_of_company_visited, Instru: data["Department Of Instrumental"].no_of_company_visited, Mech: data["Department Of Mechinical engineering"].no_of_company_visited},)
+    rows.push({ id:"Average Package", Chem: data["Department Of Chemical Engineering"].Average_Package, Comp: data["Department Of Computer Science"].Average_Package, Extc: data["Department Of Electronics and Telecomnications"].Average_Package, It: data["Department Of Information Technology"].Average_Package, Instru: data["Department Of Instrumental"].Average_Package, Mech: data["Department Of Mechinical engineering"].Average_Package},)
     rows.push({ id:"Range (LPA)",
         Chem: `${data["Department Of Chemical Engineering"].Range_min} - ${data["Department Of Chemical Engineering"].Range_max}`,
         Comp: `${data["Department Of Computer Science"].Range_min} - ${data["Department Of Computer Science"].Range_max}`,
         Extc: `${data["Department Of Electronics and Telecomnications"].Range_min} - ${data["Department Of Electronics and Telecomnications"].Range_max}`,
-        it: `${data["Department Of Information Technology"].Range_min} - ${data["Department Of Information Technology"].Range_max}`,
-        instru: `${data["Department Of Instrumental"].Range_min} - ${data["Department Of Instrumental"].Range_max}`,
+        It: `${data["Department Of Information Technology"].Range_min} - ${data["Department Of Information Technology"].Range_max}`,
+        Instru: `${data["Department Of Instrumental"].Range_min} - ${data["Department Of Instrumental"].Range_max}`,
         Mech:`${data["Department Of Mechinical engineering"].Range_min} - ${data["Department Of Mechinical engineering"].Range_max}`},)
 
     setRows(rows)
+    // console.log(rows)
     setOptions({
         animationEnabled: true,
         exportEnabled: true,
