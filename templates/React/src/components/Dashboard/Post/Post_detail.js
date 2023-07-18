@@ -9,15 +9,10 @@ import {UnPlaceStudent} from "../../../features/post/UnPlaceStudent";
 import {selectResult, SuccessSelector} from "../../../features/post/PostSlicer";
 import {selectError, selectStatus} from "../../../features/Department/StudentSLicer";
 import UpperHoc from "../../../CommonFunctions/UpperCLouser/CustomHoc";
-import { DataGrid ,GridToolbarExport,GridToolbarContainer} from '@mui/x-data-grid';
-import Button from "@mui/material/Button";
-import SendIcon from '@mui/icons-material/Send';
 import ScrollableTabsButtonForce from "../../../CommonFunctions/CTabs";
 import {DeletePost} from "../../../features/post/Delete_post";
 
-const onRowsSelectionHandler = (ids) => {
-    const selectedRowsData = ids.map((id) => rows.find((row) => row.id === id));
-};
+
 
 function create_question_and_answer(setQuestion,setResponse_1,setResponse_2,setResponse_3,data)
 {
@@ -78,7 +73,6 @@ function create_question_and_answer(setQuestion,setResponse_1,setResponse_2,setR
     setResponse_1(response_1)
     setResponse_2(response_2)
     setResponse_3(response_3)
-// console.log(columns,rows)
 
 }
 

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from department_module.models import Department_related_form
 from form_module.models import Form
 
 
@@ -28,7 +29,7 @@ class Form_View_Serailizer(serializers.ModelSerializer):
                   "Company_image",
                   "Company_name",
                   "conditions",
-                  "Creator_note"
+                  "Creator_note",
                   ]
 
     def get_Company_image(self, obj):

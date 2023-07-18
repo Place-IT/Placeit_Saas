@@ -15,12 +15,12 @@ router.registry.extend(CompanyRouter.registry)
 router.registry.extend(FormRouter.registry)
 router.registry.extend(UserRouter.registry)
 
-urlpatterns =[
+urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
     path('Offer_letter_update/<int:pk>/', login_required(OfferLetterUploadView.as_view()), name='Response_To_User-update'),
     path('UserImageUploadView/<int:pk>/', login_required(UserImageUploadView.as_view()), name='UserImageUploadView-update'),
     path('UserResume_profileUploadView/<int:pk>/', login_required(UserResume_profileUploadView.as_view()), name='UserResume_profileUploadView-update'),
 ]
-urlpatterns += router.urls
 
+urlpatterns += router.urls

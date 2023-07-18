@@ -2,6 +2,7 @@ from django.db.models import Exists
 from rest_framework import serializers
 from django.db.models import OuterRef, Subquery
 from Custom_helper_functions import check_eligible
+from department_module.models import Department_related_form
 from form_module.models import Form, ResponseFromUser
 from django.utils import timezone
 
@@ -17,6 +18,8 @@ class Form_Serailizer(serializers.ModelSerializer):
     Company_name = serializers.SlugField(source="Visitng_record.company.Company_name", read_only=True)
     is_user_eligible = serializers.SerializerMethodField()
     expired= serializers.SerializerMethodField()
+    department_names=serializers.SerializerMethodField()
+
     class Meta:
         model = Form
         depth = 1
@@ -36,7 +39,9 @@ class Form_Serailizer(serializers.ModelSerializer):
                   "Company_name",
                   "conditions",
                   "is_user_eligible",
-                  "expired"
+                  "expired",
+                  "department_names",
+                  "Creator_note"
                   ]
 
     def get_Company_image(self, obj):
@@ -69,3 +74,12 @@ class Form_Serailizer(serializers.ModelSerializer):
             )
         ).values('has_response').first()
         return user_has_response['has_response'] if user_has_response else False
+    def get_department_names(self, obj):
+        request = self.context.get("request")
+        if request.user.groups.filter(name="Head").exists():
+            post_names = []
+            department_related_forms = Department_related_form.objects.filter(posts_id=obj.id)
+            for department_related_form in department_related_forms:
+                post_names.append(department_related_form.Department.name)
+            return post_names
+        return ""

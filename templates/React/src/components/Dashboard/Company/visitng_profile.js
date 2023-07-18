@@ -88,26 +88,29 @@ export default function  Visiting_profile (props)  {
                                 <p className="lg:text-2xl px-2 border-b-4 border-indigo-800">Back</p>
                             </div>
                         </Link>
-                        {UserDetail.Cache_check=== true && UserDetail.groups.includes("Head")&&<>
-                            <div
-                                onClick={ev=>{
-                                    Delete()
-                                }}
-                                className=" flex flex-row bg-red-600 rounded-full px-4 py-2 cursor-pointer">
-                                <p href="#" className="px-2"><i className='bx bx-task-x text-white text-xl md:text-3xl'></i></p>
-                                <p className="text-md md:text-2xl text-white md:px-2 font-bold">Delete</p>
-                            </div>
-                        </> }
 
-                        {UserDetail.Cache_check=== true && UserDetail.groups.includes("Faculty")&&<>
-                        <div className="hidden md:flex flex-row  bg-indigo-600 rounded-full px-4 py-2 cursor-pointer"
-                             onClick={ev=>{
-                                 setOpen(true)
-                             }}>
-                            <p href="#" className="px-2"><i className='bx bx-receipt text-white text-2xl pr-2 '></i></p>
-                            <p className="text-2xl text-white px-2 font-bold ">Banner</p>
+                        <div className={"flex justify-end gap-4 "}>
+                            {UserDetail.Cache_check=== true && UserDetail.groups.includes("Head")&&<>
+                                <div
+                                    onClick={ev=>{
+                                        Delete()
+                                    }}
+                                    className=" flex flex-row bg-red-600 rounded-full px-4 py-2 cursor-pointer">
+                                    <p href="#" className="px-2"><i className='bx bx-task-x text-white text-xl md:text-3xl'></i></p>
+                                    <p className="text-md md:text-2xl text-white md:px-2 font-bold">Delete</p>
+                                </div>
+                            </> }
+
+                            {/*{UserDetail.Cache_check=== true && UserDetail.groups.includes("Faculty")&&<>*/}
+                            <div className="hidden md:flex flex-row  bg-indigo-600 rounded-full px-4 py-2 cursor-pointer"
+                                 onClick={ev=>{
+                                     setOpen(true)
+                                 }}>
+                                <p href="#" className="px-2"><i className='bx bx-receipt text-white text-2xl pr-2 '></i></p>
+                                <p className="text-2xl text-white px-2 font-bold ">Banner</p>
+                            </div>
                         </div>
-                        </> }
+                        {/*</> }*/}
                     </div>
 
                     <div className=" border-2  relative space-y-3 md:space-y-0  rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto bg-gray-200">

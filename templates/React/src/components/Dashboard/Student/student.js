@@ -165,7 +165,7 @@ export default function  Student(props)  {
                                 </button>
                             </div>
                         </form>
-                        {UserDetail.Cache_check=== true && UserDetail.groups.includes("Faculty")&&<>
+                        {/*{UserDetail.Cache_check=== true && UserDetail.groups.includes("Faculty")&&<>*/}
                             <div className="hidden md:flex flex-row bg-indigo-600 rounded-full px-4 py-2 cursor-pointer"
                                  onClick={ev=>{
                                      setOpen(true)
@@ -181,7 +181,7 @@ export default function  Student(props)  {
                         {/*    <p className="px-2"><i className='bx bx-receipt text-white text-md pr-2'></i></p>*/}
                         {/*    <p className="text-sm text-white px-2 font-bold">Banner</p>*/}
                         {/*</div>*/}
-                        </>}
+                        {/*</>}*/}
 
                     </div>
 
