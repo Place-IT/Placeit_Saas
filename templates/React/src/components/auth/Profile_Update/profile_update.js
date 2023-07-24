@@ -1008,7 +1008,7 @@ export default function  Profile_update (props)  {
                         <div className="px-5 py-1 flex justify-center  font-bold">
                             <p
                                onClick={dispatch_function}
-                               className="px-8 py-2 border-2 border-indigo-700 bg-indigo-700 text-white rounded-full font-bold">
+                               className="px-8 py-2 border-2 border-indigo-700 bg-indigo-700 text-white rounded-full font-bold cursor-pointer">
                                   Submit
                             </p>
                         </div>

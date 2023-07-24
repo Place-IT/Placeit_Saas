@@ -141,7 +141,7 @@ export default function  Profile_image_update (props)  {
                                                 // console.log(myRef)
                                                 myRef.current.click();
                                             }}
-                                                  className="text-md text-blue-600 font-semibold md:text-2xl">Upload
+                                                  className="text-md text-blue-600 font-semibold md:text-2xl cursor-pointer">Upload
                                                 Photo</div>
                                         </>}
 
@@ -157,7 +157,7 @@ export default function  Profile_image_update (props)  {
                                 {!selectedFile &&
 
                                 <li className="flex justify-center space-x-4 mx-4 my-2">
-                                    <div href="#"><div onClick={dispatch_function_delete_image} className="text-md text-red-600 font-semibold md:text-2xl"> Remove
+                                    <div href="#"><div onClick={dispatch_function_delete_image} className="text-md text-red-600 font-semibold md:text-2xl cursor-pointer"> Remove
                                         Photo</div></div>
                                 </li>
                                 }

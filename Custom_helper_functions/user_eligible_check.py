@@ -36,8 +36,8 @@ def check_eligible(request, obj, Form_View=True, User=False):
 
     if Form_View and not request.user.is_authenticated:
         return {"final": False, "reason": ["Unauthenticated"]}
-
-    if Form_View and request.user.Affliated_Department.id != obj.department_related_form_set.all()[0].Department.id:
+    # print([x.Department.id for x in obj.department_related_form_set.all()],request.user.Affliated_Department.id)
+    if Form_View and request.user.Affliated_Department.id not in [x.Department.id for x in obj.department_related_form_set.all()]:
         return {"final": False, "reason": ["Form not of your Department"]}
 
     elif obj.conditions is None:

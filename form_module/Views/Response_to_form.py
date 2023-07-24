@@ -41,7 +41,7 @@ class Response_to_form_viewset(CustomViewset, viewsets.ModelViewSet):
             return Response({}), False
         if request.user.groups.filter(name="Faculty") or request.user.groups.filter(name="Head"):
             queryset = queryset.filter(
-                Form_id__department_related_form__Department__id=request.user.Affliated_Department.id,
+                # Form_id__department_related_form__Department__id=request.user.Affliated_Department.id,
                 Form_id__Originator=request.user.id)
         elif request.user.groups.filter(name="Student"):
             queryset = queryset.filter(
